@@ -1,0 +1,44 @@
+GenericEntity : "{4A6E4610AB16F47F}DronePref.et" {
+ coords 66.11 2.336 15.732
+ angleX 7.118
+ angleY -0.224
+ angleZ 22.544
+ {
+  GenericEntity {
+   ID "6464D4F4AB5D4A5C"
+   components {
+    DroneWingSpine "{6464DAB444ECD2F0}" {
+    }
+   }
+  }
+  GenericEntity {
+   ID "6464D8B701122276"
+   components {
+    DroneWingSpine "{6464DAB442C18BBF}" {
+     speedMult 2
+    }
+   }
+  }
+  GenericEntity {
+   ID "6464DA345233814C"
+   components {
+    DroneWingSpine "{6464DAB4402BD4BD}" {
+    }
+   }
+  }
+  GenericEntity {
+   ID "6464DA3453056B65"
+   components {
+    DroneWingSpine "{6464DAB45CD4A4B9}" {
+    }
+   }
+  }
+ }
+}
+Vehicle UH1H1 : "{70BAEEFC2D3FEE64}Prefabs/Vehicles/Helicopters/UH1H/UH1H.et" {
+ coords 65.364 5.037 66.81
+ angleY 76.851
+}
+GenericEntity : "{81EB948E6414BD6F}Prefabs/Weapons/Rifles/M14/Rifle_M21_ARTII.et" {
+ coords 74.438 3.185 14.977
+}

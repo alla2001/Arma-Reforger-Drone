@@ -1,0 +1,16 @@
+SCR_ManualCamera {
+ ID "6464AA7F29C301CF"
+ components {
+  SCR_PostProcessCameraComponent "{646533F1C4134845}" {
+   m_Effects {
+    SCR_CameraPostProcessEffect "{646533F1C4E4E2B6}" {
+     m_Type FilmGrain
+     m_MaterialPath "{3B4B9E13CA330078}RangeNoise.emat"
+    }
+   }
+  }
+  Hierarchy "{6464AA7F2118EBEF}" {
+  }
+ }
+ cameraFlags 5
+}

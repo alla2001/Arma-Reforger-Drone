@@ -1,0 +1,383 @@
+GenericEntity "DronePrefab.et" {
+ components {
+  DroneBatteryHandler "{646550CAF85880D5}" {
+   batteryConsumptionPerForceUnite 0.01
+  }
+  DroneController "{646550CAF85880EE}" {
+   throttleForce 85
+   rotationSpeed 3
+   tiltSpeed 1.7
+   groundRayDistance 25
+   camPrefab "{8CC82BD58DB3ED83}DroneCam.et"
+   cameraSpawnPoint 0 0.01 0.25
+  }
+  DroneSignalHandler "{646550CAF85880F7}" {
+   maxRange 750
+  }
+  MeshObject "{646550CAF8588080}" {
+   Object "{F13FCBCEAB0900BD}DroneBody.xob"
+   LODFactors {
+    1 1 1
+   }
+  }
+  RigidBody "{646550CAF85880B7}" {
+   SimState None
+   ResponseIndex "HugeMomentum"
+   Geometries {
+    PhysicsBoxGeometry box {
+     Mass 3
+     Extents 0.2 0.2 0.4
+    }
+   }
+  }
+  SCR_ExplosiveChargeInventoryItemComponent "{646550CAF85881E2}" {
+   Attributes SCR_ItemAttributeCollection "{646550CAF85881E3}" {
+    ItemDisplayName WeaponUIInfo "{646550CAF858816A}" {
+     Name "#AR-Weapon_M112DemoCharge_Name"
+     Description "#AR-Weapon_M112DemoCharge_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{646550CAF8588101}" {
+     Weight 0.57
+     SizeSetupStrategy Manual
+     ItemDimensions 10 10 10
+     ItemVolume 400
+     DimensionScaler 1
+     RestingAdditiveRotationLS 0 0 0
+     RestingAdditiveOffsetLS 0 0 0
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{646550CAF85881C1}" {
+     IkSettings {
+      ItemIKSettings "{646550CAF8588123}" {
+       MovementSpeedRange 0 3
+      }
+      ItemIKSettings "{646550CAF858812E}" {
+       Lowered 1
+       InAds 0
+       OutAds 0
+       MovementSpeedRange 0 0
+      }
+      ItemIKSettings "{646550CAF8588136}" {
+       Jumping 1
+       InAds 0
+       OutAds 0
+       MovementSpeedRange 0 0
+      }
+      ItemIKSettings "{646550CAF858813D}" {
+       ProneTurn 1
+       MovementSpeedRange 0 0
+       IkSettingsStand 4
+      }
+     }
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{ADA8287EEE81F47D}Assets/Weapons/Explosives/DemoBlock_M112/anims/p_M112_IK.anm"
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{646550CAF85881D7}" {
+      CameraPreset Top
+      CameraOrbitAngles -25 -30 0
+      CameraOffset 0.025 0 0
+      FOV 60
+      AspectRatio 1
+      LodModel 1
+     }
+     CharacterModifierAttributes "{646550CAF85881DD}" {
+     }
+    }
+    CommonItemType "EXPLOSIVE_CHARGE"
+    m_Size SLOT_1x1
+    m_SlotType SLOT_BACKPACK
+   }
+  }
+  SCR_ExplosiveTriggerComponent "{646550CAF858818F}" {
+   PROJECTILE_EFFECTS {
+    AIExplosionEffect "{646550CAF85881FB}" {
+    }
+    ExplosionEffect "{646550CAF8588189}" {
+     EffectPrefab "{A1195711333615DF}Prefabs/Weapons/Warheads/Warhead_ExplosiveCharge_M112.et"
+     SoundEvent "SOUND_EXPLOSION"
+    }
+   }
+  }
+  SCR_MineDamageManager "{646550CAF85881AC}" {
+   "Additional hit zones" {
+    SCR_HitZone Main {
+     HZDefault 1
+     DamageReduction 0
+     DamageThreshold 0.8
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Incendiary multiplier" 0
+     m_fFireMultiplier 0
+    }
+   }
+  }
+  SCR_SoundDataComponent "{646550CAF8588202}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{646550CAF858824C}" {
+     m_sSoundProject "{CC0E5A1324E761C1}Sounds/Items/_SharedData/Drop/Items_Drop_Generic.acp"
+     m_sSoundEventName "SOUND_DROP"
+    }
+    SCR_AudioSourceConfiguration "{646550CAF8588258}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_PICK_UP"
+    }
+    SCR_AudioSourceConfiguration "{646550CAF8588261}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_EQUIP"
+    }
+    SCR_AudioSourceConfiguration "{646550CAF8588269}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_PLACEMENT"
+    }
+    SCR_AudioSourceConfiguration "{646550CAF8588272}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_ARM"
+    }
+    SCR_AudioSourceConfiguration "{646550CAF8588275}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_DISARM"
+    }
+    SCR_AudioSourceConfiguration "{646550CAF8588278}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_TIMER_ADJUST"
+    }
+    SCR_AudioSourceConfiguration "{646550CAF8588203}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_CONNECT"
+    }
+   }
+  }
+  ActionsManagerComponent "{646550CAF85882CD}" {
+   ActionContexts {
+    UserActionContext "{646550CAF858822A}" {
+     ContextName "default"
+     Position PointInfo "{646550CAF8588225}" {
+     }
+    }
+   }
+   additionalActions {
+    SCR_PickUpItemAction "{646550CAF85882C3}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{646550CAF858823C}" {
+      Name "#AR-Inventory_PickUp"
+     }
+     "Sort Priority" 10
+    }
+    SCR_DeployDroneAction "{646550CAF85882CE}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{646550CAF85882CF}" {
+      Name "Deploy"
+     }
+    }
+   }
+  }
+  NwkMovementComponent "{646550CAF85882D7}" {
+  }
+  RplComponent "{646550CAF85882D9}" {
+   "Parent Node From Parent Entity" 0
+  }
+  Hierarchy "{646550CAF85882E7}" {
+  }
+ }
+ coords 2370.538 8.042 3188.125
+}
+GenericEntity Area1 : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Area.et" {
+ components {
+  SCR_ScenarioFrameworkArea "{59E8CDC50969206E}" {
+   m_SpawnChildren RANDOM_ONE
+   m_sTriggerResource ""
+  }
+ }
+ coords 3246.99 12.771 2282.834
+ {
+  GenericEntity Layer1 : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
+   coords -876.945 -4.426 906.358
+   {
+    $grp GenericEntity : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
+     spawns2 {
+      components {
+       SCR_ScenarioFrameworkLayerBase "{5A2283EA2A0B4B14}" {
+        m_SpawnChildren RANDOM_ONE
+       }
+      }
+      coords -3.225 0 -2.011
+      {
+       $grp GenericEntity : "{AA01691FDC4E9167}Prefabs/ScenarioFramework/Components/Slot.et" {
+        Slot_148 {
+         components {
+          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+           m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+           m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+          }
+         }
+         coords -5.04 -0.124 4.596
+         angleY 112.65
+        }
+        Slot_153 {
+         components {
+          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+           m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+           m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+          }
+         }
+         coords -1.844 -0.421 8.883
+         angleY 154.386
+        }
+        Slot_156 {
+         components {
+          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+           m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+           m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+          }
+         }
+         coords 6.328 -0.581 9.585
+         angleY 174.355
+        }
+       }
+      }
+     }
+     d_camp2 {
+      coords 2.064 0 -9.686
+      angleY 152.385
+      {
+       $grp GenericEntity : "{8D43830F02C3F114}Prefabs/ScenarioFramework/Components/SlotAI.et" {
+        SlotAI15 {
+         components {
+          SCR_ScenarioFrameworkSlotAI "{5A26B3E02AC77BA0}" {
+           m_sFactionKey "US"
+           m_aActivationActions {
+            SCR_ScenarioFrameworkActionKillEntity "{5EBEEB2CAE8F801C}" {
+             m_Getter SCR_ScenarioFrameworkGetSpawnedEntity "{5EBEEB2CAD2066C2}" {
+              m_sLayerName "SlotAI1"
+             }
+            }
+           }
+           m_sObjectToSpawn "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
+           m_WaypointSet SCR_ScenarioFrameworkWaypointSet "{6060CE9109029FC8}" {
+           }
+          }
+         }
+         coords 137.578 3.921 64.125
+         angleY 71.697
+        }
+        SlotAI16 {
+         components {
+          SCR_ScenarioFrameworkSlotAI "{5A26B3E02AC77BA0}" {
+           m_sFactionKey "US"
+           m_aActivationActions {
+            SCR_ScenarioFrameworkActionKillEntity "{5EBEEB2CAE8F801C}" {
+             m_Getter SCR_ScenarioFrameworkGetSpawnedEntity "{5EBEEB2CAD2066C2}" {
+              m_sLayerName "SlotAI3"
+             }
+            }
+           }
+           m_sObjectToSpawn "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
+           m_WaypointSet SCR_ScenarioFrameworkWaypointSet "{6060CE910906632E}" {
+           }
+          }
+         }
+         coords 137.006 3.893 71.117
+         angleY 167.104
+        }
+       }
+       $grp GenericEntity : "{AA01691FDC4E9167}Prefabs/ScenarioFramework/Components/Slot.et" {
+        Slot_157 {
+         components {
+          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+           m_sObjectToSpawn "{EA34AA1A128DDF6E}Prefabs/Props/Military/Arsenal/AmmoBoxes/AmmoBoxCache_CP.et"
+          }
+         }
+         coords -10.336 -0.44 -2.634
+         angleY 6.422
+        }
+        Slot_158 {
+         components {
+          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+           m_sObjectToSpawn "{5168FEA3054D6D15}Prefabs/Vehicles/Wheeled/M151A2/M151A2_M2HB_MERDC.et"
+          }
+         }
+         coords 137.58 3.989 66.566
+         angleX -3.731
+         angleY 53.735
+         angleZ -4.992
+        }
+        Slot_159 {
+         components {
+          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+           m_sObjectToSpawn "{01AE5FD77A9A4C21}Prefabs/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.et"
+          }
+         }
+         coords 0.796 -0.529 -9.897
+         angleX 2.077
+         angleY 69.653
+        }
+        Slot_160 {
+         components {
+          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+           m_sObjectToSpawn "{01AE5FD77A9A4C21}Prefabs/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.et"
+          }
+         }
+         coords -10.02 -0.449 -6.569
+         angleY 3.753
+        }
+        Slot_161 {
+         components {
+          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+           m_sObjectToSpawn "{2521D0D11FB543C7}PrefabsEditable/Auto/Props/Civilian/E_Fireplace_01.et"
+          }
+         }
+         coords -6.17 -0.304 -1.866
+         angleY 130.23
+        }
+       }
+       GenericEntity SlotMarker8 : "{E537867C6E760514}Prefabs/ScenarioFramework/Components/SlotMarker.et" {
+        components {
+         SCR_ScenarioFrameworkSlotMarker "{5EA2BD9901E5E82E}" {
+          m_sFactionKey "US"
+          m_bCanBeGarbageCollected 0
+          m_MapMarkerType SCR_ScenarioFrameworkMarkerCustom "{5EECE8B242C19799}" {
+           m_sMapMarkerText "#AR-CampaignMapMarkerPlayerSpawn"
+           m_eMapMarkerIcon OBJECTIVE_MARKER2
+           m_eMapMarkerColor REFORGER_ORANGE
+          }
+         }
+        }
+        coords -0.192 -0.019 -0.282
+        angleY 55.23
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
+GenericEntity : "{D84238050BB795CC}DronePrefab.et" {
+ components {
+  DroneController "{646550CB159501ED}" {
+   throttleForce 100
+   tiltSpeed 0.5
+   groundRayDistance 65
+   groundRayOffset 0.2
+   cameraSpawnPoint 0 0 0.25
+  }
+  RigidBody "{646550CB5B53C45F}" {
+   Mass 5
+   LinearDamping 0.5
+   AngularDamping 0.8
+   Geometries {
+    PhysicsBoxGeometry box {
+     Mass 5
+     Extents 0.4 0.55 0.6
+    }
+   }
+  }
+ }
+ coords 2369.143 8.07 3188.972
+}
