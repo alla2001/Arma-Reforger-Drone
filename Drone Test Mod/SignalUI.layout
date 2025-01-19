@@ -1,0 +1,72 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  FrameWidgetClass "{6467432F00CC7FAC}" {
+   Name "Frame0"
+   Slot FrameWidgetSlot "{6467432EA33C135F}" {
+    Anchor 1 1 1 1
+    PositionX -281.568
+    OffsetLeft -281.568
+    PositionY -159.732
+    OffsetTop -159.732
+    SizeX 132.88
+    OffsetRight 148.688
+    SizeY 124.5
+    OffsetBottom 35.232
+   }
+   {
+    ImageWidgetClass "{6467432F00CC7FAD}" {
+     Name "Image0"
+     Slot FrameWidgetSlot "{6467432F4830AC16}" {
+      Anchor 0 0 0 0
+      PositionX 47.542
+      OffsetLeft 47.542
+      PositionY 97.463
+      OffsetTop 97.463
+      SizeX 34.027
+      OffsetRight -81.57
+      SizeY 21.207
+      OffsetBottom -118.67
+     }
+     Color 0.561 0.439 0.071 0.463
+     Texture "{7406AAE7A49BB23C}Signal1.edds"
+     Size 86 62
+    }
+    ImageWidgetClass "{6467432FC76BAD96}" {
+     Name "Image1"
+     Slot FrameWidgetSlot "{6467432F4830AC16}" {
+      Anchor 0 0 0 0
+      PositionX 25.591
+      OffsetLeft 25.591
+      PositionY 67.452
+      OffsetTop 67.452
+      SizeX 81.204
+      OffsetRight -106.795
+      SizeY 25.964
+      OffsetBottom -93.416
+     }
+     Color 0.561 0.439 0.071 0.463
+     Texture "{2AEE83A41B163C33}Signal2.edds"
+     Size 189 66
+    }
+    ImageWidgetClass "{6467432FCDC1C7A3}" {
+     Name "Image2"
+     Slot FrameWidgetSlot "{6467432F4830AC16}" {
+      Anchor 0 0 0 0
+      PositionX 0.547
+      OffsetLeft 0.547
+      PositionY 30.066
+      OffsetTop 30.066
+      SizeX 131.26
+      OffsetRight -131.808
+      SizeY 40.117
+      OffsetBottom -70.183
+     }
+     Color 0.561 0.439 0.071 0.463
+     Texture "{2AEE83A41B163C33}Signal2.edds"
+     Size 189 66
+    }
+   }
+  }
+ }
+}

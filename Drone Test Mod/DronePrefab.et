@@ -7,8 +7,11 @@ GenericEntity {
    }
    m_sSoundEvent "SOUND_FLY"
   }
+  SoundComponent "{6467432C23236FEA}" {
+  }
   DroneBatteryHandler "{646550CB13E3E89C}" {
-   batteryConsumptionPerForceUnite 0.03
+   batteryConsumptionPerForceUnite 0.01
+   layout "{02DE12AE488E3BBF}BatteryUI.layout"
   }
   DroneController "{646550CB159501ED}" {
    throttleForce 175
@@ -22,6 +25,8 @@ GenericEntity {
   }
   DroneSignalHandler "{646550CB1734D305}" {
    maxRange 750
+   layout "{CA40F2CA10EBCF98}SignalUI.layout"
+   WarningColor 0.561 0.071 0.071 0.444
   }
   MeshObject "{646550CB5B53C40F}" {
    Object "{F13FCBCEAB0900BD}DroneBody.xob"
@@ -31,7 +36,7 @@ GenericEntity {
   }
   RigidBody "{646550CB5B53C45F}" {
    Mass 5
-   LinearDamping 0.5
+   LinearDamping 0.1
    AngularDamping 0.8
    SimState None
    ResponseIndex "HugeMomentum"
@@ -86,7 +91,8 @@ GenericEntity {
     CustomAttributes {
      PreviewRenderAttributes "{646550CB5B53C5C8}" {
       CameraPreset Top
-      CameraOrbitAngles -25 -30 0
+      CameraOrbitAngles 0 25 0
+      CameraDistanceToItem 0.4
       CameraOffset 0.025 0 0
       FOV 60
       AspectRatio 1
@@ -114,11 +120,12 @@ GenericEntity {
    "Additional hit zones" {
     SCR_HitZone Main {
      HZDefault 1
+     MaxHealth 25
      DamageReduction 0
      DamageThreshold 0.8
      "Collision multiplier" 0
      "Melee multiplier" 0
-     "Kinetic multiplier" 0
+     "Kinetic multiplier" 2
      "Fragmentation multiplier" 0
      "Incendiary multiplier" 0
      m_fFireMultiplier 0
@@ -189,6 +196,22 @@ GenericEntity {
      }
      UIInfo UIInfo "{646550CB4F98FF1E}" {
       Name "Deploy"
+     }
+    }
+    SCR_ArmDroneAction "{6467432D557CB447}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6467432D557CB5F4}" {
+      Name "Arm"
+     }
+    }
+    SCR_DisarmDroneAction "{6467432D56200229}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6467432D5620025D}" {
+      Name "Disarm"
      }
     }
    }

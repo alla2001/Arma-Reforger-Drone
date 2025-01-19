@@ -9,14 +9,21 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 {
 	
 
-	float currentSignalStrength;
+	float currentSignalStrength = 1.0;
 	[Attribute("100")]
 	float maxRange;
 
 	SCR_CameraPostProcessEffect filmGrainPostEffect;
 	IEntity controlingPlayer;
 	SCR_PostProcessCameraComponent post;
-
+	ImageWidget Bar1;
+	ImageWidget Bar2;
+	ImageWidget Bar3;
+	 [Attribute()] ResourceName layout;
+	[Attribute()]
+	ref Color WarningColor;
+	ref Color defaultColor;
+   Widget root ;
 	 override void OnPostInit(IEntity owner)
     {
         super.OnPostInit(GetOwner());
@@ -34,7 +41,8 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 		
 		
     }
-	void Deploy(IEntity playerOwner,IEntity Camera){
+	void Deploy(IEntity playerOwner,IEntity Camera)
+	{
 	 post=SCR_PostProcessCameraComponent.Cast( Camera
 		
 		.FindComponent(SCR_PostProcessCameraComponent));
@@ -47,19 +55,37 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 			return;
 		}
 	
-	controlingPlayer =   playerOwner;
-		
+		controlingPlayer =   playerOwner;
+		root = GetGame().GetWorkspace().CreateWidgets(layout);
+
+  
+  
+		 Bar1= ImageWidget.Cast(	root.FindAnyWidget("Image0"));
+		 Bar2= ImageWidget.Cast(	root.FindAnyWidget("Image1"));
+		 Bar3= ImageWidget.Cast(	root.FindAnyWidget("Image2"));
+		defaultColor= Bar1.GetColor();
+	}
+	
+	void Disconnected(){
+		controlingPlayer=null;
+		delete root;
 	}
 	
 	void CalcualteSignalStrength()
 	{
 		float dist =vector.Distance( GetOwner().GetOrigin(),controlingPlayer.GetOrigin());
-		currentSignalStrength=Math.AbsFloat(1-((maxRange-dist)/maxRange));
+		currentSignalStrength=Math.Clamp(((maxRange-dist)/maxRange),0,1);
 		if (filmGrainPostEffect)
-			filmGrainPostEffect.SetParam("Intensity",currentSignalStrength );
+			filmGrainPostEffect.SetParam("Intensity",1-currentSignalStrength );
 		Print(currentSignalStrength);
+		if(currentSignalStrength > 0.1)
+		Bar1.SetColor(defaultColor);
+		else
+		Bar1.SetColor(WarningColor);
+		Bar2.SetVisible(currentSignalStrength>0.33);
+		Bar3.SetVisible(currentSignalStrength>0.66);
 	}
-
+	bool isOutOfRange(){return currentSignalStrength<=0;}
 	  override void EOnSimulate(IEntity owner, float timeSlice)
     {
 		if(controlingPlayer)

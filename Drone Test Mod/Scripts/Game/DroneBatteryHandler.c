@@ -12,14 +12,30 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 	float currentBattery;
 	[Attribute("100")]
 	float maxBattery;
-	[Attribute("0.25")]
+	[Attribute("0.05")]
 	float batteryConsumptionPerForceUnite;
+	    [Attribute()] ResourceName layout;
+			ProgressBarWidget batteryBar;
+
+   Widget root ;
+	void Deploy(){
+	
+	  root = GetGame().GetWorkspace().CreateWidgets(layout);
+
+  
+  
+		 batteryBar= ProgressBarWidget.Cast(	root.FindAnyWidget("BatteryBar"));
 
 	
-	
+	}
+	void Disconnected(){
+		delete root;
+	}
 	void EnergyUsed(float energy)
 	{
 		currentBattery = Math.Clamp(currentBattery-(energy*batteryConsumptionPerForceUnite),0,maxBattery);
+		if(batteryBar)
+		batteryBar.SetCurrent(currentBattery);
 		//Print(currentBattery);
 	}
 	bool isDead(){return currentBattery<=0;}

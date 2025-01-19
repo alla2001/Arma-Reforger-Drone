@@ -9,6 +9,7 @@ class DroneWingSpine : ScriptComponent // GameComponent > GenericComponent
 {
 	[Attribute()]
 	float speedMult;
+	 [RplProp(condition: RplCondition.NoOwner)]
 	float spinSpeed;
 	
 	  override void OnPostInit(IEntity owner)
@@ -32,6 +33,7 @@ class DroneWingSpine : ScriptComponent // GameComponent > GenericComponent
 	
 	void SetSpinSpeed(float speed){
 		spinSpeed = speed;
+		Replication.BumpMe();
 	}
 	
 }

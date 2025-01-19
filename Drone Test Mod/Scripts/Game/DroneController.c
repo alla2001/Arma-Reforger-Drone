@@ -22,17 +22,19 @@ class DroneController : ScriptComponent
     float yawInput;
     float throttleInput;
     InputManager inputManager;
-    [Attribute()] ResourceName layout;
-    [Attribute()] string rtTextureName;
-    [Attribute()] string rtName;
+
+
     [Attribute()] int m_iCameraIndex;
-    [RplProp(condition: RplCondition.OwnerOnly)]bool deployed;
+    [RplProp(condition: RplCondition.NoOwner)]bool deployed;
+	    [RplProp(condition: RplCondition.NoOwner)]bool armed;
 	[Attribute()] vector cameraSpawnPoint;
-	
+	 IEntity playerUser;
 	 DroneSignalHandler droneSignalHandler;
 	DroneBatteryHandler batteryHandler;
 	ref array<DroneWingSpine> wings ;
 	vector lastPos;
+	NwkMovementComponent networkedMovment;
+	
     override void OnPostInit(IEntity owner)
     {
         super.OnPostInit(GetOwner());
@@ -42,6 +44,7 @@ class DroneController : ScriptComponent
         SetEventMask(owner, EntityEvent.SIMULATE);
         SetEventMask(owner, EntityEvent.INIT);
         SetEventMask(owner, EntityEvent.CONTACT);
+		
 		if(debugd!=0){
 		DiagMenu.SetValue(SCR_DebugMenuID.DEBUGUI_INPUT_MANAGER,debugd);
 			  inputManager.SetDebug(debugd);
@@ -52,12 +55,13 @@ class DroneController : ScriptComponent
     void DeployDrone(IEntity drone, IEntity user)
     {
 	 	Print("Deploying");
-		if (!deployed)
+		if (deployed)
             return;
 		SoundComponent soundData = SoundComponent.Cast(GetOwner().FindComponent(SoundComponent));
-			if (!soundData)
+			if (soundData)
 					soundData.SoundEvent("SOUND_FLY");
-	
+		deployed = true;
+		Replication.BumpMe();
         bool m_bIsServer = Replication.IsServer();
         if (user != GetGame().GetPlayerController().GetControlledEntity())
         {
@@ -84,33 +88,47 @@ class DroneController : ScriptComponent
         rb.SetActive(ActiveState.ALWAYS_ACTIVE);
         rb.ChangeSimulationState(SimulationState.SIMULATION);
         // Create layout
-        /* Widget root = GetGame().GetWorkspace().CreateWidgets(layout);
-
-         // We dont have required RT widgets, delete layout and terminate
-         RTTextureWidget RTTexture = RTTextureWidget.Cast(root.FindAnyWidget(rtTextureName));
-         RenderTargetWidget RTWidget = RenderTargetWidget.Cast(root.FindAnyWidget(rtName));
-         // Set camera index of render target widget
-         BaseWorld baseWorld = drone.GetWorld();
-
-         RTWidget.SetWorld(baseWorld, m_iCameraIndex);
-         if (!RTTexture || !RTWidget)
-         {
-             root.RemoveFromHierarchy();
-         }*/
+      
+        
  		CreateCamera(drone);
         GetGame().GetCameraManager().SetCamera(camera);
-			inputManager.AddActionListener("MouseRight",EActionTrigger.DOWN,TriggerExplode);
-       
+	
+       inputManager.ActivateContext("GadgetContext",duration : 1000);
+		       inputManager.ActivateAction("CharacterInspect",duration : 1000);
+		 inputManager.AddActionListener("CharacterInspect",EActionTrigger.DOWN,Disconnect);
+			inputManager.AddActionListener("MouseRight",EActionTrigger.DOWN,TriggerExplode);	
 		lastPos=drone.GetOrigin();
 		droneSignalHandler.Deploy(user,camera);
-		 deployed = true;
+		batteryHandler.Deploy();		
+		 
+		playerUser=user;
 		
     }
+	void ArmDrone(){
+	
+	
+	armed=true;
+		Replication.BumpMe();
+	}
+	
+	void DisarmeDrone(){
+	
+	
+	armed=false;
+		Replication.BumpMe();
+	}
 	CameraManager m_CameraManager;
     bool once = false;
 	
     override void EOnInit(IEntity owner)
     {
+			if (deployed){
+			SoundComponent soundData = SoundComponent.Cast(GetOwner().FindComponent(SoundComponent));
+			if (soundData)
+					soundData.SoundEvent("SOUND_FLY");
+		}
+          
+	
 			 wings ={};
 		array<Managed> comps = new array<Managed>();
 		FindComponentsInAllChildren(DroneWingSpine,owner,false,1,2,comps);
@@ -155,13 +173,13 @@ class DroneController : ScriptComponent
 	}
     override void EOnFrame(IEntity owner, float timeSlice)
     {
-    
+    	
         // once =true;
         // Print("cam : " + 	GetGame().GetCameraManager().CurrentCamera ());
         if (!deployed)
             return;
         // Altitude control input
-
+	
         throttleInput = inputManager.GetActionValue("CharacterFire");
 
         // Get inputs
@@ -197,15 +215,12 @@ class DroneController : ScriptComponent
             return;
 		
 		   BaseWorld baseWorld = owner.GetWorld();
-		vector dir = lastPos- owner.GetOrigin();
-		TraceParam param = MakeTraceParam(lastPos, owner.GetOrigin()+dir, TraceFlags.DEFAULT);
-        float hit = baseWorld.TraceMove(param, null);
-		owner.SetOrigin(vector.Lerp(lastPos,owner.GetOrigin(),hit));
+	
         vector mat[4];
         owner.GetTransform(mat);
      
-       param = MakeTraceParam(owner.GetOrigin() - mat[1] * groundRayOffset, owner.GetOrigin() - mat[1] * groundRayDistance, TraceFlags.DEFAULT);
-         hit = baseWorld.TraceMove(param, null);
+       	TraceParam param = MakeTraceParam(owner.GetOrigin() - mat[1] * groundRayOffset, owner.GetOrigin() - mat[1] * groundRayDistance, TraceFlags.DEFAULT);
+        float hit = baseWorld.TraceMove(param, null);
 
         // Print("Hit Down : " + hit);
         //  Get drone mass
@@ -239,26 +254,70 @@ class DroneController : ScriptComponent
         vector angularDamping = -rb.GetAngularVelocity() * 0.5;
         rb.ApplyForce(velocityDamping);
         rb.ApplyTorque(angularDamping);
+		vector dir = lastPos- owner.GetOrigin();
+		 param = MakeTraceParam(lastPos, owner.GetOrigin()+dir, TraceFlags.DEFAULT);
+         hit = baseWorld.TraceMove(param, null);
+		owner.SetOrigin(vector.Lerp(lastPos,owner.GetOrigin(),hit));
 		lastPos=owner.GetOrigin();
 		
-		batteryHandler.EnergyUsed( throttleInput +yawInput+ vInput[2]+ vInput[0]);
-		if(batteryHandler.isDead())TriggerExplode();
+		batteryHandler.EnergyUsed( Math.AbsFloat(throttleInput) +Math.AbsFloat(yawInput)+ Math.AbsFloat(vInput[2])+ Math.AbsFloat(vInput[0]));
+		if(batteryHandler.isDead())Disconnect();
+		if(droneSignalHandler.isOutOfRange())Disconnect();
     }
+	
+	void Disconnect(){
+	
+		if(!deployed)return; 
+				 inputManager.RemoveActionListener("CharacterInspect",EActionTrigger.DOWN,Disconnect);
+			inputManager.RemoveActionListener("MouseRight",EActionTrigger.DOWN,TriggerExplode);	
+		droneSignalHandler.Disconnected();
+		batteryHandler.Disconnected();	
+       inputManager.ActivateContext("GadgetContext",duration : 0);
+		       inputManager.ActivateAction("CharacterInspect",duration : 0);
+		deployed = false;
+		delete camera;
+		 bool m_bIsServer = Replication.IsServer();
+		return;
+        if (playerUser != GetGame().GetPlayerController().GetControlledEntity())
+        {
+            if (!m_bIsServer)
+                return;
+            else
+            {
+                BaseRplComponent rplc = BaseRplComponent.Cast(GetOwner().FindComponent(RplComponent));
+                if (!rplc)
+                {
+                    Print("This example requires that the entity has an RplComponent.", LogLevel.WARNING);
+                    return;
+                }
+                SCR_ChimeraCharacter chim = SCR_ChimeraCharacter.Cast(playerUser);
+                rplc.Give(Replication.FindOwner(Replication.FindId(chim)));
+				Print("RPC Auth :" + rplc.IsOwner(), LogLevel.ERROR);
+            }
+			return;
+        }
+		playerUser=null;
+	}
     override void EOnContact(IEntity owner, IEntity other, Contact contact)
     {
 
-        // Print("Hit");
-        if (!deployed)
-            return;
+       if(!armed)return;
         if (contact.Impulse < forceToExplode)
             return;
-    	Rpc(Explode);
+		
+    	TriggerExplode();
     }
 	void TriggerExplode()
-	{
-	Rpc(Explode);
+	{	Disconnect();
+		Rpc(Explode);
+		
+	}
+	void OnDelete(IEntity owner){
+	Disconnect();
+	
 	}
 	bool isDeployed(){return deployed;}
+	bool isArmed(){return armed;}
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void Explode(){
 	    SCR_ExplosiveTriggerComponent m_Trigger = SCR_ExplosiveTriggerComponent.Cast(GetOwner().FindComponent(SCR_ExplosiveTriggerComponent));

@@ -874,7 +874,7 @@ AudioClass {
    name "Fly"
    version 7
    tl -411.912 273
-   Volume 18
+   Volume 30
    "Volume variance" 1
    "Pitch variance" 0.5
    "Loop count" 255
