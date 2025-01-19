@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{164F1A41CC49DA8B}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Drone.acp"
+ Configurations {
+  AudioProjectResourceClass PC {
+  }
+  AudioProjectResourceClass XBOX_ONE : PC {
+  }
+  AudioProjectResourceClass XBOX_SERIES : PC {
+  }
+  AudioProjectResourceClass PS4 : PC {
+  }
+  AudioProjectResourceClass PS5 : PC {
+  }
+  AudioProjectResourceClass HEADLESS : PC {
+  }
+ }
+}

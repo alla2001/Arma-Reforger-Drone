@@ -1,0 +1,262 @@
+GenericEntity {
+ ID "64669CD99AED3E0A"
+ components {
+  SoundComponent "{64669CDBC889293E}" {
+  }
+  DroneBatteryHandler "{64669CD99AF2E3DB}" {
+   batteryConsumptionPerForceUnite 0.03
+  }
+  DroneController "{64669CD99AF2E3D6}" {
+   throttleForce 250
+   rotationSpeed 5
+   tiltSpeed 1.75
+   groundRayDistance 125
+   groundRayOffset 0.2
+   forceToExplode 100
+   camPrefab "{8CC82BD58DB3ED83}DroneCam.et"
+   cameraSpawnPoint 0 -0.05 0.15
+  }
+  DroneSignalHandler "{64669CD99AF2E3D3}" {
+   maxRange 750
+  }
+  MeshObject "{64669CD99AF2E3ED}" {
+   Object "{4D308FF3535F56BF}FPVFastDrone.xob"
+   LODFactors {
+    1 1 1
+   }
+  }
+  RigidBody "{64669CD99AF2E3EF}" {
+   Mass 5
+   LinearDamping 0.5
+   AngularDamping 0.8
+   SimState None
+   ResponseIndex "HugeMomentum"
+   Geometries {
+    PhysicsBoxGeometry box {
+     Mass 5
+     Extents 0.5 0.5 0.8
+    }
+   }
+  }
+  SCR_ExplosiveChargeInventoryItemComponent "{64669CD99AF2E3E1}" {
+   Attributes SCR_ItemAttributeCollection "{64669CD99AF2E3E3}" {
+    ItemDisplayName WeaponUIInfo "{64669CD99AF2E3FC}" {
+     Name "#AR-Weapon_M112DemoCharge_Name"
+     Description "#AR-Weapon_M112DemoCharge_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{64669CD99AF2E3FA}" {
+     Weight 0.57
+     SizeSetupStrategy Manual
+     ItemDimensions 10 10 10
+     ItemVolume 400
+     DimensionScaler 1
+     RestingAdditiveRotationLS 0 0 0
+     RestingAdditiveOffsetLS 0 0 0
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{64669CD99AF2E3F5}" {
+     IkSettings {
+      ItemIKSettings "{64669CD99AF2E3F7}" {
+       MovementSpeedRange 0 3
+      }
+      ItemIKSettings "{64669CD99AF2E3F1}" {
+       Lowered 1
+       InAds 0
+       OutAds 0
+       MovementSpeedRange 0 0
+      }
+      ItemIKSettings "{64669CD99AF2E39C}" {
+       Jumping 1
+       InAds 0
+       OutAds 0
+       MovementSpeedRange 0 0
+      }
+      ItemIKSettings "{64669CD99AF2E39E}" {
+       ProneTurn 1
+       MovementSpeedRange 0 0
+       IkSettingsStand 4
+      }
+     }
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{ADA8287EEE81F47D}Assets/Weapons/Explosives/DemoBlock_M112/anims/p_M112_IK.anm"
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{64669CD99AF2E390}" {
+      CameraPreset Top
+      CameraOrbitAngles -25 -30 0
+      CameraOffset 0.025 0 0
+      FOV 60
+      AspectRatio 1
+      LodModel 1
+     }
+     CharacterModifierAttributes "{64669CD99AF2E3AC}" {
+     }
+    }
+    CommonItemType "EXPLOSIVE_CHARGE"
+    m_Size SLOT_1x1
+    m_SlotType SLOT_BACKPACK
+   }
+  }
+  SCR_ExplosiveTriggerComponent "{64669CD99AF2E3A9}" {
+   PROJECTILE_EFFECTS {
+    AIExplosionEffect "{64669CD99AF2E3AB}" {
+    }
+    ExplosionEffect "{64669CD99AF2E3A5}" {
+     EffectPrefab "{A1195711333615E0}Prefabs/Weapons/Warheads/DroneExpo.et"
+     SoundEvent "SOUND_EXPLOSION"
+    }
+   }
+  }
+  SCR_MineDamageManager "{64669CD99AF2E3A2}" {
+   "Additional hit zones" {
+    SCR_HitZone Main {
+     HZDefault 1
+     DamageReduction 0
+     DamageThreshold 0.8
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Incendiary multiplier" 0
+     m_fFireMultiplier 0
+    }
+   }
+  }
+  SCR_SoundDataComponent "{64669CD99AF2E3B8}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{64669CD99AF2E3B4}" {
+     m_sSoundProject "{CC0E5A1324E761C1}Sounds/Items/_SharedData/Drop/Items_Drop_Generic.acp"
+     m_sSoundEventName "SOUND_DROP"
+    }
+    SCR_AudioSourceConfiguration "{64669CD99AF2E3B0}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_PICK_UP"
+    }
+    SCR_AudioSourceConfiguration "{64669CD99AF2E245}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_EQUIP"
+    }
+    SCR_AudioSourceConfiguration "{64669CD99AF2E246}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_PLACEMENT"
+    }
+    SCR_AudioSourceConfiguration "{64669CD99AF2E240}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_ARM"
+    }
+    SCR_AudioSourceConfiguration "{64669CD99AF2E242}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_DISARM"
+    }
+    SCR_AudioSourceConfiguration "{64669CD99AF2E243}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_TIMER_ADJUST"
+    }
+    SCR_AudioSourceConfiguration "{64669CD99AF2E25C}" {
+     m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
+     m_sSoundEventName "SOUND_CONNECT"
+    }
+    SCR_AudioSourceConfiguration "{64669CD99AF2E25E}" {
+     m_sSoundProject "{164F1A41CC49DA8B}Sounds/Drone.acp"
+     m_sSoundEventName "SOUND_FLY"
+    }
+   }
+  }
+  ActionsManagerComponent "{64669CD99AF2E258}" {
+   ActionContexts {
+    UserActionContext "{64669CD99AF2E25A}" {
+     ContextName "default"
+     Position PointInfo "{64669CD99AF2E254}" {
+     }
+    }
+   }
+   additionalActions {
+    SCR_PickUpItemAction "{64669CD99AF2E26E}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64669CD99AF2E26F}" {
+      Name "#AR-Inventory_PickUp"
+     }
+     "Sort Priority" 10
+    }
+    SCR_DeployDroneAction "{64669CD99AF2E26A}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64669CD99AF2E26B}" {
+      Name "Deploy"
+     }
+    }
+   }
+  }
+  NwkMovementComponent "{64669CD99AF2E266}" {
+  }
+  RplComponent "{64669CD99AF2E267}" {
+   "Parent Node From Parent Entity" 0
+  }
+  Hierarchy "{64669CD99AF2E261}" {
+  }
+ }
+ coords 2369.368 7.946 3189.222
+ scale 0.6
+ {
+  $grp GenericEntity {
+   wing2 {
+    ID "64669CD99AED3E09"
+    components {
+     DroneWingSpine "{64669CD99AF2E27C}" {
+      speedMult 10
+     }
+     MeshObject "{64669CD99AF2E278}" {
+      Object "{765DFC92DF00A5E1}FPVFastDroneWing.xob"
+     }
+     Hierarchy "{64669CD99AF2E27A}" {
+     }
+    }
+    coords -0.236 0.06 0.192
+   }
+   wing2 {
+    ID "64669CD99AF2E338"
+    components {
+     DroneWingSpine "{64669CD99AF2E208}" {
+      speedMult 10
+     }
+     MeshObject "{64669CD99AF2E20A}" {
+      Object "{765DFC92DF00A5E1}FPVFastDroneWing.xob"
+     }
+     Hierarchy "{64669CD99AF2E20B}" {
+     }
+    }
+    coords 0.234 0.065 -0.21
+   }
+   wing4 {
+    ID "64669CD99AF2E33E"
+    components {
+     DroneWingSpine "{64669CD99AF2E275}" {
+      speedMult 10
+     }
+     MeshObject "{64669CD99AF2E277}" {
+      Object "{765DFC92DF00A5E1}FPVFastDroneWing.xob"
+     }
+     Hierarchy "{64669CD99AF2E270}" {
+     }
+    }
+    coords -0.236 0.066 -0.211
+   }
+   wing3 {
+    ID "64669CD99AF2E33F"
+    components {
+     DroneWingSpine "{64669CD99AF2E272}" {
+      speedMult 10
+     }
+     MeshObject "{64669CD99AF2E20D}" {
+      Object "{765DFC92DF00A5E1}FPVFastDroneWing.xob"
+     }
+     Hierarchy "{64669CD99AF2E20E}" {
+     }
+    }
+    coords 0.237 0.063 0.197
+   }
+  }
+ }
+}

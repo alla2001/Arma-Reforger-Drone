@@ -1,0 +1,1997 @@
+AudioClass {
+ signals {
+  SignalClass {
+   id 7181
+   name "Signal Reverb"
+   tl 893.571 -244.286
+   res "{76CBB40EF7F227B6}Sounds/_SharedData/Signals/Reverb/Reverb_Base.sig"
+   inputsport {
+    1 35 40 112 139
+   }
+   outputsport {
+    34 39 105 106 107 110
+   }
+   inputvalues {
+    40 0 0 15627 16000
+   }
+   inputvaluesmin {
+    0 0 0 0 0
+   }
+   inputvaluesmax {
+    100 1 1 16000 16000
+   }
+   path "{76CBB40EF7F227B6}Sounds/_SharedData/Signals/Reverb/Reverb_Base.sig"
+  }
+  SignalClass {
+   id 12301
+   name "Signal Occlusion"
+   tl 384 -368
+   res "{A45B14CDEA2D5DCD}Sounds/_SharedData/Signals/Props/Props_Occlusion.sig"
+   inputsport {
+    1 6 7 23 52 56
+   }
+   outputsport {
+    5 37
+   }
+   inputvalues {
+    0 1 1 0 1000 400
+   }
+   inputvaluesmin {
+    0 0 0 0 0 0
+   }
+   inputvaluesmax {
+    1 1 1 1 10000 10000
+   }
+   path "{A45B14CDEA2D5DCD}Sounds/_SharedData/Signals/Props/Props_Occlusion.sig"
+  }
+  SignalClass {
+   id 32781
+   name "Surface"
+   tl -127.083 1020.166
+   res "{A7D67203F4146DC7}Sounds/_SharedData/Signals/OneSignal/Surface.sig"
+   inputsport {
+    1
+   }
+   outputsport {
+    2
+   }
+   inputvalues {
+    0
+   }
+   inputvaluesmin {
+    0
+   }
+   inputvaluesmax {
+    10000
+   }
+   path "{A7D67203F4146DC7}Sounds/_SharedData/Signals/OneSignal/Surface.sig"
+  }
+  SignalClass {
+   id 54285
+   name "Signal 56"
+   tl 7 -261
+   res "{B0940E284D98C2C1}Sounds/_SharedData/Signals/Weapons/Weapon_UnderPlayerControl_1p_3p_Cam.sig"
+   inputsport {
+    1 7 21 28 31 34 36
+   }
+   outputsport {
+    2 6 8 9 12 26 30 33 40 43 45 46
+   }
+   inputvalues {
+    1 0 0 1 0 0 0
+   }
+   inputvaluesmin {
+    0 0 0 0 0 0 0
+   }
+   inputvaluesmax {
+    1 1 9999 1 1 1 1
+   }
+   path "{B0940E284D98C2C1}Sounds/_SharedData/Signals/Weapons/Weapon_UnderPlayerControl_1p_3p_Cam.sig"
+  }
+ }
+ sounds {
+  SoundClass {
+   id 4105
+   name "SOUND_PLACEMENT"
+   version 5
+   tl 608 992
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 3090
+       port 65
+      }
+     }
+    }
+   }
+   outState 1035
+   outStatePort 79879
+  }
+  SoundClass {
+   id 13321
+   name "SOUND_TIMER_ADJUST"
+   version 5
+   tl 614.167 604.773
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 21522
+       port 65
+      }
+     }
+    }
+   }
+   outState 1035
+   outStatePort 79879
+  }
+  SoundClass {
+   id 14345
+   name "SOUND_FLY"
+   version 5
+   tl 608 240
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 26642
+       port 65
+      }
+     }
+    }
+   }
+   outState 1035
+   outStatePort 79879
+  }
+  SoundClass {
+   id 15369
+   name "SOUND_DISARM"
+   version 5
+   tl 614.167 419
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 24594
+       port 65
+      }
+     }
+    }
+   }
+   outState 1035
+   outStatePort 79879
+  }
+  SoundClass {
+   id 17417
+   name "SOUND_CONNECT"
+   version 5
+   tl 614.167 811.242
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 19474
+       port 65
+      }
+     }
+    }
+   }
+   outState 1035
+   outStatePort 79879
+  }
+ }
+ buses {
+  BusClass {
+   id 35847
+   name "SurfaceLayer Bus"
+   version 7
+   tl 85.088 1026.059
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 49158
+       port 65
+      }
+     }
+    }
+   }
+   volume 5.623
+   volume_dB 15
+  }
+ }
+ selectors {
+  SelectorClass : "{F705136E41EFAAC6}Sounds/_SharedData/Configs/Selector/Character/Selector_Character_Surfaces.conf" {
+   id 49158
+   version 5
+   tl -127.083 1088.396
+   parent "{F705136E41EFAAC6}Sounds/_SharedData/Configs/Selector/Character/Selector_Character_Surfaces.conf"
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 32781
+       port 2
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 3592483
+     links {
+      ConnectionClass connection {
+       id 33796
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 4341162
+     links {
+      ConnectionClass connection {
+       id 45060
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 50582991
+     links {
+      ConnectionClass connection {
+       id 44036
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 138977036
+     links {
+      ConnectionClass connection {
+       id 47108
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 149588851
+     links {
+      ConnectionClass connection {
+       id 37892
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 194658567
+     links {
+      ConnectionClass connection {
+       id 46084
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 247657638
+     links {
+      ConnectionClass connection {
+       id 38916
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 406494895
+     links {
+      ConnectionClass connection {
+       id 30724
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 520835504
+     links {
+      ConnectionClass connection {
+       id 30724
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 538803063
+     links {
+      ConnectionClass connection {
+       id 41988
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 634134935
+     links {
+      ConnectionClass connection {
+       id 40964
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 764440260
+     links {
+      ConnectionClass connection {
+       id 29700
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 847183086
+     links {
+      ConnectionClass connection {
+       id 47108
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 847186733
+     links {
+      ConnectionClass connection {
+       id 48132
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1015907001
+     links {
+      ConnectionClass connection {
+       id 28676
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1024662004
+     links {
+      ConnectionClass connection {
+       id 30724
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1103662938
+     links {
+      ConnectionClass connection {
+       id 34820
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1165767034
+     links {
+      ConnectionClass connection {
+       id 51204
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1239820241
+     links {
+      ConnectionClass connection {
+       id 37892
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1280751085
+     links {
+      ConnectionClass connection {
+       id 28676
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1597774028
+     links {
+      ConnectionClass connection {
+       id 43012
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1615616022
+     links {
+      ConnectionClass connection {
+       id 39940
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1997238349
+     links {
+      ConnectionClass connection {
+       id 36868
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2004870568
+     links {
+      ConnectionClass connection {
+       id 51204
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2144620789
+     links {
+      ConnectionClass connection {
+       id 31748
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    1 0
+   }
+  }
+ }
+ mixers {
+  MixerClass {
+   id 1035
+   name "FinalMix"
+   version 4
+   tl 893.5 55.333
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass connections {
+     id 79879
+     links {
+      ConnectionClass connection {
+       id 4105
+       port 65
+      }
+      ConnectionClass connection {
+       id 13321
+       port 65
+      }
+      ConnectionClass connection {
+       id 14345
+       port 65
+      }
+      ConnectionClass connection {
+       id 15369
+       port 65
+      }
+      ConnectionClass connection {
+       id 17417
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 152583
+     links {
+      ConnectionClass connection {
+       id 6173
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    49152 0
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "Dialog_Delay_Exterior"
+   }
+  }
+ }
+ constants {
+  ConstantClass {
+   id 27660
+   name "SurfaceLayer Pitch"
+   version 5
+   tl -608.662 1060.643
+   "Constant values" {
+    IOPConstantsValueClass Pitch {
+     Key "Pitch"
+     Value 2.5
+     Port 1
+    }
+   }
+  }
+  ConstantClass {
+   id 50188
+   name "Offsets"
+   version 5
+   tl -608.662 1422.864
+   "Constant values" {
+    IOPConstantsValueClass "Pebbles Offset" {
+     Key "Pebbles Offset"
+     Value 85
+     Port 1
+    }
+    IOPConstantsValueClass "CropField Offset" {
+     Key "CropField Offset"
+     Value 500
+     Port 2
+    }
+    IOPConstantsValueClass "ForestDeciduous Offset" {
+     Key "ForestDeciduous Offset"
+     Value 200
+     Port 3
+    }
+   }
+  }
+ }
+ shaders {
+  ShaderClass {
+   id 3090
+   name "Placement Shader"
+   version 5
+   tl 370 988
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 10268
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 9235
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 11285
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 35847
+       port 65
+      }
+      ConnectionClass connection {
+       id 53252
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass {
+   id 19474
+   name "Connect Shader"
+   version 5
+   tl 373.333 799.242
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 10268
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 9235
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 11285
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 18436
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass {
+   id 21522
+   name "Timer Adjust Shader"
+   version 5
+   tl 373.333 592.773
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 10268
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 9235
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 11285
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 22532
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass {
+   id 24594
+   name "Disarm Shader"
+   version 5
+   tl 373.333 407
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 10268
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 9235
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 11285
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 23556
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass {
+   id 26642
+   name "Disarm Shader"
+   version 5
+   tl 373.333 237
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 10268
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 9235
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 11285
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 25604
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass : "{C97DEFA6B88F6DE9}Sounds/_SharedData/Configs/Amplitude/_SharedData/Amplitude_-55LUFS_to_-50LUFS.conf" {
+   id 9235
+   version 5
+   tl 373.333 -165.625
+   parent "{C97DEFA6B88F6DE9}Sounds/_SharedData/Configs/Amplitude/_SharedData/Amplitude_-55LUFS_to_-50LUFS.conf"
+  }
+ }
+ frequency {
+  FrequencyClass : "{0005FE42A6D80399}Sounds/_SharedData/Configs/Frequency/_SharedData/Frequency_DynamicUpdate.conf" {
+   id 11285
+   version 5
+   tl 373.333 -36.009
+   parent "{0005FE42A6D80399}Sounds/_SharedData/Configs/Frequency/_SharedData/Frequency_DynamicUpdate.conf"
+   ins {
+    ConnectionsClass connections {
+     id 4
+     links {
+      ConnectionClass connection {
+       id 12301
+       port 37
+      }
+     }
+    }
+   }
+   pi {
+    16 0
+   }
+   pu {
+    16 0
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 18436
+   name "Connect"
+   version 7
+   tl -411.912 835.242
+   Volume -16
+   "Volume variance" 1
+   "Pitch variance" 2
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{8773F6EC822B3A58}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Samples/Weapons_DemoBlock_Connect_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{1E6D4F759FCC0BC8}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Samples/Weapons_DemoBlock_Connect_02.wav"
+     Index 1
+    }
+   }
+  }
+  BankLocalClass {
+   id 22532
+   name "Timer Adjust"
+   version 7
+   tl -416 624
+   Volume -22
+   "Volume variance" 1
+   "Pitch variance" 1
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{FBCD32B18C3F4BAA}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Samples/Weapons_DemoBlock_TimerAdjust_01.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 23556
+   name "Disarm"
+   version 7
+   tl -411.912 443
+   Volume -17
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{DF6A3E2A5A4C0CD1}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Samples/Weapons_DemoBlock_Disarm_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{467487B347AB3D41}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Samples/Weapons_DemoBlock_Disarm_02.wav"
+     Index 1
+    }
+   }
+  }
+  BankLocalClass {
+   id 25604
+   name "Fly"
+   version 7
+   tl -411.912 273
+   Volume 18
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   "Loop count" 255
+   "Infinite loop" 1
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{FB20FDF0712F7ECC}Sounds/drone-flying-67483.wav"
+     Index 1
+    }
+   }
+  }
+  BankLocalClass {
+   id 28676
+   name "Asphalt"
+   version 7
+   tl -411.912 1048.643
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -16
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   "Fade in time" 100
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{3AE6B671D4953ADF}Sounds/Character/Footsteps/Samples/Walk/Asphalt/Footstep_Walk_Asphalt_08.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{32AEB8827F1EF59A}Sounds/Character/Footsteps/Samples/Walk/Asphalt/Footstep_Walk_Asphalt_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{ABB0011B62F9C40A}Sounds/Character/Footsteps/Samples/Walk/Asphalt/Footstep_Walk_Asphalt_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{DCBA6993965B2B7A}Sounds/Character/Footsteps/Samples/Walk/Asphalt/Footstep_Walk_Asphalt_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{DB7D93C2F0DD91B9}Sounds/Character/Footsteps/Samples/Walk/Asphalt/Footstep_Walk_Asphalt_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{AC77FB4A047F7EC9}Sounds/Character/Footsteps/Samples/Walk/Asphalt/Footstep_Walk_Asphalt_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{356942D319984F59}Sounds/Character/Footsteps/Samples/Walk/Asphalt/Footstep_Walk_Asphalt_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{42632A5BED3AA029}Sounds/Character/Footsteps/Samples/Walk/Asphalt/Footstep_Walk_Asphalt_07.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 29700
+   name "Metal_Plate"
+   version 7
+   tl -411.912 2207.935
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -10
+   Pitch 1
+   "Pitch variance" 0.5
+   "Fade in time" 200
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{525E7EFEB8DC1123}Sounds/Character/Footsteps/Samples/Walk/MetalSheet/Footstep_Walk_MetalSheet_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{CB40C767A53B20B3}Sounds/Character/Footsteps/Samples/Walk/MetalSheet/Footstep_Walk_MetalSheet_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{BC4AAFEF5199CFC3}Sounds/Character/Footsteps/Samples/Walk/MetalSheet/Footstep_Walk_MetalSheet_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{BB8D55BE371F7500}Sounds/Character/Footsteps/Samples/Walk/MetalSheet/Footstep_Walk_MetalSheet_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{CC873D36C3BD9A70}Sounds/Character/Footsteps/Samples/Walk/MetalSheet/Footstep_Walk_MetalSheet_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{559984AFDE5AABE0}Sounds/Character/Footsteps/Samples/Walk/MetalSheet/Footstep_Walk_MetalSheet_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{2293EC272AF84490}Sounds/Character/Footsteps/Samples/Walk/MetalSheet/Footstep_Walk_MetalSheet_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{5A16700D1357DE66}Sounds/Character/Footsteps/Samples/Walk/MetalSheet/Footstep_Walk_MetalSheet_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 30724
+   name "DryGrass"
+   version 7
+   tl -411.912 3140.281
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 4
+     links {
+      ConnectionClass connection {
+       id 50188
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    18 0
+   }
+   Volume -19
+   "Volume variance" 1
+   Pitch -6
+   "Pitch variance" 0.5
+   "Fade in time" 40
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{27190E41D080ED57}Sounds/Character/Footsteps/Samples/Walk/DryGrass/Footstep_Walk_DryGrass_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{BE07B7D8CD67DCC7}Sounds/Character/Footsteps/Samples/Walk/DryGrass/Footstep_Walk_DryGrass_02.wav"
+     Index 1
+    }
+    AudioBankSampleClass Sample {
+     Filename "{C90DDF5039C533B7}Sounds/Character/Footsteps/Samples/Walk/DryGrass/Footstep_Walk_DryGrass_03.wav"
+     Index 2
+    }
+    AudioBankSampleClass Sample {
+     Filename "{CECA25015F438974}Sounds/Character/Footsteps/Samples/Walk/DryGrass/Footstep_Walk_DryGrass_04.wav"
+     Index 3
+    }
+    AudioBankSampleClass Sample {
+     Filename "{B9C04D89ABE16604}Sounds/Character/Footsteps/Samples/Walk/DryGrass/Footstep_Walk_DryGrass_05.wav"
+     Index 4
+    }
+    AudioBankSampleClass Sample {
+     Filename "{20DEF410B6065794}Sounds/Character/Footsteps/Samples/Walk/DryGrass/Footstep_Walk_DryGrass_06.wav"
+     Index 5
+    }
+    AudioBankSampleClass Sample {
+     Filename "{57D49C9842A4B8E4}Sounds/Character/Footsteps/Samples/Walk/DryGrass/Footstep_Walk_DryGrass_07.wav"
+     Index 6
+    }
+    AudioBankSampleClass Sample {
+     Filename "{2F5100B27B0B2212}Sounds/Character/Footsteps/Samples/Walk/DryGrass/Footstep_Walk_DryGrass_08.wav"
+     Index 7
+    }
+   }
+  }
+  BankLocalClass {
+   id 31748
+   name "Wood_Hollow"
+   version 7
+   tl -411.912 1737.803
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -17.5
+   "Volume variance" 1
+   Pitch 3
+   "Pitch variance" 0.5
+   "Fade in time" 150
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{DCB957010A782C59}Sounds/Character/Footsteps/Samples/Walk/Wood/Footstep_Walk_Wood_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{45A7EE98179F1DC9}Sounds/Character/Footsteps/Samples/Walk/Wood/Footstep_Walk_Wood_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{32AD8610E33DF2B9}Sounds/Character/Footsteps/Samples/Walk/Wood/Footstep_Walk_Wood_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{356A7C4185BB487A}Sounds/Character/Footsteps/Samples/Walk/Wood/Footstep_Walk_Wood_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{426014C97119A70A}Sounds/Character/Footsteps/Samples/Walk/Wood/Footstep_Walk_Wood_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{DB7EAD506CFE969A}Sounds/Character/Footsteps/Samples/Walk/Wood/Footstep_Walk_Wood_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{AC74C5D8985C79EA}Sounds/Character/Footsteps/Samples/Walk/Wood/Footstep_Walk_Wood_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{D4F159F2A1F3E31C}Sounds/Character/Footsteps/Samples/Walk/Wood/Footstep_Walk_Wood_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 33796
+   name "Dirt"
+   version 7
+   tl -411.912 1165.747
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -17
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   "Fade in time" 150
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{B8C69D861EA85695}Sounds/Character/Footsteps/Samples/Walk/Dirt/Footstep_Walk_Dirt_08.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{B08E9375B52399D0}Sounds/Character/Footsteps/Samples/Walk/Dirt/Footstep_Walk_Dirt_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{29902AECA8C4A840}Sounds/Character/Footsteps/Samples/Walk/Dirt/Footstep_Walk_Dirt_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{5E9A42645C664730}Sounds/Character/Footsteps/Samples/Walk/Dirt/Footstep_Walk_Dirt_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{595DB8353AE0FDF3}Sounds/Character/Footsteps/Samples/Walk/Dirt/Footstep_Walk_Dirt_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{2E57D0BDCE421283}Sounds/Character/Footsteps/Samples/Walk/Dirt/Footstep_Walk_Dirt_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{B7496924D3A52313}Sounds/Character/Footsteps/Samples/Walk/Dirt/Footstep_Walk_Dirt_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{C04301AC2707CC63}Sounds/Character/Footsteps/Samples/Walk/Dirt/Footstep_Walk_Dirt_07.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 34820
+   name "Seaweed_Mud"
+   version 7
+   tl -411.912 1851.937
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -14.5
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{B9BBD01DD76793EB}Sounds/Character/Footsteps/Samples/Walk/Seaweed_Mud/Footstep_Walk_Seaweed_Mud_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{20A56984CA80A27B}Sounds/Character/Footsteps/Samples/Walk/Seaweed_Mud/Footstep_Walk_Seaweed_Mud_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{57AF010C3E224D0B}Sounds/Character/Footsteps/Samples/Walk/Seaweed_Mud/Footstep_Walk_Seaweed_Mud_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{5068FB5D58A4F7C8}Sounds/Character/Footsteps/Samples/Walk/Seaweed_Mud/Footstep_Walk_Seaweed_Mud_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{276293D5AC0618B8}Sounds/Character/Footsteps/Samples/Walk/Seaweed_Mud/Footstep_Walk_Seaweed_Mud_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{BE7C2A4CB1E12928}Sounds/Character/Footsteps/Samples/Walk/Seaweed_Mud/Footstep_Walk_Seaweed_Mud_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{C97642C44543C658}Sounds/Character/Footsteps/Samples/Walk/Seaweed_Mud/Footstep_Walk_Seaweed_Mud_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{B1F3DEEE7CEC5CAE}Sounds/Character/Footsteps/Samples/Walk/Seaweed_Mud/Footstep_Walk_Seaweed_Mud_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 36868
+   name "Pebbles"
+   version 7
+   tl -411.912 1376.58
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 4
+     links {
+      ConnectionClass connection {
+       id 50188
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    18 0
+   }
+   Volume -20
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{02B4435B35814118}Sounds/Character/Footsteps/Samples/Walk/Pebbles/Footstep_Walk_Pebbles_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{9BAAFAC228667088}Sounds/Character/Footsteps/Samples/Walk/Pebbles/Footstep_Walk_Pebbles_02.wav"
+     Index 1
+    }
+    AudioBankSampleClass Sample {
+     Filename "{ECA0924ADCC49FF8}Sounds/Character/Footsteps/Samples/Walk/Pebbles/Footstep_Walk_Pebbles_03.wav"
+     Index 2
+    }
+    AudioBankSampleClass Sample {
+     Filename "{EB67681BBA42253B}Sounds/Character/Footsteps/Samples/Walk/Pebbles/Footstep_Walk_Pebbles_04.wav"
+     Index 3
+    }
+    AudioBankSampleClass Sample {
+     Filename "{9C6D00934EE0CA4B}Sounds/Character/Footsteps/Samples/Walk/Pebbles/Footstep_Walk_Pebbles_05.wav"
+     Index 4
+    }
+    AudioBankSampleClass Sample {
+     Filename "{0573B90A5307FBDB}Sounds/Character/Footsteps/Samples/Walk/Pebbles/Footstep_Walk_Pebbles_06.wav"
+     Index 5
+    }
+    AudioBankSampleClass Sample {
+     Filename "{7279D182A7A514AB}Sounds/Character/Footsteps/Samples/Walk/Pebbles/Footstep_Walk_Pebbles_07.wav"
+     Index 6
+    }
+   }
+  }
+  BankLocalClass {
+   id 37892
+   name "Metal"
+   version 7
+   tl -411.912 2097.206
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -10.5
+   "Volume variance" 1
+   Pitch -3
+   "Pitch variance" 0.5
+   "Fade in time" 200
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{1765E9FD4FB5EFDE}Sounds/Character/Footsteps/Samples/Walk/Metal/Footstep_Walk_Metal_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{8E7B50645252DE4E}Sounds/Character/Footsteps/Samples/Walk/Metal/Footstep_Walk_Metal_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{F97138ECA6F0313E}Sounds/Character/Footsteps/Samples/Walk/Metal/Footstep_Walk_Metal_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{FEB6C2BDC0768BFD}Sounds/Character/Footsteps/Samples/Walk/Metal/Footstep_Walk_Metal_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{89BCAA3534D4648D}Sounds/Character/Footsteps/Samples/Walk/Metal/Footstep_Walk_Metal_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{10A213AC2933551D}Sounds/Character/Footsteps/Samples/Walk/Metal/Footstep_Walk_Metal_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{67A87B24DD91BA6D}Sounds/Character/Footsteps/Samples/Walk/Metal/Footstep_Walk_Metal_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{1F2DE70EE43E209B}Sounds/Character/Footsteps/Samples/Walk/Metal/Footstep_Walk_Metal_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 38916
+   name "RoofTiles"
+   version 7
+   tl -411.912 2690.852
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -12.5
+   "Volume variance" 1
+   Pitch 5
+   "Pitch variance" 0.5
+   "Fade in time" 200
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{46F0FE7C596C46AB}Sounds/Character/Footsteps/Samples/Walk/RoofTiles/Footstep_Walk_RoofTiles_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{DFEE47E5448B773B}Sounds/Character/Footsteps/Samples/Walk/RoofTiles/Footstep_Walk_RoofTiles_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{A8E42F6DB029984B}Sounds/Character/Footsteps/Samples/Walk/RoofTiles/Footstep_Walk_RoofTiles_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{AF23D53CD6AF2288}Sounds/Character/Footsteps/Samples/Walk/RoofTiles/Footstep_Walk_RoofTiles_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{D829BDB4220DCDF8}Sounds/Character/Footsteps/Samples/Walk/RoofTiles/Footstep_Walk_RoofTiles_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{4137042D3FEAFC68}Sounds/Character/Footsteps/Samples/Walk/RoofTiles/Footstep_Walk_RoofTiles_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{363D6CA5CB481318}Sounds/Character/Footsteps/Samples/Walk/RoofTiles/Footstep_Walk_RoofTiles_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{4EB8F08FF2E789EE}Sounds/Character/Footsteps/Samples/Walk/RoofTiles/Footstep_Walk_RoofTiles_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 39940
+   name "Rubber_Plast"
+   version 7
+   tl -411.912 2324.914
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -16
+   Pitch 2
+   "Pitch variance" 0.5
+   "Fade in time" 200
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{0A6F50019076D207}Sounds/Character/Footsteps/Samples/Walk/Rubber_Plast/Footstep_Walk_Rubber_Plast_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{9371E9988D91E397}Sounds/Character/Footsteps/Samples/Walk/Rubber_Plast/Footstep_Walk_Rubber_Plast_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{E47B811079330CE7}Sounds/Character/Footsteps/Samples/Walk/Rubber_Plast/Footstep_Walk_Rubber_Plast_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{E3BC7B411FB5B624}Sounds/Character/Footsteps/Samples/Walk/Rubber_Plast/Footstep_Walk_Rubber_Plast_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{94B613C9EB175954}Sounds/Character/Footsteps/Samples/Walk/Rubber_Plast/Footstep_Walk_Rubber_Plast_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{0DA8AA50F6F068C4}Sounds/Character/Footsteps/Samples/Walk/Rubber_Plast/Footstep_Walk_Rubber_Plast_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{7AA2C2D8025287B4}Sounds/Character/Footsteps/Samples/Walk/Rubber_Plast/Footstep_Walk_Rubber_Plast_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{02275EF23BFD1D42}Sounds/Character/Footsteps/Samples/Walk/Rubber_Plast/Footstep_Walk_Rubber_Plast_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 40964
+   name "ForestConiferous"
+   version 7
+   tl -411.912 2801.164
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -20
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{6D663AEB1EEEEC15}Sounds/Character/Footsteps/Samples/Walk/ForestConiferous/Footstep_Walk_ForestConiferous_08.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{652E3418B5652350}Sounds/Character/Footsteps/Samples/Walk/ForestConiferous/Footstep_Walk_ForestConiferous_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{FC308D81A88212C0}Sounds/Character/Footsteps/Samples/Walk/ForestConiferous/Footstep_Walk_ForestConiferous_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{8B3AE5095C20FDB0}Sounds/Character/Footsteps/Samples/Walk/ForestConiferous/Footstep_Walk_ForestConiferous_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{8CFD1F583AA64773}Sounds/Character/Footsteps/Samples/Walk/ForestConiferous/Footstep_Walk_ForestConiferous_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{FBF777D0CE04A803}Sounds/Character/Footsteps/Samples/Walk/ForestConiferous/Footstep_Walk_ForestConiferous_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{62E9CE49D3E39993}Sounds/Character/Footsteps/Samples/Walk/ForestConiferous/Footstep_Walk_ForestConiferous_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{15E3A6C1274176E3}Sounds/Character/Footsteps/Samples/Walk/ForestConiferous/Footstep_Walk_ForestConiferous_07.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 41988
+   name "Carpet"
+   version 7
+   tl -411.912 2436.893
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -13
+   "Pitch variance" 0.5
+   "Fade in time" 70
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{BD9BF1BDB925E3E2}Sounds/Character/Footsteps/Samples/Walk/Carpet/Footstep_Walk_Carpet_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{24854824A4C2D272}Sounds/Character/Footsteps/Samples/Walk/Carpet/Footstep_Walk_Carpet_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{538F20AC50603D02}Sounds/Character/Footsteps/Samples/Walk/Carpet/Footstep_Walk_Carpet_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{5448DAFD36E687C1}Sounds/Character/Footsteps/Samples/Walk/Carpet/Footstep_Walk_Carpet_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{2342B275C24468B1}Sounds/Character/Footsteps/Samples/Walk/Carpet/Footstep_Walk_Carpet_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{BA5C0BECDFA35921}Sounds/Character/Footsteps/Samples/Walk/Carpet/Footstep_Walk_Carpet_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{CD5663642B01B651}Sounds/Character/Footsteps/Samples/Walk/Carpet/Footstep_Walk_Carpet_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{B5D3FF4E12AE2CA7}Sounds/Character/Footsteps/Samples/Walk/Carpet/Footstep_Walk_Carpet_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 43012
+   name "CropField"
+   version 7
+   tl -411.912 1610.3
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 4
+     links {
+      ConnectionClass connection {
+       id 50188
+       port 2
+      }
+     }
+    }
+   }
+   pi {
+    18 0
+   }
+   Volume -6
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{3B103F09A35D5A30}Sounds/Character/Footsteps/Samples/Walk/Cropfield/Footstep_Walk_Cropfield_08.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{335831FA08D69575}Sounds/Character/Footsteps/Samples/Walk/Cropfield/Footstep_Walk_Cropfield_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{AA4688631531A4E5}Sounds/Character/Footsteps/Samples/Walk/Cropfield/Footstep_Walk_Cropfield_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{DD4CE0EBE1934B95}Sounds/Character/Footsteps/Samples/Walk/Cropfield/Footstep_Walk_Cropfield_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{DA8B1ABA8715F156}Sounds/Character/Footsteps/Samples/Walk/Cropfield/Footstep_Walk_Cropfield_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{AD81723273B71E26}Sounds/Character/Footsteps/Samples/Walk/Cropfield/Footstep_Walk_Cropfield_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{349FCBAB6E502FB6}Sounds/Character/Footsteps/Samples/Walk/Cropfield/Footstep_Walk_Cropfield_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{4395A3239AF2C0C6}Sounds/Character/Footsteps/Samples/Walk/Cropfield/Footstep_Walk_Cropfield_07.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 44036
+   name "ForestDeciduous"
+   version 7
+   tl -411.912 2918.393
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 4
+     links {
+      ConnectionClass connection {
+       id 50188
+       port 3
+      }
+     }
+    }
+   }
+   pi {
+    18 0
+   }
+   Volume -18
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{1CA269E2E1910E8F}Sounds/Character/Footsteps/Samples/Walk/ForestDeciduous/Footstep_Walk_ForestDeciduous_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{85BCD07BFC763F1F}Sounds/Character/Footsteps/Samples/Walk/ForestDeciduous/Footstep_Walk_ForestDeciduous_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{F2B6B8F308D4D06F}Sounds/Character/Footsteps/Samples/Walk/ForestDeciduous/Footstep_Walk_ForestDeciduous_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{F57142A26E526AAC}Sounds/Character/Footsteps/Samples/Walk/ForestDeciduous/Footstep_Walk_ForestDeciduous_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{827B2A2A9AF085DC}Sounds/Character/Footsteps/Samples/Walk/ForestDeciduous/Footstep_Walk_ForestDeciduous_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{1B6593B38717B44C}Sounds/Character/Footsteps/Samples/Walk/ForestDeciduous/Footstep_Walk_ForestDeciduous_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{6C6FFB3B73B55B3C}Sounds/Character/Footsteps/Samples/Walk/ForestDeciduous/Footstep_Walk_ForestDeciduous_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{14EA67114A1AC1CA}Sounds/Character/Footsteps/Samples/Walk/ForestDeciduous/Footstep_Walk_ForestDeciduous_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 45060
+   name "Sand"
+   version 7
+   tl -411.912 3039.289
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -18.5
+   "Volume variance" 1
+   Pitch 3
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{4AEA0A704FA6E69C}Sounds/Character/Footsteps/Samples/Walk/Sand/Footstep_Walk_Sand_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{D3F4B3E95241D70C}Sounds/Character/Footsteps/Samples/Walk/Sand/Footstep_Walk_Sand_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{A4FEDB61A6E3387C}Sounds/Character/Footsteps/Samples/Walk/Sand/Footstep_Walk_Sand_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{A3392130C06582BF}Sounds/Character/Footsteps/Samples/Walk/Sand/Footstep_Walk_Sand_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{D43349B834C76DCF}Sounds/Character/Footsteps/Samples/Walk/Sand/Footstep_Walk_Sand_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{4D2DF02129205C5F}Sounds/Character/Footsteps/Samples/Walk/Sand/Footstep_Walk_Sand_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{3A2798A9DD82B32F}Sounds/Character/Footsteps/Samples/Walk/Sand/Footstep_Walk_Sand_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{42A20483E42D29D9}Sounds/Character/Footsteps/Samples/Walk/Sand/Footstep_Walk_Sand_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 46084
+   name "WoodFloor"
+   version 7
+   tl -411.912 1978.143
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -8.5
+   "Volume variance" 1
+   Pitch -5
+   "Pitch variance" 0.5
+   "Fade in time" 200
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{AF3B54CBE15B99E9}Sounds/Character/Footsteps/Samples/Walk/WoodFloor/Footstep_Walk_WoodFloor_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{3625ED52FCBCA879}Sounds/Character/Footsteps/Samples/Walk/WoodFloor/Footstep_Walk_WoodFloor_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{412F85DA081E4709}Sounds/Character/Footsteps/Samples/Walk/WoodFloor/Footstep_Walk_WoodFloor_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{46E87F8B6E98FDCA}Sounds/Character/Footsteps/Samples/Walk/WoodFloor/Footstep_Walk_WoodFloor_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{31E217039A3A12BA}Sounds/Character/Footsteps/Samples/Walk/WoodFloor/Footstep_Walk_WoodFloor_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{A8FCAE9A87DD232A}Sounds/Character/Footsteps/Samples/Walk/WoodFloor/Footstep_Walk_WoodFloor_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{DFF6C612737FCC5A}Sounds/Character/Footsteps/Samples/Walk/WoodFloor/Footstep_Walk_WoodFloor_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{A7735A384AD056AC}Sounds/Character/Footsteps/Samples/Walk/WoodFloor/Footstep_Walk_WoodFloor_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 47108
+   name "Grass"
+   version 7
+   tl -411.912 1501.059
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -20
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{06A76998D2BC97C4}Sounds/Character/Footsteps/Samples/Walk/Grass/Footstep_Walk_Grass_01_08.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{0EEF676B79375881}Sounds/Character/Footsteps/Samples/Walk/Grass/Footstep_Walk_Grass_01_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{97F1DEF264D06911}Sounds/Character/Footsteps/Samples/Walk/Grass/Footstep_Walk_Grass_01_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{E0FBB67A90728661}Sounds/Character/Footsteps/Samples/Walk/Grass/Footstep_Walk_Grass_01_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{E73C4C2BF6F43CA2}Sounds/Character/Footsteps/Samples/Walk/Grass/Footstep_Walk_Grass_01_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{903624A30256D3D2}Sounds/Character/Footsteps/Samples/Walk/Grass/Footstep_Walk_Grass_01_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{09289D3A1FB1E242}Sounds/Character/Footsteps/Samples/Walk/Grass/Footstep_Walk_Grass_01_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{7E22F5B2EB130D32}Sounds/Character/Footsteps/Samples/Walk/Grass/Footstep_Walk_Grass_01_07.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 48132
+   name "Gravel"
+   version 7
+   tl -411.912 1272.101
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -20
+   "Volume variance" 1
+   "Pitch variance" 0.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{EEB31E4E6152A45B}Sounds/Character/Footsteps/Samples/Walk/Gravel/Footstep_Walk_Gravel_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{77ADA7D77CB595CB}Sounds/Character/Footsteps/Samples/Walk/Gravel/Footstep_Walk_Gravel_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{00A7CF5F88177ABB}Sounds/Character/Footsteps/Samples/Walk/Gravel/Footstep_Walk_Gravel_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{0760350EEE91C078}Sounds/Character/Footsteps/Samples/Walk/Gravel/Footstep_Walk_Gravel_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{706A5D861A332F08}Sounds/Character/Footsteps/Samples/Walk/Gravel/Footstep_Walk_Gravel_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{E974E41F07D41E98}Sounds/Character/Footsteps/Samples/Walk/Gravel/Footstep_Walk_Gravel_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{9E7E8C97F376F1E8}Sounds/Character/Footsteps/Samples/Walk/Gravel/Footstep_Walk_Gravel_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{E6FB10BDCAD96B1E}Sounds/Character/Footsteps/Samples/Walk/Gravel/Footstep_Walk_Gravel_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 51204
+   name "CeramicTiles"
+   version 7
+   tl -411.912 2562.622
+   ins {
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 27660
+       port 1
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -5
+   Pitch -2
+   "Pitch variance" 0.5
+   "Fade in time" 200
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{BA3B8FC89BE95610}Sounds/Character/Footsteps/Samples/Walk/FloorTiles/Footstep_Walk_FloorTiles_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{23253651860E6780}Sounds/Character/Footsteps/Samples/Walk/FloorTiles/Footstep_Walk_FloorTiles_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{542F5ED972AC88F0}Sounds/Character/Footsteps/Samples/Walk/FloorTiles/Footstep_Walk_FloorTiles_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{53E8A488142A3233}Sounds/Character/Footsteps/Samples/Walk/FloorTiles/Footstep_Walk_FloorTiles_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{24E2CC00E088DD43}Sounds/Character/Footsteps/Samples/Walk/FloorTiles/Footstep_Walk_FloorTiles_05.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{BDFC7599FD6FECD3}Sounds/Character/Footsteps/Samples/Walk/FloorTiles/Footstep_Walk_FloorTiles_06.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{CAF61D1109CD03A3}Sounds/Character/Footsteps/Samples/Walk/FloorTiles/Footstep_Walk_FloorTiles_07.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{B273813B30629955}Sounds/Character/Footsteps/Samples/Walk/FloorTiles/Footstep_Walk_FloorTiles_08.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 53252
+   name "ItemLayer"
+   version 7
+   tl -413 970
+   Volume -17
+   "Volume variance" 2
+   Pitch -7
+   "Pitch variance" 1
+   "Terminate Loop" 0
+   "Fade in time" 5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{DF6A3E2A5A4C0CD1}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Samples/Weapons_DemoBlock_Disarm_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{467487B347AB3D41}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Samples/Weapons_DemoBlock_Disarm_02.wav"
+     Index 1
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass : "{3E728F2490D6D7BE}Sounds/_SharedData/Configs/Spatiality/Weapons/Spatiality_Weapons_Handling.conf" {
+   id 10268
+   name "Spatiality"
+   version 5
+   tl 373.333 -100
+   parent "{3E728F2490D6D7BE}Sounds/_SharedData/Configs/Spatiality/Weapons/Spatiality_Weapons_Handling.conf"
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 54285
+       port 9
+      }
+     }
+    }
+   }
+  }
+ }
+ auxOuts {
+  AuxOutClass {
+   id 6173
+   name "AuxOut INT"
+   version 5
+   tl 893.571 -61.666
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 4105
+       port 5
+      }
+      ConnectionClass connection {
+       id 13321
+       port 5
+      }
+      ConnectionClass connection {
+       id 14345
+       port 5
+      }
+      ConnectionClass connection {
+       id 15369
+       port 5
+      }
+      ConnectionClass connection {
+       id 17417
+       port 5
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 7181
+       port 34
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 7181
+       port 39
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+   pu {
+    6 0
+   }
+   OSPort 152583
+  }
+ }
+ groups {
+  GroupClass {
+   id 52227
+   name "Placement"
+   children {
+    50188 32781 40964 29700 35847 38916 34820 48132 44036 49158 47108 28676 45060 31748 33796 39940 51204 30724 41988 46084 36868 37892 43012 27660 53252
+   }
+   parent -1
+   Color 0.6 0.6 0.6 0.251
+  }
+ }
+ version 1
+ sourcesLimit 1
+}

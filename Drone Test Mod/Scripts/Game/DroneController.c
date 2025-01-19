@@ -12,7 +12,7 @@ class DroneController : ScriptComponent
     [Attribute()] float groundRayDistance;
 	 [Attribute()] float groundRayOffset;
     [Attribute()] int debugd;
-
+ [Attribute()] float forceToExplode;
 	[Attribute(params: "et")]
 	protected ResourceName camPrefab;
 	
@@ -51,7 +51,13 @@ class DroneController : ScriptComponent
     }
     void DeployDrone(IEntity drone, IEntity user)
     {
-
+	 	Print("Deploying");
+		if (!deployed)
+            return;
+		SoundComponent soundData = SoundComponent.Cast(GetOwner().FindComponent(SoundComponent));
+			if (!soundData)
+					soundData.SoundEvent("SOUND_FLY");
+	
         bool m_bIsServer = Replication.IsServer();
         if (user != GetGame().GetPlayerController().GetControlledEntity())
         {
@@ -91,13 +97,14 @@ class DroneController : ScriptComponent
          {
              root.RemoveFromHierarchy();
          }*/
- CreateCamera(drone);
+ 		CreateCamera(drone);
         GetGame().GetCameraManager().SetCamera(camera);
 			inputManager.AddActionListener("MouseRight",EActionTrigger.DOWN,TriggerExplode);
        
 		lastPos=drone.GetOrigin();
 		droneSignalHandler.Deploy(user,camera);
 		 deployed = true;
+		
     }
 	CameraManager m_CameraManager;
     bool once = false;
@@ -118,7 +125,7 @@ class DroneController : ScriptComponent
 		if(droneSignalHandler==null){
 		Print("Missing Signal Handler On Drone !.", LogLevel.WARNING);
 		}
-		
+	
     }
 	protected void CreateCamera(IEntity parent)
 	{
@@ -243,11 +250,12 @@ class DroneController : ScriptComponent
         // Print("Hit");
         if (!deployed)
             return;
-        if (contact.Impulse < 20)
+        if (contact.Impulse < forceToExplode)
             return;
     	Rpc(Explode);
     }
-	void TriggerExplode(){
+	void TriggerExplode()
+	{
 	Rpc(Explode);
 	}
 	bool isDeployed(){return deployed;}

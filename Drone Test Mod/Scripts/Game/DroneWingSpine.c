@@ -26,7 +26,7 @@ class DroneWingSpine : ScriptComponent // GameComponent > GenericComponent
 		vector tran[4];
 		owner.GetTransform(tran);
 		vector tran1[4];
-		SCR_Math3D.RotateAround(tran,owner.GetOrigin(), tran[1], timeSlice*spinSpeed, tran1);
+		SCR_Math3D.RotateAround(tran,owner.GetOrigin(), tran[1], timeSlice*spinSpeed+timeSlice*1, tran1);
 		owner.SetTransform(tran1);
 	}
 	

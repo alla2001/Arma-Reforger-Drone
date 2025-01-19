@@ -1,5 +1,9 @@
 GenericEntity "DronePrefab.et" {
  components {
+  SignalsManagerComponent "{6466001A2F4D2C02}" {
+  }
+  SoundComponent "{64668E36F4BE3C99}" {
+  }
   DroneBatteryHandler "{646550CAF85880D5}" {
    batteryConsumptionPerForceUnite 0.01
   }
@@ -187,6 +191,12 @@ GenericEntity "DronePrefab.et" {
  }
  coords 2370.538 8.042 3188.125
 }
+GenericEntity : "{33CBDE73AB48172A}Prefabs/Weapons/Explosives/DemoBlock_M112/DemoBlock_M112.et" {
+ coords 2357.484 5.822 3211.316
+}
+Vehicle UH1H1 : "{70BAEEFC2D3FEE64}Prefabs/Vehicles/Helicopters/UH1H/UH1H.et" {
+ coords 2395.886 7.094 3201.48
+}
 GenericEntity Area1 : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Area.et" {
  components {
   SCR_ScenarioFrameworkArea "{59E8CDC50969206E}" {
@@ -359,25 +369,5 @@ GenericEntity Area1 : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Ar
  }
 }
 GenericEntity : "{D84238050BB795CC}DronePrefab.et" {
- components {
-  DroneController "{646550CB159501ED}" {
-   throttleForce 100
-   tiltSpeed 0.5
-   groundRayDistance 65
-   groundRayOffset 0.2
-   cameraSpawnPoint 0 0 0.25
-  }
-  RigidBody "{646550CB5B53C45F}" {
-   Mass 5
-   LinearDamping 0.5
-   AngularDamping 0.8
-   Geometries {
-    PhysicsBoxGeometry box {
-     Mass 5
-     Extents 0.4 0.55 0.6
-    }
-   }
-  }
- }
  coords 2369.143 8.07 3188.972
 }

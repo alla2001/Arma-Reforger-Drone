@@ -1,17 +1,24 @@
 GenericEntity {
  ID "646550CA0862413F"
  components {
+  SCR_TriggerSoundComponent "{6466001BD9491E03}" {
+   Filenames {
+    "{164F1A41CC49DA8B}Sounds/Drone.acp"
+   }
+   m_sSoundEvent "SOUND_FLY"
+  }
   DroneBatteryHandler "{646550CB13E3E89C}" {
    batteryConsumptionPerForceUnite 0.03
   }
   DroneController "{646550CB159501ED}" {
-   throttleForce 100
+   throttleForce 175
    rotationSpeed 3
-   tiltSpeed 1.5
-   groundRayDistance 25
-   groundRayOffset 0.3
+   tiltSpeed 2
+   groundRayDistance 85
+   groundRayOffset 0.2
+   forceToExplode 30
    camPrefab "{8CC82BD58DB3ED83}DroneCam.et"
-   cameraSpawnPoint 0 0.01 0.25
+   cameraSpawnPoint 0 -0.02 0.22
   }
   DroneSignalHandler "{646550CB1734D305}" {
    maxRange 750
@@ -23,13 +30,14 @@ GenericEntity {
    }
   }
   RigidBody "{646550CB5B53C45F}" {
+   Mass 5
    LinearDamping 0.5
    AngularDamping 0.8
    SimState None
    ResponseIndex "HugeMomentum"
    Geometries {
     PhysicsBoxGeometry box {
-     Mass 3
+     Mass 5
      Extents 0.5 0.5 0.8
     }
    }
@@ -151,6 +159,10 @@ GenericEntity {
      m_sSoundProject "{180B4B22F7EBB2BB}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_DemoBlock_Handling.acp"
      m_sSoundEventName "SOUND_CONNECT"
     }
+    SCR_AudioSourceConfiguration "{6466001EFACA4AC1}" {
+     m_sSoundProject "{164F1A41CC49DA8B}Sounds/Drone.acp"
+     m_sSoundEventName "SOUND_FLY"
+    }
    }
   }
   ActionsManagerComponent "{646550CB5B5077B8}" {
@@ -197,7 +209,7 @@ GenericEntity {
     ID "64655C6ACF6AF504"
     components {
      DroneWingSpine "{64655B816A2F2F77}" {
-      speedMult 1
+      speedMult 10
      }
      MeshObject "{64655B8151209588}" {
       Object "{1ADEA7AE71730DC5}DroneWing.xob"
@@ -205,14 +217,14 @@ GenericEntity {
      Hierarchy "{64655B816DB21199}" {
      }
     }
-    coords -0.275 0.043 0.357
+    coords -0.275 0.054 0.355
     scale 0.6
    }
    wing4 {
     ID "6465603B6DB6C219"
     components {
      DroneWingSpine "{64655B816A2F2F77}" {
-      speedMult 1
+      speedMult 10
      }
      MeshObject "{64655B8151209588}" {
       Object "{1ADEA7AE71730DC5}DroneWing.xob"
@@ -227,7 +239,7 @@ GenericEntity {
     ID "6465603B6E7F2992"
     components {
      DroneWingSpine "{64655B816A2F2F77}" {
-      speedMult 1
+      speedMult 10
      }
      MeshObject "{64655B8151209588}" {
       Object "{1ADEA7AE71730DC5}DroneWing.xob"
@@ -235,14 +247,14 @@ GenericEntity {
      Hierarchy "{64655B816DB21199}" {
      }
     }
-    coords 0.27 0.043 0.354
+    coords 0.273 0.052 0.357
     scale 0.6
    }
    wing2 {
     ID "6465603B6EE0F2D5"
     components {
      DroneWingSpine "{64655B816A2F2F77}" {
-      speedMult 1
+      speedMult 10
      }
      MeshObject "{64655B8151209588}" {
       Object "{1ADEA7AE71730DC5}DroneWing.xob"
@@ -250,7 +262,7 @@ GenericEntity {
      Hierarchy "{64655B816DB21199}" {
      }
     }
-    coords 0.274 0.059 -0.354
+    coords 0.274 0.05 -0.354
     scale 0.6
    }
   }
