@@ -76,8 +76,8 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 		float dist =vector.Distance( GetOwner().GetOrigin(),controlingPlayer.GetOrigin());
 		currentSignalStrength=Math.Clamp(((maxRange-dist)/maxRange),0,1);
 		if (filmGrainPostEffect)
-			filmGrainPostEffect.SetParam("Intensity",1-currentSignalStrength );
-		Print(currentSignalStrength);
+			filmGrainPostEffect.SetParam("Intensity",(0.7)-(currentSignalStrength)+0.1 );
+	
 		if(currentSignalStrength > 0.1)
 		Bar1.SetColor(defaultColor);
 		else

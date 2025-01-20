@@ -5,6 +5,257 @@ $grp GenericEntity {
  {
   coords 2371.196 7.659 3189.805
  }
+ "DronePrefab.et" {
+  components {
+   SignalsManagerComponent "{646802A67C18BE10}" {
+   }
+   SoundComp "{646802A663EAF31E}" {
+    Filenames {
+     "{164F1A41CC49DA8B}Sounds/Drone.acp"
+    }
+    OnFrameUpdate 1
+    ScriptCallbacks 1
+   }
+   DroneBatteryHandler "{646550CB13E3E89C}" {
+    batteryConsumptionPerForceUnite 0.01
+    layout "{02DE12AE488E3BBF}BatteryUI.layout"
+   }
+   DroneController "{646550CB159501ED}" {
+    throttleForce 175
+    rotationSpeed 3
+    tiltSpeed 2
+    groundRayDistance 85
+    groundRayOffset 0.2
+    debugd 0
+    forceToExplode 30
+    camPrefab "{8CC82BD58DB3ED83}DroneCam.et"
+    cameraSpawnPoint 0 -0.02 0.22
+   }
+   DroneSignalHandler "{646550CB1734D305}" {
+    maxRange 750
+    layout "{CA40F2CA10EBCF98}SignalUI.layout"
+    WarningColor 0.561 0.071 0.071 0.444
+   }
+   MeshObject "{646550CB5B53C40F}" {
+    Object "{F13FCBCEAB0900BD}DroneBody.xob"
+    LODFactors {
+     1 1 1
+    }
+   }
+   RigidBody "{646550CB5B53C45F}" {
+    Mass 5
+    LinearDamping 0.1
+    AngularDamping 0.8
+    SimState None
+    ResponseIndex "HugeMomentum"
+    Geometries {
+     PhysicsBoxGeometry box {
+      Mass 5
+      Extents 0.5 0.5 0.8
+     }
+    }
+   }
+   SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
+    Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
+     ItemDisplayName WeaponUIInfo "{646550CB5B53C5A0}" {
+      Name "#AR-Weapon_M112DemoCharge_Name"
+      Description "#AR-Weapon_M112DemoCharge_Description"
+     }
+     ItemPhysAttributes ItemPhysicalAttributes "{646550CB5B53C595}" {
+      Weight 0.57
+      SizeSetupStrategy Manual
+      ItemDimensions 10 10 10
+      ItemVolume 400
+      DimensionScaler 1
+      RestingAdditiveRotationLS 0 0 0
+      RestingAdditiveOffsetLS 0 0 0
+     }
+     ItemAnimationAttributes ItemAnimationAttributes "{646550CB5B53C5EE}" {
+      IkSettings {
+       ItemIKSettings "{646550CB5B53C583}" {
+        MovementSpeedRange 0 3
+       }
+       ItemIKSettings "{646550CB5B53C5F8}" {
+        Lowered 1
+        InAds 0
+        OutAds 0
+        MovementSpeedRange 0 0
+       }
+       ItemIKSettings "{646550CB5B53C5F7}" {
+        Jumping 1
+        InAds 0
+        OutAds 0
+        MovementSpeedRange 0 0
+       }
+       ItemIKSettings "{646550CB5B53C5ED}" {
+        ProneTurn 1
+        MovementSpeedRange 0 0
+        IkSettingsStand 4
+       }
+      }
+      AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+      AnimationIKPose "{ADA8287EEE81F47D}Assets/Weapons/Explosives/DemoBlock_M112/anims/p_M112_IK.anm"
+     }
+     CustomAttributes {
+      PreviewRenderAttributes "{646550CB5B53C5C8}" {
+       CameraPreset Top
+       CameraOrbitAngles 0 25 0
+       CameraDistanceToItem 0.4
+       CameraOffset 0.025 0 0
+       FOV 60
+       AspectRatio 1
+       LodModel 1
+      }
+      CharacterModifierAttributes "{646550CB5B53C5C7}" {
+      }
+     }
+     CommonItemType "EXPLOSIVE_CHARGE"
+     m_Size SLOT_1x1
+     m_SlotType SLOT_BACKPACK
+    }
+   }
+   SCR_ExplosiveTriggerComponent "{646550CB5B53DBB7}" {
+    PROJECTILE_EFFECTS {
+     AIExplosionEffect "{646550CB5B53DA5E}" {
+     }
+     ExplosionEffect "{646550CB5B53DA4E}" {
+      EffectPrefab "{A1195711333615E0}Prefabs/Weapons/Warheads/DroneExpo.et"
+      SoundEvent "SOUND_EXPLOSION"
+     }
+    }
+   }
+   SCR_MineDamageManager "{646550CB5B53DB35}" {
+    "Additional hit zones" {
+     SCR_HitZone Main {
+      HZDefault 1
+      MaxHealth 25
+      DamageReduction 0
+      DamageThreshold 0.8
+      "Collision multiplier" 0
+      "Melee multiplier" 0
+      "Kinetic multiplier" 2
+      "Fragmentation multiplier" 0
+      "Incendiary multiplier" 0
+      m_fFireMultiplier 0
+     }
+    }
+   }
+   ActionsManagerComponent "{646550CB5B5077B8}" {
+    ActionContexts {
+     UserActionContext "{646550CB5B5076FC}" {
+      ContextName "default"
+      Position PointInfo "{646550CB5B5076FD}" {
+      }
+     }
+    }
+    additionalActions {
+     SCR_PickUpItemAction "{646550CB5B5076B4}" {
+      ParentContextList {
+       "default"
+      }
+      UIInfo UIInfo "{646550CB5B507694}" {
+       Name "#AR-Inventory_PickUp"
+      }
+      "Sort Priority" 10
+     }
+     SCR_DeployDroneAction "{646550CB4D471C65}" {
+      ParentContextList {
+       "default"
+      }
+      UIInfo UIInfo "{646550CB4F98FF1E}" {
+       Name "Deploy"
+      }
+     }
+     SCR_ArmDroneAction "{6467432D557CB447}" {
+      ParentContextList {
+       "default"
+      }
+      UIInfo UIInfo "{6467432D557CB5F4}" {
+       Name "Arm"
+      }
+     }
+     SCR_DisarmDroneAction "{6467432D56200229}" {
+      ParentContextList {
+       "default"
+      }
+      UIInfo UIInfo "{6467432D5620025D}" {
+       Name "Disarm"
+      }
+     }
+    }
+   }
+   NwkMovementComponent "{646550CB9D3263E5}" {
+   }
+   RplComponent "{646550CB5B50700D}" {
+    "Rpl State Override" None
+    "Parent Node From Parent Entity" 0
+   }
+   Hierarchy "{646550CB5B507010}" {
+   }
+  }
+  coords 2369.143 8.07 3188.972
+  scale 0.6
+  {
+   $grp GenericEntity {
+    wing2 {
+     components {
+      DroneWingSpine "{64655B816A2F2F77}" {
+       speedMult 10
+      }
+      MeshObject "{64655B8151209588}" {
+       Object "{1ADEA7AE71730DC5}DroneWing.xob"
+      }
+      Hierarchy "{64655B816DB21199}" {
+      }
+     }
+     coords -0.275 0.054 0.355
+     scale 0.6
+    }
+    wing4 {
+     components {
+      DroneWingSpine "{64655B816A2F2F77}" {
+       speedMult 10
+      }
+      MeshObject "{64655B8151209588}" {
+       Object "{1ADEA7AE71730DC5}DroneWing.xob"
+      }
+      Hierarchy "{64655B816DB21199}" {
+      }
+     }
+     coords -0.273 0.053 -0.355
+     scale 0.6
+    }
+    wing3 {
+     components {
+      DroneWingSpine "{64655B816A2F2F77}" {
+       speedMult 10
+      }
+      MeshObject "{64655B8151209588}" {
+       Object "{1ADEA7AE71730DC5}DroneWing.xob"
+      }
+      Hierarchy "{64655B816DB21199}" {
+      }
+     }
+     coords 0.273 0.052 0.357
+     scale 0.6
+    }
+    wing5 {
+     components {
+      DroneWingSpine "{64655B816A2F2F77}" {
+       speedMult 10
+      }
+      MeshObject "{64655B8151209588}" {
+       Object "{1ADEA7AE71730DC5}DroneWing.xob"
+      }
+      Hierarchy "{64655B816DB21199}" {
+      }
+     }
+     coords 0.274 0.05 -0.354
+     scale 0.6
+    }
+   }
+  }
+ }
 }
 $grp GenericEntity : "{33CBDE73AB48172A}Prefabs/Weapons/Explosives/DemoBlock_M112/DemoBlock_M112.et" {
  {
@@ -23,175 +274,363 @@ $grp GenericEntity : "{33CBDE73AB48172A}Prefabs/Weapons/Explosives/DemoBlock_M11
   coords 2369.997 7.353 3193.24
  }
 }
+$grp GenericEntity : "{4361E89661000744}DronePrefabFast.et" {
+ {
+  coords 2373.674 5.729 3210.276
+ }
+ {
+  coords 2372.192 5.721 3210.607
+ }
+ {
+  coords 2371.605 5.686 3211.085
+ }
+ {
+  coords 2372.54 5.46 3213.341
+ }
+}
 Vehicle UH1H1 : "{70BAEEFC2D3FEE64}Prefabs/Vehicles/Helicopters/UH1H/UH1H.et" {
  coords 2395.886 7.094 3201.48
 }
 GenericEntity : "{BE99D77D1155B127}Prefabs/Props/Military/Arsenal/ArsenalBoxes/US/ArsenalBox_US.et" {
  coords 2373.345 7.459 3191.608
 }
-GenericEntity Area1 : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Area.et" {
- components {
-  SCR_ScenarioFrameworkArea "{59E8CDC50969206E}" {
-   m_SpawnChildren RANDOM_ONE
-   m_sTriggerResource ""
+$grp GenericEntity : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Area.et" {
+ Area1 {
+  components {
+   SCR_ScenarioFrameworkArea "{59E8CDC50969206E}" {
+    m_SpawnChildren RANDOM_ONE
+    m_sTriggerResource ""
+   }
   }
- }
- coords 3246.99 12.771 2282.834
- {
-  GenericEntity Layer1 : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
-   coords -876.945 -4.426 906.358
-   {
-    $grp GenericEntity : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
-     spawns2 {
-      components {
-       SCR_ScenarioFrameworkLayerBase "{5A2283EA2A0B4B14}" {
-        m_SpawnChildren RANDOM_ONE
+  coords 2373.08 6.841 3205.936
+  angleX -5.356
+  {
+   GenericEntity Layer1 : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
+    coords 0 0 0
+    {
+     $grp GenericEntity : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
+      spawns2 {
+       components {
+        SCR_ScenarioFrameworkLayerBase "{5A2283EA2A0B4B14}" {
+         m_SpawnChildren RANDOM_ONE
+        }
+       }
+       coords -3.225 0 -2.011
+       {
+        $grp GenericEntity : "{AA01691FDC4E9167}Prefabs/ScenarioFramework/Components/Slot.et" {
+         Slot_148 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+            m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+           }
+          }
+          coords -5.04 -0.124 4.596
+          angleY 112.65
+         }
+         Slot_153 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+            m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+           }
+          }
+          coords -1.844 -0.421 8.883
+          angleY 154.386
+         }
+         Slot_156 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+            m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+           }
+          }
+          coords 6.328 -0.581 9.585
+          angleY 174.355
+         }
+        }
        }
       }
-      coords -3.225 0 -2.011
-      {
-       $grp GenericEntity : "{AA01691FDC4E9167}Prefabs/ScenarioFramework/Components/Slot.et" {
-        Slot_148 {
-         components {
-          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
-           m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
-           m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+      d_camp2 {
+       coords 2.064 0 -9.686
+       angleY 152.385
+       {
+        $grp GenericEntity : "{8D43830F02C3F114}Prefabs/ScenarioFramework/Components/SlotAI.et" {
+         SlotAI15 {
+          components {
+           SCR_ScenarioFrameworkSlotAI "{5A26B3E02AC77BA0}" {
+            m_sFactionKey "US"
+            m_aActivationActions {
+             SCR_ScenarioFrameworkActionKillEntity "{5EBEEB2CAE8F801C}" {
+              m_Getter SCR_ScenarioFrameworkGetSpawnedEntity "{5EBEEB2CAD2066C2}" {
+               m_sLayerName "SlotAI1"
+              }
+             }
+            }
+            m_sObjectToSpawn "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
+            m_WaypointSet SCR_ScenarioFrameworkWaypointSet "{6060CE9109029FC8}" {
+            }
+           }
           }
+          coords 137.578 3.921 64.125
+          angleY 71.697
          }
-         coords -5.04 -0.124 4.596
-         angleY 112.65
+         SlotAI16 {
+          components {
+           SCR_ScenarioFrameworkSlotAI "{5A26B3E02AC77BA0}" {
+            m_sFactionKey "US"
+            m_aActivationActions {
+             SCR_ScenarioFrameworkActionKillEntity "{5EBEEB2CAE8F801C}" {
+              m_Getter SCR_ScenarioFrameworkGetSpawnedEntity "{5EBEEB2CAD2066C2}" {
+               m_sLayerName "SlotAI3"
+              }
+             }
+            }
+            m_sObjectToSpawn "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
+            m_WaypointSet SCR_ScenarioFrameworkWaypointSet "{6060CE910906632E}" {
+            }
+           }
+          }
+          coords 137.006 3.893 71.117
+          angleY 167.104
+         }
         }
-        Slot_153 {
-         components {
-          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
-           m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
-           m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+        $grp GenericEntity : "{AA01691FDC4E9167}Prefabs/ScenarioFramework/Components/Slot.et" {
+         Slot_157 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{EA34AA1A128DDF6E}Prefabs/Props/Military/Arsenal/AmmoBoxes/AmmoBoxCache_CP.et"
+           }
           }
+          coords -10.336 -0.44 -2.634
+          angleY 6.422
          }
-         coords -1.844 -0.421 8.883
-         angleY 154.386
+         Slot_158 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{5168FEA3054D6D15}Prefabs/Vehicles/Wheeled/M151A2/M151A2_M2HB_MERDC.et"
+           }
+          }
+          coords 137.58 3.989 66.566
+          angleX -3.731
+          angleY 53.735
+          angleZ -4.992
+         }
+         Slot_159 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{01AE5FD77A9A4C21}Prefabs/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.et"
+           }
+          }
+          coords 0.796 -0.529 -9.897
+          angleX 2.077
+          angleY 69.653
+         }
+         Slot_160 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{01AE5FD77A9A4C21}Prefabs/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.et"
+           }
+          }
+          coords -10.02 -0.449 -6.569
+          angleY 3.753
+         }
+         Slot_161 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{2521D0D11FB543C7}PrefabsEditable/Auto/Props/Civilian/E_Fireplace_01.et"
+           }
+          }
+          coords -6.17 -0.304 -1.866
+          angleY 130.23
+         }
         }
-        Slot_156 {
+        GenericEntity SlotMarker8 : "{E537867C6E760514}Prefabs/ScenarioFramework/Components/SlotMarker.et" {
          components {
-          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
-           m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
-           m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+          SCR_ScenarioFrameworkSlotMarker "{5EA2BD9901E5E82E}" {
+           m_sFactionKey "US"
+           m_bCanBeGarbageCollected 0
+           m_MapMarkerType SCR_ScenarioFrameworkMarkerCustom "{5EECE8B242C19799}" {
+            m_sMapMarkerText "#AR-CampaignMapMarkerPlayerSpawn"
+            m_eMapMarkerIcon OBJECTIVE_MARKER2
+            m_eMapMarkerColor REFORGER_ORANGE
+           }
           }
          }
-         coords 6.328 -0.581 9.585
-         angleY 174.355
+         coords -0.192 -0.019 -0.282
+         angleY 55.23
         }
        }
       }
      }
-     d_camp2 {
-      coords 2.064 0 -9.686
-      angleY 152.385
-      {
-       $grp GenericEntity : "{8D43830F02C3F114}Prefabs/ScenarioFramework/Components/SlotAI.et" {
-        SlotAI15 {
-         components {
-          SCR_ScenarioFrameworkSlotAI "{5A26B3E02AC77BA0}" {
-           m_sFactionKey "US"
-           m_aActivationActions {
-            SCR_ScenarioFrameworkActionKillEntity "{5EBEEB2CAE8F801C}" {
-             m_Getter SCR_ScenarioFrameworkGetSpawnedEntity "{5EBEEB2CAD2066C2}" {
-              m_sLayerName "SlotAI1"
-             }
-            }
-           }
-           m_sObjectToSpawn "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
-           m_WaypointSet SCR_ScenarioFrameworkWaypointSet "{6060CE9109029FC8}" {
-           }
-          }
-         }
-         coords 137.578 3.921 64.125
-         angleY 71.697
-        }
-        SlotAI16 {
-         components {
-          SCR_ScenarioFrameworkSlotAI "{5A26B3E02AC77BA0}" {
-           m_sFactionKey "US"
-           m_aActivationActions {
-            SCR_ScenarioFrameworkActionKillEntity "{5EBEEB2CAE8F801C}" {
-             m_Getter SCR_ScenarioFrameworkGetSpawnedEntity "{5EBEEB2CAD2066C2}" {
-              m_sLayerName "SlotAI3"
-             }
-            }
-           }
-           m_sObjectToSpawn "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
-           m_WaypointSet SCR_ScenarioFrameworkWaypointSet "{6060CE910906632E}" {
-           }
-          }
-         }
-         coords 137.006 3.893 71.117
-         angleY 167.104
+    }
+   }
+  }
+ }
+ Area3 {
+  components {
+   SCR_ScenarioFrameworkArea "{59E8CDC50969206E}" {
+    m_SpawnChildren RANDOM_ONE
+    m_sTriggerResource ""
+   }
+  }
+  coords 673.738 39.496 2589.147
+  {
+   GenericEntity Layer3 : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
+    coords 0 0 0
+    {
+     $grp GenericEntity : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
+      spawns3 {
+       components {
+        SCR_ScenarioFrameworkLayerBase "{5A2283EA2A0B4B14}" {
+         m_SpawnChildren RANDOM_ONE
         }
        }
-       $grp GenericEntity : "{AA01691FDC4E9167}Prefabs/ScenarioFramework/Components/Slot.et" {
-        Slot_157 {
-         components {
-          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
-           m_sObjectToSpawn "{EA34AA1A128DDF6E}Prefabs/Props/Military/Arsenal/AmmoBoxes/AmmoBoxCache_CP.et"
+       coords -3.225 1.653 -2.011
+       {
+        $grp GenericEntity : "{AA01691FDC4E9167}Prefabs/ScenarioFramework/Components/Slot.et" {
+         Slot_17 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+            m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+           }
           }
+          coords -5.04 -0.124 4.596
+          angleY 112.65
          }
-         coords -10.336 -0.44 -2.634
-         angleY 6.422
-        }
-        Slot_158 {
-         components {
-          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
-           m_sObjectToSpawn "{5168FEA3054D6D15}Prefabs/Vehicles/Wheeled/M151A2/M151A2_M2HB_MERDC.et"
+         Slot_18 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+            m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+           }
           }
+          coords -1.844 -0.421 8.883
+          angleY 154.386
          }
-         coords 137.58 3.989 66.566
-         angleX -3.731
-         angleY 53.735
-         angleZ -4.992
-        }
-        Slot_159 {
-         components {
-          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
-           m_sObjectToSpawn "{01AE5FD77A9A4C21}Prefabs/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.et"
+         Slot_34 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{B1248BD4035260A0}Prefabs/MP/Spawning/SpawnPoint_US_CP.et"
+            m_sOverrideObjectDisplayName "#AR-DeployMenu_SpawnPoint_Name"
+           }
           }
+          coords 6.328 -0.581 9.585
+          angleY 174.355
          }
-         coords 0.796 -0.529 -9.897
-         angleX 2.077
-         angleY 69.653
-        }
-        Slot_160 {
-         components {
-          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
-           m_sObjectToSpawn "{01AE5FD77A9A4C21}Prefabs/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.et"
-          }
-         }
-         coords -10.02 -0.449 -6.569
-         angleY 3.753
-        }
-        Slot_161 {
-         components {
-          SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
-           m_sObjectToSpawn "{2521D0D11FB543C7}PrefabsEditable/Auto/Props/Civilian/E_Fireplace_01.et"
-          }
-         }
-         coords -6.17 -0.304 -1.866
-         angleY 130.23
         }
        }
-       GenericEntity SlotMarker8 : "{E537867C6E760514}Prefabs/ScenarioFramework/Components/SlotMarker.et" {
-        components {
-         SCR_ScenarioFrameworkSlotMarker "{5EA2BD9901E5E82E}" {
-          m_sFactionKey "US"
-          m_bCanBeGarbageCollected 0
-          m_MapMarkerType SCR_ScenarioFrameworkMarkerCustom "{5EECE8B242C19799}" {
-           m_sMapMarkerText "#AR-CampaignMapMarkerPlayerSpawn"
-           m_eMapMarkerIcon OBJECTIVE_MARKER2
-           m_eMapMarkerColor REFORGER_ORANGE
+      }
+      d_camp3 {
+       coords 2.064 0 -9.686
+       angleY 152.385
+       {
+        $grp GenericEntity : "{8D43830F02C3F114}Prefabs/ScenarioFramework/Components/SlotAI.et" {
+         SlotAI2 {
+          components {
+           SCR_ScenarioFrameworkSlotAI "{5A26B3E02AC77BA0}" {
+            m_sFactionKey "US"
+            m_aActivationActions {
+             SCR_ScenarioFrameworkActionKillEntity "{5EBEEB2CAE8F801C}" {
+              m_Getter SCR_ScenarioFrameworkGetSpawnedEntity "{5EBEEB2CAD2066C2}" {
+               m_sLayerName "SlotAI1"
+              }
+             }
+            }
+            m_sObjectToSpawn "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
+            m_WaypointSet SCR_ScenarioFrameworkWaypointSet "{6060CE9109029FC8}" {
+            }
+           }
           }
+          coords 137.578 3.921 64.125
+          angleY 71.697
+         }
+         SlotAI10 {
+          components {
+           SCR_ScenarioFrameworkSlotAI "{5A26B3E02AC77BA0}" {
+            m_sFactionKey "US"
+            m_aActivationActions {
+             SCR_ScenarioFrameworkActionKillEntity "{5EBEEB2CAE8F801C}" {
+              m_Getter SCR_ScenarioFrameworkGetSpawnedEntity "{5EBEEB2CAD2066C2}" {
+               m_sLayerName "SlotAI3"
+              }
+             }
+            }
+            m_sObjectToSpawn "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
+            m_WaypointSet SCR_ScenarioFrameworkWaypointSet "{6060CE910906632E}" {
+            }
+           }
+          }
+          coords 137.006 3.893 71.117
+          angleY 167.104
          }
         }
-        coords -0.192 -0.019 -0.282
-        angleY 55.23
+        $grp GenericEntity : "{AA01691FDC4E9167}Prefabs/ScenarioFramework/Components/Slot.et" {
+         Slot_122 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{EA34AA1A128DDF6E}Prefabs/Props/Military/Arsenal/AmmoBoxes/AmmoBoxCache_CP.et"
+           }
+          }
+          coords -10.336 -0.44 -2.634
+          angleY 6.422
+         }
+         Slot_123 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{5168FEA3054D6D15}Prefabs/Vehicles/Wheeled/M151A2/M151A2_M2HB_MERDC.et"
+           }
+          }
+          coords 137.58 3.989 66.566
+          angleX -3.731
+          angleY 53.735
+          angleZ -4.992
+         }
+         Slot_124 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{01AE5FD77A9A4C21}Prefabs/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.et"
+           }
+          }
+          coords 0.796 -0.529 -9.897
+          angleX 2.077
+          angleY 69.653
+         }
+         Slot_125 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{01AE5FD77A9A4C21}Prefabs/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.et"
+           }
+          }
+          coords -10.02 -0.449 -6.569
+          angleY 3.753
+         }
+         Slot_126 {
+          components {
+           SCR_ScenarioFrameworkSlotBase "{5A22E1D67E712EC8}" {
+            m_sObjectToSpawn "{2521D0D11FB543C7}PrefabsEditable/Auto/Props/Civilian/E_Fireplace_01.et"
+           }
+          }
+          coords -6.17 -0.304 -1.866
+          angleY 130.23
+         }
+        }
+        GenericEntity SlotMarker2 : "{E537867C6E760514}Prefabs/ScenarioFramework/Components/SlotMarker.et" {
+         components {
+          SCR_ScenarioFrameworkSlotMarker "{5EA2BD9901E5E82E}" {
+           m_sFactionKey "US"
+           m_bCanBeGarbageCollected 0
+           m_MapMarkerType SCR_ScenarioFrameworkMarkerCustom "{5EECE8B242C19799}" {
+            m_sMapMarkerText "#AR-CampaignMapMarkerPlayerSpawn"
+            m_eMapMarkerIcon OBJECTIVE_MARKER2
+            m_eMapMarkerColor REFORGER_ORANGE
+           }
+          }
+         }
+         coords -0.192 -0.019 -0.282
+         angleY 55.23
+        }
        }
       }
      }
@@ -203,11 +642,80 @@ GenericEntity Area1 : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Ar
 GenericEntity : "{D6EF54367CECE1D9}Prefabs/Weapons/Explosives/Mine_TM62M/Mine_TM62M.et" {
  coords 2369.812 7.296 3193.874
 }
-GenericEntity : "{D84238050BB795CC}DronePrefab.et" {
- components {
-  DroneController "{646550CB159501ED}" {
-   debugd 0
-  }
+$grp GenericEntity : "{D84238050BB795CC}DronePrefab.et" {
+ {
+  coords 2398.984 6.725 3196.933
  }
- coords 2369.143 8.07 3188.972
+ {
+  coords 2372.145 7.388 3192.507
+ }
+ {
+  coords 2374.417 7.727 3188.84
+ }
+ {
+  coords 2371.795 7.817 3188.276
+ }
+ {
+  coords 2374.323 7.94 3186.585
+ }
+ {
+  coords 2370.349 7.785 3188.77
+ }
+ {
+  coords 2375.792 7.082 3204.625
+ }
+ {
+  coords 2376.81 7.082 3204.625
+ }
+ {
+  coords 2378.471 7.082 3204.625
+ }
+ {
+  coords 2377.948 7.082 3205.771
+ }
+ {
+  coords 2377.242 7.082 3206.701
+ }
+ {
+  coords 2378.106 7.082 3208.275
+ }
+ {
+  components {
+   DroneController "{646550CB159501ED}" {
+    throttleForce 17000
+    rotationSpeed 100
+    tiltSpeed 1
+    groundRayDistance 100
+    fakeGravityForce 10
+   }
+  }
+  coords 2376.892 7.082 3208.164
+ }
+ {
+  coords 2378.032 7.082 3207.177
+ }
+ {
+  coords 2379.307 7.082 3208.865
+ }
+ {
+  coords 2377.763 7.082 3209.366
+ }
+ {
+  coords 2375.688 7.082 3207.997
+ }
+ {
+  coords 2376.036 7.082 3206.857
+ }
+ {
+  coords 2378.924 7.082 3206.372
+ }
+ {
+  coords 2379.945 7.082 3204.787
+ }
+ {
+  coords 2380.219 7.082 3203.054
+ }
+ {
+  coords 2381.5 7.082 3201.302
+ }
 }

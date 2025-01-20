@@ -10,6 +10,7 @@ class SCR_DisarmDroneAction :  ScriptedUserAction
 		
 		
 			Print("DISARMING");
+		
 		DroneController.Cast(pOwnerEntity.FindComponent(DroneController)).DisarmeDrone();
 	}
 	

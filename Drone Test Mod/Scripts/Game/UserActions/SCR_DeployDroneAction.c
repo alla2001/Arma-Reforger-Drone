@@ -9,7 +9,7 @@ class SCR_DeployDroneAction :  ScriptedUserAction
 		
 		
 		
-			Print("DEPLOYING");
+		
 		DroneController.Cast(pOwnerEntity.FindComponent(DroneController)).DeployDrone(pOwnerEntity,pUserEntity);
 	}
 	
