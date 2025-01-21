@@ -1,0 +1,19 @@
+GenericEntity : "{D84238050BB795CC}DronePrefab.et" {
+ ID "646550CA0862413F"
+ components {
+  SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
+   Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
+    ItemDisplayName WeaponUIInfo "{646550CB5B53C5A0}" {
+     Name "RPG Drone WEAk"
+    }
+   }
+  }
+  SCR_ExplosiveTriggerComponent "{646550CB5B53DBB7}" {
+   PROJECTILE_EFFECTS {
+    ExplosionEffect "{646550CB5B53DA4E}" {
+     EffectPrefab "{8C3C62C58D2DBEDA}Prefabs/Weapons/Warheads/Warhead_HEAT.et"
+    }
+   }
+  }
+ }
+}

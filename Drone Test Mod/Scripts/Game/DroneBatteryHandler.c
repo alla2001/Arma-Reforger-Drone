@@ -34,10 +34,20 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 	void EnergyUsed(float energy)
 	{
 		currentBattery = Math.Clamp(currentBattery-(energy*batteryConsumptionPerForceUnite),0,maxBattery);
+	
+		Rpc(RPC_CurrentBattery,currentBattery);
+		//Print(currentBattery);
+
+	}
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	void RPC_CurrentBattery(float batteryVal)
+	{
+		currentBattery = batteryVal;
 		if(batteryBar)
 		batteryBar.SetCurrent(currentBattery);
-		//Print(currentBattery);
+
 	}
+	
 	bool isDead(){return currentBattery<=0;}
 	override void EOnPostFrame(IEntity owner, float timeSlice)
 	{

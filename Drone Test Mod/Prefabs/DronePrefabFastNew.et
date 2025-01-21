@@ -1,0 +1,148 @@
+GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
+ ID "646550CA0862413F"
+ components {
+  DroneController "{646550CB159501ED}" {
+   throttleForce 15000
+   rotationSpeed 26
+   tiltSpeed 1.7
+   groundRayOffset 0.4
+   fakeGravityForce 15
+   cameraSpawnPoint 0 0.1 0.168
+   cameraSpawnRotation 32 0 0
+  }
+  MeshObject "{646550CB5B53C40F}" {
+   Object "{0606CDA76EA40E00}Models/Drone.xob"
+  }
+  RigidBody "{646550CB5B53C45F}" {
+   Mass 3
+   CenterOfMass 0 -0.2 0
+   AngularDamping 0.6
+   Geometries {
+    PhysicsBoxGeometry box {
+     Mass 3
+     Extents 0.2 0.3 0.4
+    }
+   }
+  }
+  SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
+   Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
+    ItemDisplayName WeaponUIInfo "{646550CB5B53C5A0}" {
+     Name "FPV Drone"
+     Description "FPV Drone, fly it"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{646550CB5B53C595}" {
+     Weight 2
+     RestingAdditiveOffsetLS 0 0.3 0
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{646550CB5B53C5EE}" {
+     HandAdditiveRotation 0 0 180
+     AllowInspection 1
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{646550CB5B53C5C8}" {
+      CameraOrbitAngles 30 30 30
+      CameraDistanceToItem 0.3
+      CameraOffset 0.025 -0.1 0
+      FOV 65
+     }
+    }
+    m_Size SLOT_2x1
+   }
+  }
+  SCR_PlaceableItemComponent "{6468D525EA34CF06}" {
+   m_bCanAttachAngled 0
+   m_fMaxPlacementDistance 2
+  }
+  WeaponComponent "{6468D52551BE07BC}" {
+   components {
+    AttachmentSlotComponent "{646AC1D543E3B426}" {
+     AttachmentSlot InventoryStorageSlot slot {
+      InspectionWidgetOffset 0 -0.1415 0
+     }
+     AttachmentType AttachmentOpticsCarryHandle "{646AC1D45025B6C3}" {
+     }
+     ShowInInspection 1
+    }
+   }
+  }
+  ActionsManagerComponent "{646550CB5B5077B8}" {
+   ActionContexts {
+    UserActionContext "{646550CB5B5076FC}" {
+     Position PointInfo "{646550CB5B5076FD}" {
+     }
+     Radius 1
+     Height 0
+    }
+    UserActionContext "{646A855957ADDEDF}" {
+     ContextName "knob_toggle"
+     Position PointInfo "{646A85595E00802E}" {
+      Offset 0 0.2 -0.01
+     }
+     Radius 1
+     Height 0
+    }
+   }
+   additionalActions {
+    CustomSCR_PickUpItemAction "{646550CB5B5076B4}" {
+    }
+    SCR_DroneAttachementAction "{646AC1D34149EF81}" {
+     ParentContextList {
+      "knob_toggle"
+     }
+     UIInfo UIInfo "{646AC1D343A340CF}" {
+      Name "Attach"
+     }
+    }
+   }
+  }
+ }
+ scale 1
+ {
+  GenericEntity {
+   ID "64655C6ACF6AF504"
+   components {
+    MeshObject "{64655B8151209588}" {
+     Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     Materials {
+      MaterialAssignClass "{646A855DE123A611}" {
+       SourceMaterial "Scene__Root"
+       AssignedMaterial "{23A28350B90178DB}Materials/FPVDroneBody.emat"
+      }
+     }
+    }
+   }
+   coords -0.206 0.127 0.208
+   scale 1.3
+  }
+  GenericEntity {
+   ID "6465603B6EE0F2D5"
+   components {
+    MeshObject "{64655B8151209588}" {
+     Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+    }
+   }
+   coords 0.204 0.125 -0.209
+   scale 1.3
+  }
+  GenericEntity {
+   ID "6465603B6E7F2992"
+   components {
+    MeshObject "{64655B8151209588}" {
+     Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+    }
+   }
+   coords 0.206 0.125 0.208
+   scale 1.3
+  }
+  GenericEntity {
+   ID "6465603B6DB6C219"
+   components {
+    MeshObject "{64655B8151209588}" {
+     Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+    }
+   }
+   coords -0.205 0.123 -0.207
+   scale 1.3
+  }
+ }
+}

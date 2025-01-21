@@ -1,0 +1,5 @@
+MatPBRBasic {
+ BCRMap "{E404AB1EDE6DFBEF}Texture/Scene_-_Root_BCR.edds"
+ NormalPower 1.121
+ NMOMap "{DCDC108C071AA971}Texture/Scene_-_Root_NMO.edds"
+}

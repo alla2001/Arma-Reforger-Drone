@@ -1,0 +1,23 @@
+SCR_ManualCamera {
+ ID "6464AA7F29C301CF"
+ components {
+  SCR_PostProcessCameraComponent "{646533F1C4134845}" {
+   m_Effects {
+    SCR_CameraPostProcessEffect "{646533F1C4E4E2B6}" {
+     m_Type FilmGrain
+     m_iPriority 1
+     m_MaterialPath "{3B4B9E13CA330078}RangeNoise.emat"
+    }
+    SCR_CameraPostProcessEffect "{6468D51DA9A1478F}" {
+     m_Type Colors
+     m_MaterialPath "{E4324967325C499A}DeSatColor.emat"
+    }
+   }
+  }
+  Hierarchy "{6464AA7F2118EBEF}" {
+  }
+ }
+ coords 0 0 0
+ angleX 6.83
+ cameraFlags 5
+}

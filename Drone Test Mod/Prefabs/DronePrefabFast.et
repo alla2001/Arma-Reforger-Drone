@@ -1,0 +1,64 @@
+GenericEntity : "{D84238050BB795CC}DronePrefab.et" {
+ ID "646550CA0862413F"
+ components {
+  DroneController "{646550CB159501ED}" {
+   throttleForce 15000
+   rotationSpeed 30
+   tiltSpeed 2.5
+   groundRayOffset 0.31
+   fakeGravityForce 15
+  }
+  DroneSignalHandler "{646550CB1734D305}" {
+   maxRange 1100
+  }
+  MeshObject "{646550CB5B53C40F}" {
+   Object "{4D308FF3535F56BF}FPVFastDrone.xob"
+  }
+  RigidBody "{646550CB5B53C45F}" {
+   Mass 3
+   CenterOfMass 0 -0.2 0
+   AngularDamping 0.6
+   Geometries {
+    PhysicsBoxGeometry box {
+     Mass 3
+     Extents 0.2 0.3 0.4
+    }
+   }
+  }
+  SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
+   Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
+    ItemDisplayName WeaponUIInfo "{646550CB5B53C5A0}" {
+     Name "FPV Drone"
+     Description "FPV Drone, fly it"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{646550CB5B53C595}" {
+     Weight 1
+    }
+    m_Size SLOT_2x1
+   }
+  }
+ }
+ scale 1
+ {
+  GenericEntity {
+   ID "64655C6ACF6AF504"
+   coords -0.235 0.054 0.196
+   scale 0.6
+  }
+  GenericEntity {
+   ID "6465603B6EE0F2D5"
+   coords 0.237 0.05 -0.209
+   scale 0.6
+  }
+  GenericEntity {
+   ID "6465603B6E7F2992"
+   coords 0.236 0.052 0.194
+   scale 0.6
+  }
+  GenericEntity {
+   ID "6465603B6DB6C219"
+   coords -0.238 0.053 -0.21
+   scale 0.6
+  }
+ }
+}

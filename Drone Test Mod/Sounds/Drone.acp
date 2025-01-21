@@ -25,7 +25,7 @@ AudioClass {
   SignalClass {
    id 12301
    name "Signal Occlusion"
-   tl 384 -368
+   tl -21 -385.5
    res "{A45B14CDEA2D5DCD}Sounds/_SharedData/Signals/Props/Props_Occlusion.sig"
    inputsport {
     1 6 7 23 52 56
@@ -69,7 +69,7 @@ AudioClass {
   SignalClass {
    id 54285
    name "Signal 56"
-   tl 7 -261
+   tl -210.5 -241
    res "{B0940E284D98C2C1}Sounds/_SharedData/Signals/Weapons/Weapon_UnderPlayerControl_1p_3p_Cam.sig"
    inputsport {
     1 7 21 28 31 34 36
@@ -132,7 +132,7 @@ AudioClass {
    id 14345
    name "SOUND_FLY"
    version 5
-   tl 608 240
+   tl 615.5 192.5
    ins {
     ConnectionsClass connections {
      id 64
@@ -459,7 +459,7 @@ AudioClass {
    id 1035
    name "FinalMix"
    version 4
-   tl 893.5 55.333
+   tl 946 120.333
    res "{B764D803219C775E}Sounds/FinalMix.afm"
    ins {
     ConnectionsClass connections {
@@ -741,7 +741,7 @@ AudioClass {
    id 26642
    name "Disarm Shader"
    version 5
-   tl 373.333 237
+   tl 408.333 199.5
    ins {
     ConnectionsClass connections {
      id 0
@@ -774,6 +774,10 @@ AudioClass {
      id 64
      links {
       ConnectionClass connection {
+       id 55300
+       port 65
+      }
+      ConnectionClass connection {
        id 25604
        port 65
       }
@@ -789,7 +793,7 @@ AudioClass {
   AmplitudeClass : "{C97DEFA6B88F6DE9}Sounds/_SharedData/Configs/Amplitude/_SharedData/Amplitude_-55LUFS_to_-50LUFS.conf" {
    id 9235
    version 5
-   tl 373.333 -165.625
+   tl 365.833 -275.625
    parent "{C97DEFA6B88F6DE9}Sounds/_SharedData/Configs/Amplitude/_SharedData/Amplitude_-55LUFS_to_-50LUFS.conf"
   }
  }
@@ -797,7 +801,7 @@ AudioClass {
   FrequencyClass : "{0005FE42A6D80399}Sounds/_SharedData/Configs/Frequency/_SharedData/Frequency_DynamicUpdate.conf" {
    id 11285
    version 5
-   tl 373.333 -36.009
+   tl 358.333 -116.009
    parent "{0005FE42A6D80399}Sounds/_SharedData/Configs/Frequency/_SharedData/Frequency_DynamicUpdate.conf"
    ins {
     ConnectionsClass connections {
@@ -871,17 +875,17 @@ AudioClass {
   }
   BankLocalClass {
    id 25604
-   name "Fly"
+   name "Takeoff"
    version 7
-   tl -411.912 273
+   tl -284.412 238
    Volume 30
    "Volume variance" 1
-   "Pitch variance" 0.5
-   "Loop count" 255
-   "Infinite loop" 1
+   Pitch -2
+   "Pitch variance" 1
+   Resampler FIR_4
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{FB20FDF0712F7ECC}Sounds/drone-flying-67483.wav"
+     Filename "{41A3AA0DE565C19F}Sounds/drone-Takeoff.wav"
      Index 1
     }
    }
@@ -1900,13 +1904,34 @@ AudioClass {
     }
    }
   }
+  BankLocalClass {
+   id 55300
+   name "Fly"
+   version 7
+   tl -257.5 342.5
+   Volume 30
+   "Volume variance" 2
+   Pitch -2
+   "Pitch variance" 1
+   "Loop count" 255
+   "Infinite loop" 1
+   Resampler FIR_4
+   Silence 1200
+   "Random start offset" 1
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{A058C2CD2CA74FD6}Sounds/drone-flying.wav"
+     Index 1
+    }
+   }
+  }
  }
  spatialities {
   SpatialityClass : "{3E728F2490D6D7BE}Sounds/_SharedData/Configs/Spatiality/Weapons/Spatiality_Weapons_Handling.conf" {
    id 10268
    name "Spatiality"
    version 5
-   tl 373.333 -100
+   tl 85.833 -12.5
    parent "{3E728F2490D6D7BE}Sounds/_SharedData/Configs/Spatiality/Weapons/Spatiality_Weapons_Handling.conf"
    ins {
     ConnectionsClass connections {

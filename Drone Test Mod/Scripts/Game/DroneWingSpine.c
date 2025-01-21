@@ -11,14 +11,16 @@ class DroneWingSpine : ScriptComponent // GameComponent > GenericComponent
 	float speedMult;
 	 [RplProp(condition: RplCondition.NoOwner)]
 	float spinSpeed;
-	
-	  override void OnPostInit(IEntity owner)
+	vector localPos;
+
+	override void OnPostInit(IEntity owner)
     {
         super.OnPostInit(GetOwner());
      
         SetEventMask(owner, EntityEvent.POSTFRAME);
 
-		
+		localPos = owner.CoordToLocal( owner.GetOrigin());
+
         return;
     }
 	
@@ -32,7 +34,7 @@ float scale = tran[0].Length(); // Assuming uniform scaling
 
 // Perform the rotation
 vector tran1[4];
-SCR_Math3D.RotateAround(tran, owner.GetOrigin(), tran[1], timeSlice * spinSpeed + timeSlice * 1, tran1);
+SCR_Math3D.RotateAround(tran, owner.GetOrigin(), tran[1], timeSlice * spinSpeed + timeSlice * 5, tran1);
 
 // Reapply the scale
 tran1[0] = tran1[0].Normalized() * scale;
@@ -41,7 +43,8 @@ tran1[2] = tran1[2].Normalized() * scale;
 
 // Set the transformed matrix back to the object
 owner.SetTransform(tran1);
-	
+	owner.SetOrigin( owner.CoordToParent( localPos));
+		owner.Update();
 			//Print(spinSpeed);
 	}
 	
@@ -55,6 +58,10 @@ owner.SetTransform(tran1);
 	
 		spinSpeed = speed;
 		Replication.BumpMe();
+	}
+	void ToggleMesh(bool val){
+	
+		GetOwner().Show(val);
 	}
 	
 }
