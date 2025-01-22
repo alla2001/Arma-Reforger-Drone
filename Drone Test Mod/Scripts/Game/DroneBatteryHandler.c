@@ -29,6 +29,7 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 	
 	}
 	void Disconnected(){
+		if(root)
 		delete root;
 	}
 	void EnergyUsed(float energy)
@@ -52,6 +53,11 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 	override void EOnPostFrame(IEntity owner, float timeSlice)
 	{
 		
+	}
+	void OnDelete(IEntity owner){
+		if(root)
+		delete root;
+	
 	}
 
 	

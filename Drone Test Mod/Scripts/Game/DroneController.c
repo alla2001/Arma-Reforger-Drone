@@ -11,9 +11,13 @@ class DroneController : ScriptComponent
     [Attribute()] float maxTiltAngle;  // Maximum tilt angle for DroneController
     [Attribute()] float groundRayDistance;
     [Attribute()] float groundRayOffset;
-	 [Attribute()] float fakeGravityForce;
+    [Attribute()] float fakeGravityForce;
     [Attribute()] int debugd;
     [Attribute()] float forceToExplode;
+  [Attribute()] 
+                float interpolationThreshold; 
+	  [Attribute()] 
+	  float interpolationSpeed;
     [Attribute(params : "et")] protected ResourceName camPrefab;
 
     SCR_ManualCamera camera;
@@ -26,24 +30,25 @@ class DroneController : ScriptComponent
     [Attribute()] int m_iCameraIndex;
     [RplProp(onRplName : "OnDeployed")] bool deployed;
     [RplProp(condition : RplCondition.NoOwner)] bool armed;
-   [Attribute(defvalue: "0 0 0", uiwidget: UIWidgets.Coords, params: "inf inf 0 purpose=coords space=entity anglesVar=cameraSpawnRotation")] vector cameraSpawnPoint;
-	   [Attribute(defvalue: "0 0 0", uiwidget: UIWidgets.Coords, params: "inf inf 0 purpose=angles space=entity coordsVar=cameraSpawnPoint")] vector cameraSpawnRotation;
-    
-	IEntity playerUser;
+    [Attribute(defvalue : "0 0 0", uiwidget : UIWidgets.Coords, params : "inf inf 0 purpose=coords space=entity anglesVar=cameraSpawnRotation")] vector cameraSpawnPoint;
+    [Attribute(defvalue : "0 0 0", uiwidget : UIWidgets.Coords, params : "inf inf 0 purpose=angles space=entity coordsVar=cameraSpawnPoint")] vector cameraSpawnRotation;
+
+    IEntity playerUser;
     DroneSignalHandler droneSignalHandler;
     DroneBatteryHandler batteryHandler;
     ref array<DroneWingSpine> wings;
     vector lastPos;
     NwkMovementComponent networkedMovment;
-SCR_PlaceableInventoryItemComponent placable;
+    SCR_PlaceableInventoryItemComponent placable;
     BaseRplComponent rplc;
-	float mass=1;
-	float sfxVolume=0;
-	float dialgoVolume;	
+    float mass = 1;
+    float sfxVolume = 0;
+    float dialgoVolume;
+    bool phyiscal;
     override void OnPostInit(IEntity owner)
     {
         super.OnPostInit(GetOwner());
-        rb = owner.GetPhysics();
+
         inputManager = GetGame().GetInputManager();
         SetEventMask(owner, EntityEvent.FRAME);
         SetEventMask(owner, EntityEvent.SIMULATE);
@@ -55,42 +60,48 @@ SCR_PlaceableInventoryItemComponent placable;
             DiagMenu.SetValue(SCR_DebugMenuID.DEBUGUI_INPUT_MANAGER, debugd);
             inputManager.SetDebug(debugd);
         }
-
-		mass= rb.GetMass();
+		
+        rb = owner.GetPhysics();
+		if(rb)
+        mass = rb.GetMass();
         return;
     }
 
     void DeployDrone(IEntity drone, IEntity user)
     {
-      
-	
+
         bool m_bIsServer = Replication.IsServer();
-		 if (m_bIsServer){
+        if (m_bIsServer)
+        {
 
+            lastPos = drone.GetOrigin();
 
-	lastPos = drone.GetOrigin();
-	
-		SetDynamic(GetOwner());
-				
-      
-			   droneSignalHandler.SetControlingPlayer(user);
-		}
-		 playerUser = user;
-			PlayerController playerC =  	GetGame().GetPlayerController();
-	
-		IEntity playerEnt =null;
-		if(playerC)
-		playerEnt = playerC.GetControlledEntity();
-   		
+            SetDynamic(GetOwner());
+
+            droneSignalHandler.SetControlingPlayer(user);
+        }
+        else
+        {
+
+            phyiscal = true;
+        }
+        playerUser = user;
+        PlayerController playerC = GetGame().GetPlayerController();
+
+        IEntity playerEnt = null;
+        if (playerC)
+            playerEnt = playerC.GetControlledEntity();
+
         // Create layout
-        if (playerUser !=playerEnt)
+        if (playerUser != playerEnt)
         {
             if (!m_bIsServer)
                 return;
             else
-            {	SCR_ExplosiveTriggerComponent m_Trigger = SCR_ExplosiveTriggerComponent.Cast(GetOwner().FindComponent(SCR_ExplosiveTriggerComponent));
+            {
+                SCR_ExplosiveTriggerComponent m_Trigger = SCR_ExplosiveTriggerComponent.Cast(GetOwner().FindComponent(SCR_ExplosiveTriggerComponent));
 
-				m_Trigger.SetInstigator(Instigator.CreateInstigator(user));
+                m_Trigger.SetInstigator(Instigator.CreateInstigator(user));
                 deployed = true;
                 Replication.BumpMe();
                 rplc = BaseRplComponent.Cast(drone.FindComponent(RplComponent));
@@ -99,53 +110,46 @@ SCR_PlaceableInventoryItemComponent placable;
                     Print("This example requires that the entity has an RplComponent.", LogLevel.WARNING);
                     return;
                 }
-			
+
                 SCR_ChimeraCharacter chim = SCR_ChimeraCharacter.Cast(user);
                 rplc.Give(Replication.FindOwner(Replication.FindId(chim)));
                 Print("RPC Auth :" + rplc.IsOwner(), LogLevel.ERROR);
             }
             return;
         }
-     		   deployed = true;
+        deployed = true;
 
         CreateCamera(drone);
         GetGame().GetCameraManager().SetCamera(camera);
 
         inputManager.ActivateContext("HelicopterContext", duration : int.MAX);
         inputManager.ActivateAction("CollectiveIncrease", duration : int.MAX);
-		    inputManager.ActivateAction("CollectiveIncrease", duration : int.MAX);
-		    inputManager.ActivateAction("CollectiveDecrease", duration : int.MAX);
-		inputManager.ActivateAction("CyclicRight", duration : int.MAX);
-		inputManager.ActivateAction("CyclicLeft", duration : int.MAX);
-		inputManager.ActivateAction("CyclicForward", duration : int.MAX);
-		inputManager.ActivateAction("CyclicBack", duration : int.MAX);
-		inputManager.ActivateAction("AntiTorqueLeft", duration :int.MAX);
-		inputManager.ActivateAction("AntiTorqueRight", duration : int.MAX);
-    
+        inputManager.ActivateAction("CollectiveIncrease", duration : int.MAX);
+        inputManager.ActivateAction("CollectiveDecrease", duration : int.MAX);
+        inputManager.ActivateAction("CyclicRight", duration : int.MAX);
+        inputManager.ActivateAction("CyclicLeft", duration : int.MAX);
+        inputManager.ActivateAction("CyclicForward", duration : int.MAX);
+        inputManager.ActivateAction("CyclicBack", duration : int.MAX);
+        inputManager.ActivateAction("AntiTorqueLeft", duration : int.MAX);
+        inputManager.ActivateAction("AntiTorqueRight", duration : int.MAX);
 
         inputManager.AddActionListener("JumpOut", EActionTrigger.DOWN, ClientDisconnect);
         inputManager.AddActionListener("CharacterFire", EActionTrigger.DOWN, TriggerExplode);
         lastPos = drone.GetOrigin();
         droneSignalHandler.Deploy(user, camera);
         batteryHandler.Deploy();
-		
-		SCR_ExplosiveTriggerComponent m_Trigger = SCR_ExplosiveTriggerComponent.Cast(GetOwner().FindComponent(SCR_ExplosiveTriggerComponent));
-	
-		
-		m_Trigger.SetInstigator(Instigator.CreateInstigator(user));
-		sfxVolume=AudioSystem.GetMasterVolume(AudioSystem.SFX);
-	
-		if(sfxVolume!=0)
-		AudioSystem.SetMasterVolume(AudioSystem.SFX, 0.05);
 
+        SCR_ExplosiveTriggerComponent m_Trigger = SCR_ExplosiveTriggerComponent.Cast(GetOwner().FindComponent(SCR_ExplosiveTriggerComponent));
 
-       
+        m_Trigger.SetInstigator(Instigator.CreateInstigator(user));
+        sfxVolume = AudioSystem.GetMasterVolume(AudioSystem.SFX);
+
+        if (sfxVolume != 0)
+            AudioSystem.SetMasterVolume(AudioSystem.SFX, 0.05);
     }
 
-	
     [RplRpc(RplChannel.Reliable, RplRcver.Server)] void RPC_ArmDrone()
     {
-		
         armed = true;
         Replication.BumpMe();
     }
@@ -164,19 +168,13 @@ SCR_PlaceableInventoryItemComponent placable;
         if (soundData)
             soundData.SoundEvent("SOUND_CONNECT");
         Rpc(RPC_ArmDrone);
-			 bool m_bIsServer = Replication.IsServer();
-			 if (m_bIsServer){
+        bool m_bIsServer = Replication.IsServer();
+        if (m_bIsServer)
+        {
 
-
-
-
-  
-        //rb.SetActive(ActiveState.ALWAYS_ACTIVE);
-       // rb.ChangeSimulationState(SimulationState.SIMULATION);
-			
-
-			}
-		
+            // rb.SetActive(ActiveState.ALWAYS_ACTIVE);
+            // rb.ChangeSimulationState(SimulationState.SIMULATION);
+        }
     }
 
     void DisarmeDrone()
@@ -188,84 +186,94 @@ SCR_PlaceableInventoryItemComponent placable;
             soundData.SoundEvent("SOUND_DISARM");
         Rpc(RPC_DisarmeDrone);
     }
-		
-	
-	
+
     void PickUp()
     {
-		currentTransform[0]=vector.Zero; currentTransform[1]==vector.Zero; currentTransform[2]==vector.Zero; currentTransform[3]==vector.Zero;
+        currentTransform[0] = vector.Zero;
+        currentTransform[1] == vector.Zero;
+        currentTransform[2] == vector.Zero;
+        currentTransform[3] == vector.Zero;
         SoundComp soundData = SoundComp.Cast(GetOwner().FindComponent(SoundComp));
 
         if (soundData)
             soundData.TerminateAll();
-		
-		foreach (DroneWingSpine wing : wings)
+
+        foreach (DroneWingSpine wing : wings)
         {
             wing.ToggleMesh(false);
         }
-		 bool m_bIsServer = Replication.IsServer();
-			 if (m_bIsServer){
 
-
-
-		rb.Destroy();
-
-     
-			
-
-			}
-
+        rb.SetActive(ActiveState.INACTIVE);
+        rb.ChangeSimulationState(SimulationState.NONE);
+        phyiscal = false;
+        bool m_bIsServer = Replication.IsServer();
+        if (m_bIsServer)
+        {
+        }
     }
-	private void SetStatic(IEntity owner)
-	{
-		return;
-		mass= rb.GetMass();
-		rb.Destroy();
-		PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.2, 0.6));
 
-		PhysicsGeomDef geoms[] = { PhysicsGeomDef("box", geom , "", 0xffffffff) };
-		rb=Physics.CreateStaticEx(owner, geoms);
-		
-		  rb.EnableGravity(false); // Ensure gravity is enabled for realistic falling
+    void SetStatic(IEntity owner)
+    {
+        return;
+        mass = rb.GetMass();
+        rb.Destroy();
+        PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.2, 0.6));
+
+        PhysicsGeomDef geoms[] = {PhysicsGeomDef("box", geom, "", 0xffffffff)};
+        rb = Physics.CreateStaticEx(owner, geoms);
+
+        rb.EnableGravity(false); // Ensure gravity is enabled for realistic falling
         rb.SetActive(ActiveState.INACTIVE);
         rb.ChangeSimulationState(SimulationState.SIMULATION);
-	}
-	private void SetDynamic(IEntity owner)
-	{
-		
-			rb.Destroy();
-		PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.2, 0.6));
-		PhysicsGeomDef geoms[] = { PhysicsGeomDef("box", geom, "", 0xffffffff) };
-		vector center = 0.097 * vector.Up;
-		Physics.CreateDynamicEx(owner, center, mass, geoms);
-		
-		rb=owner.GetPhysics();
-		  rb.EnableGravity(true); // Ensure gravity is enabled for realistic falling
+    }
+
+    void SetDynamic(IEntity owner)
+    {
+
+        rb.Destroy();
+        PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.2, 0.6));
+        PhysicsGeomDef geoms[] = {PhysicsGeomDef("box", geom, "", 0xffffffff)};
+        vector center = 0.097 * vector.Up;
+        Physics.CreateDynamicEx(owner, center, mass, geoms);
+
+        rb = owner.GetPhysics();
+        rb.EnableGravity(true); // Ensure gravity is enabled for realistic falling
         rb.SetActive(ActiveState.ALWAYS_ACTIVE);
         rb.ChangeSimulationState(SimulationState.SIMULATION);
-		
-	}
+    }
     void Drop(ChimeraCharacter placingCharacter, SCR_PlaceableInventoryItemComponent placedItemIIC)
     {
-		if(placable!=placedItemIIC)return;
+
+        if (placable != placedItemIIC)
+            return;
+			if(!rb)
+        rb=GetOwner().GetPhysics();
         SoundComp soundData = SoundComp.Cast(GetOwner().FindComponent(SoundComp));
 
-        if (soundData &&deployed)
+        if (soundData && deployed)
             soundData.SoundEvent("SOUND_DISARM");
-		
-		foreach (DroneWingSpine wing : wings)
+
+        foreach (DroneWingSpine wing : wings)
         {
             wing.ToggleMesh(true);
         }
-		 bool m_bIsServer = Replication.IsServer();
-			 if (m_bIsServer){
-			if(!rb) return;
-      			rb.Destroy();
- }
+        vector mat[4];
+        GetOwner().GetTransform(mat);
+        vector pos = GetOwner().GetOrigin();
+        GetOwner().SetOrigin(pos + mat[1].Normalized() * 0.22);
+
+        if (!armed)
+        {
+
+            rb.SetActive(ActiveState.INACTIVE);
+            rb.ChangeSimulationState(SimulationState.NONE);
+        }
+        bool m_bIsServer = Replication.IsServer();
+        if (m_bIsServer)
+        {
+        }
     }
 
-	
-	
     CameraManager m_CameraManager;
     bool once = false;
 
@@ -291,20 +299,24 @@ SCR_PlaceableInventoryItemComponent placable;
         {
             Print("Missing Signal Handler On Drone !.", LogLevel.WARNING);
         }
-			placable=	SCR_PlaceableInventoryItemComponent.Cast( owner.FindComponent(SCR_PlaceableInventoryItemComponent));
-  		placable.GetOnPlacementDoneInvoker().Insert(Drop);
-		placable.m_OnParentSlotChangedInvoker.Insert(SlotChanged);
+        placable = SCR_PlaceableInventoryItemComponent.Cast(owner.FindComponent(SCR_PlaceableInventoryItemComponent));
+        placable.GetOnPlacementDoneInvoker().Insert(Drop);
+        placable.m_OnParentSlotChangedInvoker.Insert(SlotChanged);
+       rb = owner.GetPhysics();
+		if(rb)
+        mass = rb.GetMass();
     }
-	void SlotChanged(InventoryStorageSlot oldslot, InventoryStorageSlot newslot){
-	
-	if(newslot==null)
-	Drop(null,placable);
-		else
-		PickUp();
-	}
+    void SlotChanged(InventoryStorageSlot oldslot, InventoryStorageSlot newslot)
+    {
+
+        if (newslot == null)
+            Drop(null, placable);
+        else
+            PickUp();
+    }
     void OnDeployed()
     {
-     
+
         SoundComp soundData = SoundComp.Cast(GetOwner().FindComponent(SoundComp));
 
         if (soundData)
@@ -334,96 +346,119 @@ SCR_PlaceableInventoryItemComponent placable;
         // Set camera to hierarchy
         parent.AddChild(camera, -1, EAddChildFlags.AUTO_TRANSFORM);
     }
-    override void EOnFrame(IEntity owner, float timeSlice)
-    { 
-		
-		
-		
-		 bool m_bIsServer = Replication.IsServer();
-		if(!m_bIsServer)
-		{
-          	if (interpolationProgress < 1.0) {
-        	// Increment the interpolation progress
-        	interpolationProgress = Math.Clamp(interpolationProgress + timeSlice * interpolationSpeed, 0.0, 1.0);
-		
-        	// Interpolate each element of the matrix
-        	for (int i = 0; i < 4; i++) {
-            currentTransform[i] = vector.Lerp(currentTransform[i], targetTransform[i], interpolationProgress);
-       	 }
 
-        	// Apply the interpolated transformation
-        	GetOwner().SetTransform(currentTransform);
-    		}
-		}
-	
-		     SoundComp soundData = SoundComp.Cast(GetOwner().FindComponent(SoundComp));
-		  if (!deployed&&soundData && soundData.IsPlaying())
+    override void EOnFrame(IEntity owner, float timeSlice)
+    {
+
+        bool m_bIsServer = Replication.IsServer();
+        if (!m_bIsServer && phyiscal)
+        {
+            if (interpolationProgress < 1.0)
+            {
+               
+
+                // Check if the difference is too large
+                bool shouldSetDirectly = false;
+                for (int i = 0; i < 4; i++)
+                {
+                    if ((currentTransform[i] - targetTransform[i]).Length() > interpolationThreshold)
+                    {
+                        shouldSetDirectly = true;
+                        break;
+                    }
+                }
+
+                if (shouldSetDirectly)
+                {
+                    // Set directly to the target transform
+                    for (int i = 0; i < 4; i++)
+                    {
+                        currentTransform[i] = targetTransform[i];
+                    }
+                    interpolationProgress = 1.0; // Mark as completed
+                }
+                else
+                {
+                    // Increment the interpolation progress
+                    interpolationProgress = Math.Clamp(interpolationProgress + timeSlice * interpolationSpeed, 0.0, 1.0);
+
+                    // Interpolate each element of the matrix
+                    for (int i = 0; i < 4; i++)
+                    {
+                        currentTransform[i] = vector.Lerp(currentTransform[i], targetTransform[i], interpolationProgress);
+                    }
+                }
+                GetOwner().SetTransform(currentTransform);
+                GetOwner().Update();
+            }
+        }
+
+        SoundComp soundData = SoundComp.Cast(GetOwner().FindComponent(SoundComp));
+        if (!deployed && soundData && soundData.IsPlaying())
         {
             soundData.TerminateAll();
         }
-	if(rb==null)return;
- if (m_bIsServer &&rb.GetSimulationState()==ActiveState.ALWAYS_ACTIVE){
-			   
-			 vector mat[4];
-        owner.GetTransform(mat);
- 		Rpc(UpdateTransform,mat);
-		
-		
-		}
+        if (rb == null)
+            return;
+        if (m_bIsServer && rb.GetSimulationState() == SimulationState.SIMULATION)
+        {
+            BaseWorld baseWorld = owner.GetWorld();
+
+            vector mat[4];
+            owner.GetTransform(mat);
+            TraceParam param = MakeTraceParam(owner.GetOrigin() - mat[1].Normalized() * groundRayOffset, owner.GetOrigin() - mat[1].Normalized() * groundRayDistance, TraceFlags.OCEAN);
+            float hit = baseWorld.TraceMove(param, null);
+            // if(hit<=0.01) TriggerExplode();
+            vector dir = lastPos - owner.GetOrigin();
+            param = MakeTraceParam(lastPos, owner.GetOrigin() + dir * 0.5, TraceFlags.WORLD);
+            hit = baseWorld.TraceMove(param, null);
+            if (hit != 1)
+            {
+                owner.SetOrigin(vector.Lerp(lastPos + dir * 0.5, owner.GetOrigin(), hit) + dir * 0.5);
+                owner.Update();
+            }
+
+            lastPos = owner.GetOrigin() + dir * 0.5;
+        }
+
+        if (m_bIsServer && rb.GetSimulationState() == SimulationState.SIMULATION)
+        {
+
+            vector mat[4];
+            owner.GetTransform(mat);
+            Rpc(UpdateTransform, mat);
+        }
         // once =true;
         // Print("cam : " + 	GetGame().GetCameraManager().CurrentCamera ());
         if (!deployed)
             return;
-	     // Altitude control input
-	    if (soundData && !soundData.IsPlaying())
+        // Altitude control input
+        if (soundData && !soundData.IsPlaying())
         {
             soundData.SoundEvent("SOUND_FLY");
         }
-		PlayerController playerC =  	GetGame().GetPlayerController();
-	
-		IEntity playerEnt =null;
-		if(playerC)
-		playerEnt = playerC.GetControlledEntity();
+        PlayerController playerC = GetGame().GetPlayerController();
 
-   		if (!m_bIsServer&& playerUser !=playerEnt)
+        IEntity playerEnt = null;
+        if (playerC)
+            playerEnt = playerC.GetControlledEntity();
+
+        if (!m_bIsServer && playerUser != playerEnt)
         {
-			return;
-		}
-		if (m_bIsServer)
+            return;
+        }
+
+        if (playerUser != playerEnt)
         {
-			BaseWorld baseWorld = owner.GetWorld();
+            return;
+        }
 
-        vector mat[4];
-        owner.GetTransform(mat);
-		 TraceParam     param = MakeTraceParam(owner.GetOrigin() - mat[1].Normalized() * groundRayOffset, owner.GetOrigin() - mat[1].Normalized() * groundRayDistance,  TraceFlags.OCEAN);
-		float hit = baseWorld.TraceMove(param, null);
-		if(hit<=0.01) TriggerExplode();
-		  vector dir = lastPos - owner.GetOrigin();
-        param = MakeTraceParam(lastPos, owner.GetOrigin()+dir*0.5,  TraceFlags.WORLD);
-        hit = baseWorld.TraceMove(param, null);
-		if(hit!=1){
-		      owner.SetOrigin(vector.Lerp(lastPos+dir*0.5, owner.GetOrigin(), hit)+dir*0.5);
-					owner.Update();
-		}
-  
-        lastPos = owner.GetOrigin()+dir*0.5;
-
-		}
-	
-			
-        		
-    	if (playerUser != playerEnt)
-        {
-			return;
-		}
-
- 
-        throttleInput = inputManager.GetActionValue("CollectiveIncrease")- inputManager.GetActionValue("CollectiveDecrease");
+        throttleInput = inputManager.GetActionValue("CollectiveIncrease") - inputManager.GetActionValue("CollectiveDecrease");
 
         // Get inputs
         // Up (Jump) / Down (Fire3)
-        moveInput = Vector(inputManager.GetActionValue("CyclicLeft")-inputManager.GetActionValue("CyclicRight"), 0, inputManager.GetActionValue("CyclicForward")-inputManager.GetActionValue("CyclicBack")); // Forward/Backward/Strafe
-        yawInput = -inputManager.GetActionValue("AntiTorqueLeft") + inputManager.GetActionValue("AntiTorqueRight");       // Yaw (Mouse X)
+        moveInput = Vector(inputManager.GetActionValue("CyclicLeft") - inputManager.GetActionValue("CyclicRight"), 0, inputManager.GetActionValue("CyclicForward") - inputManager.GetActionValue("CyclicBack")); // Forward/Backward/Strafe
+        yawInput = -inputManager.GetActionValue("AntiTorqueLeft") + inputManager.GetActionValue("AntiTorqueRight");                                                                                              // Yaw (Mouse X)
 
         // Store last tilt angle for persistence
         vector lastTargetTilt;
@@ -438,37 +473,32 @@ SCR_PlaceableInventoryItemComponent placable;
             );
             // owner.SetAngles(vector.Lerp(owner.GetAngles(), lastTargetTilt, tiltSpeed * timeSlice));
         }
-		
-		Rpc(RPC_SendInputs,moveInput,yawInput,throttleInput);
+
+        Rpc(RPC_SendInputs, moveInput, yawInput, throttleInput);
 
         // Print("HEHE");
     }
-	[RplRpc(RplChannel.Unreliable, RplRcver.Server)]
-	void RPC_SendInputs( vector r_moveInput,
-    float r_yawInput,
-    float r_throttleInput)
-	{
-	 moveInput= r_moveInput;
- 	throttleInput =r_throttleInput;
-	yawInput =r_yawInput;
-	
-	}
+    [RplRpc(RplChannel.Unreliable, RplRcver.Server)] void RPC_SendInputs(vector r_moveInput,
+                                                                         float r_yawInput,
+                                                                         float r_throttleInput)
+    {
+        moveInput = r_moveInput;
+        throttleInput = r_throttleInput;
+        yawInput = r_yawInput;
+    }
     // vector forward = camMat[2];
     // 		vector up = camMat[1];
     // 		vector side = camMat[0];
     override void EOnSimulate(IEntity owner, float timeSlice)
     {
-		        
-		bool m_bIsServer = Replication.IsServer();
-		
-			
-   		
-       
-		if (!m_bIsServer)
+
+        bool m_bIsServer = Replication.IsServer();
+
+        if (!m_bIsServer)
         {
-			return;
-		}
-		
+            return;
+        }
+
         if (!deployed)
             return;
 
@@ -476,8 +506,8 @@ SCR_PlaceableInventoryItemComponent placable;
 
         vector mat[4];
         owner.GetTransform(mat);
-		
-        TraceParam param = MakeTraceParam(owner.GetOrigin() - mat[1] * groundRayOffset, owner.GetOrigin() - mat[1] * groundRayDistance,  TraceFlags.OCEAN | TraceFlags.WORLD);
+
+        TraceParam param = MakeTraceParam(owner.GetOrigin() - mat[1] * groundRayOffset, owner.GetOrigin() - mat[1] * groundRayDistance, TraceFlags.OCEAN | TraceFlags.WORLD);
         float hit = baseWorld.TraceMove(param, null);
 
         // Print("Hit Down : " + hit);
@@ -485,125 +515,114 @@ SCR_PlaceableInventoryItemComponent placable;
         float mass = rb.GetMass();
 
         // Calculate gravitational force
-        float gravityForce = mass * 9.81*fakeGravityForce*timeSlice*hit;
+        float gravityForce = mass * 9.81 * fakeGravityForce * timeSlice * hit;
 
-         rb.ApplyForce(-(mat[1].Normalized() * gravityForce));
+        rb.ApplyForce(-(mat[1].Normalized() * gravityForce));
         float mul = 0.5 + (1.0 - hit);
         // Apply vertical force
-        vector upwardForce = ((mat[1].Normalized() + (mat[2].Normalized() * 0.1)) * throttleInput * throttleForce * mul*timeSlice);
+        vector upwardForce = ((mat[1].Normalized() + (mat[2].Normalized() * 0.1)) * throttleInput * throttleForce * mul * timeSlice);
         rb.ApplyForce(upwardForce);
 
         // Apply horizontal force
         vector localMove = owner.VectorToParent(moveInput) * moveSpeed;
         // rb.ApplyForce(localMove);
-	
+
         vector vInput = vector.Lerp(vInput, moveInput, tiltSpeed);
         // Apply yaw torque
-        rb.ApplyTorque(mat[1].Normalized() * yawInput*timeSlice * rotationSpeed);
+        rb.ApplyTorque(mat[1].Normalized() * yawInput * timeSlice * rotationSpeed);
         // Apply yaw torque
-        rb.ApplyTorque(mat[0].Normalized() * vInput[2] *timeSlice* rotationSpeed);
+        rb.ApplyTorque(mat[0].Normalized() * vInput[2] * timeSlice * rotationSpeed);
         // Apply yaw torque
-        rb.ApplyTorque(mat[2].Normalized() * vInput[0] *timeSlice* rotationSpeed);
+        rb.ApplyTorque(mat[2].Normalized() * vInput[0] * timeSlice * rotationSpeed);
         // Print( "Was Triggered : " + SCR_ExplosiveTriggerComponent.Cast(owner.FindComponent(SCR_ExplosiveTriggerComponent)).WasTriggered());
         //  Stabilize
         vector velocityDamping = -rb.GetVelocity() * 0.1;
         vector angularDamping = -rb.GetAngularVelocity() * 0.5;
-        rb.ApplyForce(velocityDamping*timeSlice);
-        rb.ApplyTorque(angularDamping*timeSlice);
-		
-		if( vInput[2]==0 && vInput[0] ==0){
-		  rb.ApplyTorque(angularDamping*timeSlice*2);
-		}
-				
-		  foreach (DroneWingSpine wing : wings)
-        {
-            wing.SetSpinSpeed((throttleInput + vInput[2]+ vInput[0]+yawInput) * throttleForce * mul*timeSlice);
-        }
-  		
+        rb.ApplyForce(velocityDamping * timeSlice);
+        rb.ApplyTorque(angularDamping * timeSlice);
 
-		batteryHandler.EnergyUsed(Math.AbsFloat(throttleInput) + Math.AbsFloat(yawInput) + Math.AbsFloat(vInput[2]) + Math.AbsFloat(vInput[0]));
-		  if (batteryHandler.isDead())
+        if (vInput[2] == 0 && vInput[0] == 0)
+        {
+            rb.ApplyTorque(angularDamping * timeSlice * 2);
+        }
+
+        foreach (DroneWingSpine wing : wings)
+        {
+            wing.SetSpinSpeed((throttleInput + vInput[2] + vInput[0] + yawInput) * throttleForce * mul * timeSlice);
+        }
+
+        batteryHandler.EnergyUsed(Math.AbsFloat(throttleInput) + Math.AbsFloat(yawInput) + Math.AbsFloat(vInput[2]) + Math.AbsFloat(vInput[0]));
+        if (batteryHandler.isDead())
             Disconnect();
-		
+
         if (droneSignalHandler.isOutOfRange())
             Disconnect();
-		
-
-	
-      
     }
-	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
-void UpdateTransform(vector tranMat[4]) {
-   /* if (!tranMat || tranMat.size() != 4) {
-        Print("Invalid transformation matrix provided.", LogLevel.Error);
-        return;
-    }*/
+    [RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)] void UpdateTransform(vector tranMat[4])
+    {
+        /* if (!tranMat || tranMat.size() != 4) {
+             Print("Invalid transformation matrix provided.", LogLevel.Error);
+             return;
+         }*/
 
-    // Save the target transformation matrix for interpolation
-		if(currentTransform[0]==vector.Zero &&currentTransform[1]==vector.Zero &&currentTransform[2]==vector.Zero &&currentTransform[3]==vector.Zero)
-		currentTransform=targetTransform;
-    targetTransform = tranMat;
-    interpolationProgress = 0.0; // Reset interpolation progress
-}
+        // Save the target transformation matrix for interpolation
+        if (currentTransform[0] == vector.Zero && currentTransform[1] == vector.Zero && currentTransform[2] == vector.Zero && currentTransform[3] == vector.Zero)
+            currentTransform = targetTransform;
+        targetTransform = tranMat;
+        interpolationProgress = 0.0; // Reset interpolation progress
+    }
 
-// Interpolation variables
-vector currentTransform[4];
-vector targetTransform[4];
-float interpolationSpeed = 10.0; // Adjust speed for smoothness
-float interpolationProgress = 1.0; // Completed when 1.0
+    // Interpolation variables
+    vector currentTransform[4];
+    vector targetTransform[4];
+  
+    float interpolationProgress = 1.0; // Completed when 1.0
     void Disconnect()
     {
         if (!deployed)
             return;
-		
-	
-   
 
         Rpc(RPC_ClientDisconnect);
-	
-		
     }
-	void ClientDisconnect()
+    void ClientDisconnect()
     {
-       if(!deployed)return;
-	
-		inputManager.RemoveActionListener("JumpOut", EActionTrigger.DOWN, ClientDisconnect);
+        if (!deployed)
+            return;
+
+        inputManager.RemoveActionListener("JumpOut", EActionTrigger.DOWN, ClientDisconnect);
         inputManager.RemoveActionListener("CharacterFire", EActionTrigger.DOWN, TriggerExplode);
         droneSignalHandler.Disconnected();
         batteryHandler.Disconnected();
         inputManager.ActivateContext("HelicopterContext", duration : 0);
         inputManager.ActivateAction("JumpOut", duration : 0);
         playerUser = null;
-		if(sfxVolume!=0)
-		AudioSystem.SetMasterVolume(AudioSystem.SFX, sfxVolume);
-		   		delete camera;
-		
-		   Rpc(RPC_Disconnect);
+        if (sfxVolume != 0)
+            AudioSystem.SetMasterVolume(AudioSystem.SFX, sfxVolume);
+        delete camera;
+
+        Rpc(RPC_Disconnect);
     }
     [RplRpc(RplChannel.Reliable, RplRcver.Owner)] void RPC_ClientDisconnect()
     {
-       	ClientDisconnect()
-			
+        ClientDisconnect()
+    }
 
-
-    } 
-	
-	 [RplRpc(RplChannel.Reliable, RplRcver.Server)] void RPC_Disconnect()
+        [RplRpc(RplChannel.Reliable, RplRcver.Server)] void RPC_Disconnect()
     {
-       		rplc.Give(RplIdentity.Local());
+        rplc.Give(RplIdentity.Local());
         playerUser = null;
-		deployed=false;
-		Replication.BumpMe();
+        deployed = false;
+        Replication.BumpMe();
+    }
 
-    } 
-	
-	override void EOnContact(IEntity owner, IEntity other, Contact contact)
+    override void EOnContact(IEntity owner, IEntity other, Contact contact)
     {
-   		if (contact.Impulse > forceToExplode*10){
-		  TriggerExplode();
-			return;
-		}
-            
+        if (contact.Impulse > forceToExplode * 10)
+        {
+            TriggerExplode();
+            return;
+        }
+
         if (!armed)
             return;
         if (contact.Impulse < forceToExplode)
@@ -613,44 +632,46 @@ float interpolationProgress = 1.0; // Completed when 1.0
     }
     void TriggerExplode()
     {
-		
-       
-		 
+
         Rpc(Explode);
-		ClientDisconnect();
+        ClientDisconnect();
     }
-	 [RplRpc(RplChannel.Reliable, RplRcver.Owner)] void RPC_ClientExplode()
+    [RplRpc(RplChannel.Reliable, RplRcver.Owner)] void RPC_ClientExplode()
     {
-  
-		Rpc(RPC_ServerExplode);
-
-
-    } 
-    override void OnDelete(IEntity owner)
+        Rpc(RPC_ServerExplode);
+    } override void OnDelete(IEntity owner)
     {
-		bool m_bIsServer = Replication.IsServer();
-		if (!m_bIsServer)
-        { 
-			
-			return;
-		}
-      	Rpc(RPC_ClientDisconnect);
-      
-    }
+		   PlayerController playerC = GetGame().GetPlayerController();
+
+        IEntity playerEnt = null;
+        if (playerC)
+            playerEnt = playerC.GetControlledEntity();
+		if(playerUser==playerEnt){
+		
 	
+
+       	 if (sfxVolume != 0)
+            AudioSystem.SetMasterVolume(AudioSystem.SFX, sfxVolume);
+		}
+        bool m_bIsServer = Replication.IsServer();
+        if (!m_bIsServer)
+        {
+
+            return;
+        }
+        Rpc(RPC_ClientDisconnect);
+    }
+
     bool isDeployed() { return deployed; }
     bool isArmed() { return armed; }
     [RplRpc(RplChannel.Reliable, RplRcver.Server)] void Explode()
     {
-    
-		Rpc(RPC_ServerExplode);
-		
-     
+        Rpc(RPC_ServerExplode);
     }
-	 [RplRpc(RplChannel.Reliable, RplRcver.Server)] 
-	void RPC_ServerExplode(){
-	    SCR_ExplosiveTriggerComponent m_Trigger = SCR_ExplosiveTriggerComponent.Cast(GetOwner().FindComponent(SCR_ExplosiveTriggerComponent));
-	   	m_Trigger.SetLive();
+        [RplRpc(RplChannel.Reliable, RplRcver.Server)] void RPC_ServerExplode()
+    {
+        SCR_ExplosiveTriggerComponent m_Trigger = SCR_ExplosiveTriggerComponent.Cast(GetOwner().FindComponent(SCR_ExplosiveTriggerComponent));
+        m_Trigger.SetLive();
         m_Trigger.UseTrigger();
-	}
+    }
 }

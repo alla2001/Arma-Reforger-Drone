@@ -2,11 +2,14 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
  ID "646550CA0862413F"
  components {
   DroneController "{646550CB159501ED}" {
-   throttleForce 8800
+   throttleForce 9800
    rotationSpeed 45
    tiltSpeed 1.6
-   groundRayOffset 0.22
+   groundRayDistance 75
+   groundRayOffset 0.2
    fakeGravityForce 15
+   interpolationThreshold 0.1
+   interpolationSpeed 12
    cameraSpawnPoint 0 0.1 0.168
    cameraSpawnRotation 15 0 0
   }
@@ -14,11 +17,9 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
    Object "{0606CDA76EA40E00}Models/Drone.xob"
   }
   RigidBody "{646550CB5B53C45F}" {
-   Active AlwaysActive
    Mass 3
    CenterOfMass 0 0.2 0
    LinearDamping 0.3
-   SimState Collision
    ResponseIndex "Normal"
    Geometries {
     PhysicsBoxGeometry box {
@@ -122,21 +123,12 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
   GenericEntity {
    ID "64655C6ACF6AF504"
    components {
-    SignalsManagerComponent "{646CD760452BC806}" {
-    }
     MeshObject "{64655B8151209588}" {
      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
      Materials {
       MaterialAssignClass "{646A855DE123A611}" {
        SourceMaterial "Scene__Root"
        AssignedMaterial "{23A28350B90178DB}Materials/FPVDroneBody.emat"
-      }
-     }
-    }
-    ProcAnimComponent "{646CD763C2BDCF15}" {
-     Parameters {
-      ProcAnimParams "{646CD763CB58FB0A}" {
-       ResourceName "{7E42924C5878B2FC}anims/proc/DroneWingrotation.pap"
       }
      }
     }

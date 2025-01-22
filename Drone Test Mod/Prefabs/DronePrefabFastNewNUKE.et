@@ -1,0 +1,29 @@
+GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
+ ID "646550CA0862413F"
+ components {
+  SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
+   Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
+    ItemDisplayName WeaponUIInfo "{646550CB5B53C5A0}" {
+     Name "FPV Drone NUKE BOMB"
+    }
+   }
+  }
+  SCR_ExplosiveTriggerComponent "{646550CB5B53DBB7}" {
+   PROJECTILE_EFFECTS {
+    ExplosionEffect "{646550CB5B53DA4E}" {
+     EffectPrefab "{9B0D15A76C2ED966}Prefabs/Weapons/Warheads/DroneExpoNUKE.et"
+    }
+   }
+  }
+  WeaponComponent "{6468D52551BE07BC}" {
+   components {
+    AttachmentSlotComponent "{646AC1D543E3B426}" {
+     AttachmentSlot InventoryStorageSlot slot {
+      Offset 0 -0.1516 0
+      Prefab "{CEF0270365054AFB}Prefabs/DroneCanExplosiveNUKE.et"
+     }
+    }
+   }
+  }
+ }
+}
