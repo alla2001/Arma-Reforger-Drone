@@ -1,9 +1,24 @@
 GenericEntity : "{A1195711333615E0}Prefabs/Weapons/Warheads/DroneExpo.et" {
  ID "9D9BE68EA2672F76"
  components {
+  SoundComponent "{D092A75ECEFAE456}" {
+   Filenames {
+    "{1D2976C896E7143D}Sounds/Weapons/Explosives/DemoBlocks/_SharedData/Weapons_Explosives_Drone_NUKE_Generic.acp"
+   }
+  }
   BaseTriggerComponent "{55129E81CBAA1390}" {
    PROJECTILE_EFFECTS {
     ExplosionDamageContainer "{5F10B4D8DC73BB97}" {
+     ExplosionEffects {
+      BaseExplosionDamage "{5D8D1EB3EF9D02C6}" {
+       DamageValue 65535
+       DamageDistance 50
+       ExplosionEffectSpeed 1099
+       DamageFalloffCurve {
+        0 1 0.1 1 1 1 1 0
+       }
+      }
+     }
      ChargeWeight 400
     }
     SpawnParticleEffect "{64656E17495EDF1F}" {
