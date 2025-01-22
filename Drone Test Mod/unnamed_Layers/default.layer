@@ -674,6 +674,22 @@ $grp GenericEntity {
   coords 673.436 39 2580.749
   Flags 4194307
  }
+ {
+  components {
+   MeshObject "{646B35004914C290}" {
+    Object "{4B1A89CDE020EBB6}Models/Drone Battery.xob"
+   }
+  }
+  coords 676.525 39 2588.276
+ }
+ {
+  components {
+   MeshObject "{646B350049F41E4E}" {
+    Object "{290E190DCE125EC9}Models/Drone Explosive.xob"
+   }
+  }
+  coords 675.692 39.011 2587.197
+ }
 }
 GenericEntity : "{10F9EE0FB9EC0E4E}Prefabs/Props/Military/Arsenal/AmmoBoxes/FIA/AmmoBoxArsenal_Ammunition_FIA.et" {
  coords 2364.808 5.901 3209.263
@@ -1105,6 +1121,10 @@ $grp GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
   coords 2363.522 5.773 3210.161
  }
  {
+  components {
+   SCR_HybridPhysicsComponent "{646CD767AEEDE35F}" {
+   }
+  }
   coords 2364.629 5.745 3211.262
  }
  {
@@ -1127,6 +1147,39 @@ $grp GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
    }
   }
   coords 673.191 39.338 2580.258
+ }
+ {
+  coords 675.748 39 2584.244
+ }
+ {
+  coords 2364.595 5.92 3211.26
+ }
+ {
+  coords 2367.302 5.92 3209.516
+ }
+ {
+  coords 2367.273 5.92 3211.027
+ }
+ {
+  coords 2369.921 5.92 3209.8
+ }
+ {
+  coords 2371.19 5.92 3210.942
+ }
+ {
+  coords 2368.603 5.92 3214.738
+ }
+ {
+  coords 2366.073 5.92 3216.099
+ }
+ {
+  coords 2363.551 5.92 3217.575
+ }
+ {
+  coords 2361.161 5.92 3219.197
+ }
+ {
+  coords 2361.161 5.92 3219.197
  }
 }
 GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {

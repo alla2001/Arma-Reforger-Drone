@@ -1,0 +1,9 @@
+GenericEntity {
+ ID "646B350039E2432C"
+ components {
+  MeshObject "{646B350049F41E4E}" {
+   Object "{290E190DCE125EC9}Models/Drone Explosive.xob"
+  }
+ }
+ coords 675.692 39.011 2587.197
+}

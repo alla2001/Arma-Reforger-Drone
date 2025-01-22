@@ -2,6 +2,7 @@ MetaFileClass {
  Name "{C0408F20BAA47217}Models/DroneWingNew.xob"
  Configurations {
   FBXResourceClass PC {
+   ExportSkinning 1
    MaterialAssigns {
     MaterialAssignClass "{646A855DF601770E}" {
      SourceMaterial "Scene__Root"

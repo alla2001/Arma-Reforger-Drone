@@ -1,6 +1,23 @@
 FrameWidgetClass {
  Name "rootFrame"
  {
+  ImageWidgetClass "{646C107172E4ABEF}" {
+   Name "Image3"
+   Slot FrameWidgetSlot "{6467432F4830AC16}" {
+    Anchor 0 0 1 1
+    PositionX 596.688
+    OffsetLeft 596.688
+    PositionY 349.252
+    OffsetTop 349.252
+    SizeX -1193.38
+    OffsetRight 596.687
+    SizeY -677.194
+    OffsetBottom 327.942
+   }
+   Color 0.561 0.561 0.561 0.194
+   Texture "{FCE5A90D21136AA2}Texture/Target Drone.edds"
+   Size 1280 720
+  }
   FrameWidgetClass "{6467432F00CC7FAC}" {
    Name "Frame0"
    Slot FrameWidgetSlot "{6467432EA33C135F}" {
@@ -29,7 +46,7 @@ FrameWidgetClass {
       OffsetBottom -118.67
      }
      Color 0.561 0.439 0.071 0.463
-     Texture "{7406AAE7A49BB23C}Signal1.edds"
+     Texture "{7406AAE7A49BB23C}Texture/Signal1.edds"
      Size 86 62
     }
     ImageWidgetClass "{6467432FC76BAD96}" {
@@ -46,7 +63,7 @@ FrameWidgetClass {
       OffsetBottom -93.416
      }
      Color 0.561 0.439 0.071 0.463
-     Texture "{2AEE83A41B163C33}Signal2.edds"
+     Texture "{2AEE83A41B163C33}Texture/Signal2.edds"
      Size 189 66
     }
     ImageWidgetClass "{6467432FCDC1C7A3}" {
@@ -63,7 +80,7 @@ FrameWidgetClass {
       OffsetBottom -70.183
      }
      Color 0.561 0.439 0.071 0.463
-     Texture "{2AEE83A41B163C33}Signal2.edds"
+     Texture "{2AEE83A41B163C33}Texture/Signal2.edds"
      Size 189 66
     }
    }

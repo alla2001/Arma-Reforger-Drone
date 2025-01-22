@@ -1,0 +1,25 @@
+GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
+ ID "646550CA0862413F"
+ components {
+  DroneController "{646550CB159501ED}" {
+   throttleForce 9500
+   tiltSpeed 1.66
+  }
+  SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
+   Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
+    ItemDisplayName WeaponUIInfo "{646550CB5B53C5A0}" {
+     Name "FPV Drone Recon"
+    }
+   }
+  }
+  WeaponComponent "{6468D52551BE07BC}" {
+   components {
+    AttachmentSlotComponent "{646AC1D543E3B426}" {
+     AttachmentSlot InventoryStorageSlot slot {
+      Prefab ""
+     }
+    }
+   }
+  }
+ }
+}

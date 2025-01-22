@@ -1,0 +1,9 @@
+GenericEntity {
+ ID "646B35003290A6CA"
+ components {
+  MeshObject "{646B35004914C290}" {
+   Object "{4B1A89CDE020EBB6}Models/Drone Battery.xob"
+  }
+ }
+ coords 676.525 39 2588.276
+}

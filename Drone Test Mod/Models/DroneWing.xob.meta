@@ -1,7 +1,8 @@
 MetaFileClass {
- Name "{1ADEA7AE71730DC5}DroneWing.xob"
+ Name "{1ADEA7AE71730DC5}Models/DroneWing.xob"
  Configurations {
   FBXResourceClass PC {
+   ExportSkinning 1
    MaterialAssigns {
     MaterialAssignClass "{6464D4F4E2C0A122}" {
      SourceMaterial "Vint"
