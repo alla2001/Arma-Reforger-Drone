@@ -37,7 +37,7 @@ class DroneController : ScriptComponent
     NwkMovementComponent networkedMovment;
 SCR_PlaceableInventoryItemComponent placable;
     BaseRplComponent rplc;
-	float mass;
+	float mass=1;
 	float sfxVolume=0;
 	float dialgoVolume;	
     override void OnPostInit(IEntity owner)
@@ -69,7 +69,7 @@ SCR_PlaceableInventoryItemComponent placable;
 
 
 	lastPos = drone.GetOrigin();
-		rb.Destroy();
+	
 		SetDynamic(GetOwner());
 				
       
@@ -193,7 +193,7 @@ SCR_PlaceableInventoryItemComponent placable;
 	
     void PickUp()
     {
-currentTransform[0]=vector.Zero; currentTransform[1]==vector.Zero; currentTransform[2]==vector.Zero; currentTransform[3]==vector.Zero;
+		currentTransform[0]=vector.Zero; currentTransform[1]==vector.Zero; currentTransform[2]==vector.Zero; currentTransform[3]==vector.Zero;
         SoundComp soundData = SoundComp.Cast(GetOwner().FindComponent(SoundComp));
 
         if (soundData)
@@ -209,8 +209,7 @@ currentTransform[0]=vector.Zero; currentTransform[1]==vector.Zero; currentTransf
 
 
 		rb.Destroy();
-		SetStatic(GetOwner());
-  
+
      
 			
 
@@ -219,22 +218,32 @@ currentTransform[0]=vector.Zero; currentTransform[1]==vector.Zero; currentTransf
     }
 	private void SetStatic(IEntity owner)
 	{
+		return;
+		mass= rb.GetMass();
+		rb.Destroy();
 		PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.2, 0.6));
 
 		PhysicsGeomDef geoms[] = { PhysicsGeomDef("box", geom , "", 0xffffffff) };
-		Physics.CreateStaticEx(owner, geoms);
-		rb=owner.GetPhysics();
+		rb=Physics.CreateStaticEx(owner, geoms);
+		
+		  rb.EnableGravity(false); // Ensure gravity is enabled for realistic falling
+        rb.SetActive(ActiveState.INACTIVE);
+        rb.ChangeSimulationState(SimulationState.SIMULATION);
 	}
 	private void SetDynamic(IEntity owner)
 	{
+		
+			rb.Destroy();
 		PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.2, 0.6));
 		PhysicsGeomDef geoms[] = { PhysicsGeomDef("box", geom, "", 0xffffffff) };
 		vector center = 0.097 * vector.Up;
 		Physics.CreateDynamicEx(owner, center, mass, geoms);
+		
 		rb=owner.GetPhysics();
 		  rb.EnableGravity(true); // Ensure gravity is enabled for realistic falling
         rb.SetActive(ActiveState.ALWAYS_ACTIVE);
         rb.ChangeSimulationState(SimulationState.SIMULATION);
+		
 	}
     void Drop(ChimeraCharacter placingCharacter, SCR_PlaceableInventoryItemComponent placedItemIIC)
     {
@@ -248,7 +257,11 @@ currentTransform[0]=vector.Zero; currentTransform[1]==vector.Zero; currentTransf
         {
             wing.ToggleMesh(true);
         }
-     
+		 bool m_bIsServer = Replication.IsServer();
+			 if (m_bIsServer){
+			if(!rb) return;
+      			rb.Destroy();
+ }
     }
 
 	
@@ -348,7 +361,7 @@ currentTransform[0]=vector.Zero; currentTransform[1]==vector.Zero; currentTransf
         {
             soundData.TerminateAll();
         }
-	
+	if(rb==null)return;
  if (m_bIsServer &&rb.GetSimulationState()==ActiveState.ALWAYS_ACTIVE){
 			   
 			 vector mat[4];
