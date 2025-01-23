@@ -14,10 +14,9 @@ class DroneController : ScriptComponent
     [Attribute()] float fakeGravityForce;
     [Attribute()] int debugd;
     [Attribute()] float forceToExplode;
-  [Attribute()] 
-                float interpolationThreshold; 
-	  [Attribute()] 
-	  float interpolationSpeed;
+    [Attribute()] float interpolationThreshold;
+    [Attribute()] float interpolationSpeed;
+	   [Attribute()] float speedCap;
     [Attribute(params : "et")] protected ResourceName camPrefab;
 
     SCR_ManualCamera camera;
@@ -26,13 +25,14 @@ class DroneController : ScriptComponent
     float yawInput;
     float throttleInput;
     InputManager inputManager;
-
+	
+	 Widget root ;
     [Attribute()] int m_iCameraIndex;
     [RplProp(onRplName : "OnDeployed")] bool deployed;
     [RplProp(condition : RplCondition.NoOwner)] bool armed;
     [Attribute(defvalue : "0 0 0", uiwidget : UIWidgets.Coords, params : "inf inf 0 purpose=coords space=entity anglesVar=cameraSpawnRotation")] vector cameraSpawnPoint;
     [Attribute(defvalue : "0 0 0", uiwidget : UIWidgets.Coords, params : "inf inf 0 purpose=angles space=entity coordsVar=cameraSpawnPoint")] vector cameraSpawnRotation;
-
+ [Attribute()] ResourceName layout;
     IEntity playerUser;
     DroneSignalHandler droneSignalHandler;
     DroneBatteryHandler batteryHandler;
@@ -45,6 +45,12 @@ class DroneController : ScriptComponent
     float sfxVolume = 0;
     float dialgoVolume;
     bool phyiscal;
+	//! The render target texture found within our layout
+	protected RTTextureWidget m_wRenderTargetTextureWidget;
+
+	//! The render target found within our layout
+	protected RenderTargetWidget m_wRenderTargetWidget;
+
     override void OnPostInit(IEntity owner)
     {
         super.OnPostInit(GetOwner());
@@ -60,20 +66,26 @@ class DroneController : ScriptComponent
             DiagMenu.SetValue(SCR_DebugMenuID.DEBUGUI_INPUT_MANAGER, debugd);
             inputManager.SetDebug(debugd);
         }
-		
+
         rb = owner.GetPhysics();
-		if(rb)
+        if (!rb)
+            return;
         mass = rb.GetMass();
+        rb.SetActive(ActiveState.INACTIVE);
+        rb.ChangeSimulationState(SimulationState.NONE);
+        phyiscal = false;
+
         return;
     }
 
     void DeployDrone(IEntity drone, IEntity user)
     {
-
+        sfxVolume = 0;
+        lastPos = GetOwner().GetOrigin();
         bool m_bIsServer = Replication.IsServer();
         if (m_bIsServer)
         {
-
+            phyiscal = true;
             lastPos = drone.GetOrigin();
 
             SetDynamic(GetOwner());
@@ -85,6 +97,7 @@ class DroneController : ScriptComponent
 
             phyiscal = true;
         }
+
         playerUser = user;
         PlayerController playerC = GetGame().GetPlayerController();
 
@@ -225,13 +238,14 @@ class DroneController : ScriptComponent
         rb.EnableGravity(false); // Ensure gravity is enabled for realistic falling
         rb.SetActive(ActiveState.INACTIVE);
         rb.ChangeSimulationState(SimulationState.SIMULATION);
+        phyiscal = false;
     }
 
     void SetDynamic(IEntity owner)
     {
 
         rb.Destroy();
-        PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.2, 0.6));
+        PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.32, 0.6));
         PhysicsGeomDef geoms[] = {PhysicsGeomDef("box", geom, "", 0xffffffff)};
         vector center = 0.097 * vector.Up;
         Physics.CreateDynamicEx(owner, center, mass, geoms);
@@ -240,14 +254,15 @@ class DroneController : ScriptComponent
         rb.EnableGravity(true); // Ensure gravity is enabled for realistic falling
         rb.SetActive(ActiveState.ALWAYS_ACTIVE);
         rb.ChangeSimulationState(SimulationState.SIMULATION);
+        phyiscal = true;
     }
     void Drop(ChimeraCharacter placingCharacter, SCR_PlaceableInventoryItemComponent placedItemIIC)
     {
 
         if (placable != placedItemIIC)
             return;
-			if(!rb)
-        rb=GetOwner().GetPhysics();
+        if (!rb)
+            rb = GetOwner().GetPhysics();
         SoundComp soundData = SoundComp.Cast(GetOwner().FindComponent(SoundComp));
 
         if (soundData && deployed)
@@ -261,12 +276,18 @@ class DroneController : ScriptComponent
         GetOwner().GetTransform(mat);
         vector pos = GetOwner().GetOrigin();
         GetOwner().SetOrigin(pos + mat[1].Normalized() * 0.22);
-
+        // was only for not armed so u can drop a drone and u walk on it and have it explode if its armed
         if (!armed)
         {
-
+            phyiscal = false;
             rb.SetActive(ActiveState.INACTIVE);
             rb.ChangeSimulationState(SimulationState.NONE);
+        }
+        else
+        {
+            rb.SetActive(ActiveState.INACTIVE);
+            rb.ChangeSimulationState(SimulationState.NONE);
+            phyiscal = false;
         }
         bool m_bIsServer = Replication.IsServer();
         if (m_bIsServer)
@@ -302,9 +323,15 @@ class DroneController : ScriptComponent
         placable = SCR_PlaceableInventoryItemComponent.Cast(owner.FindComponent(SCR_PlaceableInventoryItemComponent));
         placable.GetOnPlacementDoneInvoker().Insert(Drop);
         placable.m_OnParentSlotChangedInvoker.Insert(SlotChanged);
-       rb = owner.GetPhysics();
-		if(rb)
+        if (!rb)
+            rb = owner.GetPhysics();
+
+        if (!rb)
+            return;
         mass = rb.GetMass();
+        rb.SetActive(ActiveState.INACTIVE);
+        rb.ChangeSimulationState(SimulationState.NONE);
+        phyiscal = false;
     }
     void SlotChanged(InventoryStorageSlot oldslot, InventoryStorageSlot newslot)
     {
@@ -345,6 +372,15 @@ class DroneController : ScriptComponent
 
         // Set camera to hierarchy
         parent.AddChild(camera, -1, EAddChildFlags.AUTO_TRANSFORM);
+			root = GetGame().GetWorkspace().CreateWidgets(layout);
+			m_wRenderTargetTextureWidget = RTTextureWidget.Cast(root.FindAnyWidget("RTTexture0"));
+		m_wRenderTargetWidget = RenderTargetWidget.Cast(root.FindAnyWidget("RenderTarget0"));
+			// Set camera index of render target widget
+		
+			m_wRenderTargetWidget.SetWorld(baseWorld, m_iCameraIndex);
+		if (!parent.IsDeleted())
+				m_wRenderTargetTextureWidget.SetGUIWidget(parent, 0);
+		
     }
 
     override void EOnFrame(IEntity owner, float timeSlice)
@@ -355,7 +391,6 @@ class DroneController : ScriptComponent
         {
             if (interpolationProgress < 1.0)
             {
-               
 
                 // Check if the difference is too large
                 bool shouldSetDirectly = false;
@@ -400,7 +435,7 @@ class DroneController : ScriptComponent
         }
         if (rb == null)
             return;
-        if (m_bIsServer && rb.GetSimulationState() == SimulationState.SIMULATION)
+        if (m_bIsServer && phyiscal)
         {
             BaseWorld baseWorld = owner.GetWorld();
 
@@ -408,7 +443,8 @@ class DroneController : ScriptComponent
             owner.GetTransform(mat);
             TraceParam param = MakeTraceParam(owner.GetOrigin() - mat[1].Normalized() * groundRayOffset, owner.GetOrigin() - mat[1].Normalized() * groundRayDistance, TraceFlags.OCEAN);
             float hit = baseWorld.TraceMove(param, null);
-            // if(hit<=0.01) TriggerExplode();
+            if (hit <= 0.0)
+                TriggerExplode();
             vector dir = lastPos - owner.GetOrigin();
             param = MakeTraceParam(lastPos, owner.GetOrigin() + dir * 0.5, TraceFlags.WORLD);
             hit = baseWorld.TraceMove(param, null);
@@ -421,7 +457,7 @@ class DroneController : ScriptComponent
             lastPos = owner.GetOrigin() + dir * 0.5;
         }
 
-        if (m_bIsServer && rb.GetSimulationState() == SimulationState.SIMULATION)
+        if (m_bIsServer && phyiscal)
         {
 
             vector mat[4];
@@ -453,8 +489,10 @@ class DroneController : ScriptComponent
             return;
         }
 
-        throttleInput = inputManager.GetActionValue("CollectiveIncrease") - inputManager.GetActionValue("CollectiveDecrease");
-
+        throttleInput += inputManager.GetActionValue("CollectiveIncrease")*timeSlice*5;
+		throttleInput -= inputManager.GetActionValue("CollectiveDecrease")*timeSlice*5;
+		throttleInput = Math.Lerp(throttleInput,0,timeSlice*10);
+throttleInput=Math.Clamp( throttleInput,-1,1);
         // Get inputs
         // Up (Jump) / Down (Fire3)
         moveInput = Vector(inputManager.GetActionValue("CyclicLeft") - inputManager.GetActionValue("CyclicRight"), 0, inputManager.GetActionValue("CyclicForward") - inputManager.GetActionValue("CyclicBack")); // Forward/Backward/Strafe
@@ -509,6 +547,8 @@ class DroneController : ScriptComponent
 
         TraceParam param = MakeTraceParam(owner.GetOrigin() - mat[1] * groundRayOffset, owner.GetOrigin() - mat[1] * groundRayDistance, TraceFlags.OCEAN | TraceFlags.WORLD);
         float hit = baseWorld.TraceMove(param, null);
+  		param = MakeTraceParam(owner.GetOrigin() + mat[1] * groundRayOffset, owner.GetOrigin() + mat[1] * groundRayDistance, TraceFlags.OCEAN | TraceFlags.WORLD);
+        float hit1 = baseWorld.TraceMove(param, null);
 
         // Print("Hit Down : " + hit);
         //  Get drone mass
@@ -518,7 +558,7 @@ class DroneController : ScriptComponent
         float gravityForce = mass * 9.81 * fakeGravityForce * timeSlice * hit;
 
         rb.ApplyForce(-(mat[1].Normalized() * gravityForce));
-        float mul = 0.5 + (1.0 - hit);
+        float mul = 0.8 + (1.0 - hit) * 3+(1.0 - hit1) * 3;
         // Apply vertical force
         vector upwardForce = ((mat[1].Normalized() + (mat[2].Normalized() * 0.1)) * throttleInput * throttleForce * mul * timeSlice);
         rb.ApplyForce(upwardForce);
@@ -536,16 +576,18 @@ class DroneController : ScriptComponent
         rb.ApplyTorque(mat[2].Normalized() * vInput[0] * timeSlice * rotationSpeed);
         // Print( "Was Triggered : " + SCR_ExplosiveTriggerComponent.Cast(owner.FindComponent(SCR_ExplosiveTriggerComponent)).WasTriggered());
         //  Stabilize
-        vector velocityDamping = -rb.GetVelocity() * 0.1;
+        vector velocityDamping = -rb.GetVelocity() * 1;
         vector angularDamping = -rb.GetAngularVelocity() * 0.5;
         rb.ApplyForce(velocityDamping * timeSlice);
         rb.ApplyTorque(angularDamping * timeSlice);
 
         if (vInput[2] == 0 && vInput[0] == 0)
         {
-            rb.ApplyTorque(angularDamping * timeSlice * 2);
+            rb.ApplyTorque(angularDamping * timeSlice * 45);
         }
-
+	
+		rb.SetVelocity( rb.GetVelocity().Normalized()* Math.Min(speedCap,rb.GetVelocity().Length()));
+		
         foreach (DroneWingSpine wing : wings)
         {
             wing.SetSpinSpeed((throttleInput + vInput[2] + vInput[0] + yawInput) * throttleForce * mul * timeSlice);
@@ -575,7 +617,7 @@ class DroneController : ScriptComponent
     // Interpolation variables
     vector currentTransform[4];
     vector targetTransform[4];
-  
+
     float interpolationProgress = 1.0; // Completed when 1.0
     void Disconnect()
     {
@@ -599,7 +641,9 @@ class DroneController : ScriptComponent
         if (sfxVolume != 0)
             AudioSystem.SetMasterVolume(AudioSystem.SFX, sfxVolume);
         delete camera;
-
+		if (m_wRenderTargetTextureWidget && GetOwner() && !GetOwner().IsDeleted())
+			m_wRenderTargetTextureWidget.SetGUIWidget(GetOwner(), -1);
+delete root;
         Rpc(RPC_Disconnect);
     }
     [RplRpc(RplChannel.Reliable, RplRcver.Owner)] void RPC_ClientDisconnect()
@@ -641,18 +685,18 @@ class DroneController : ScriptComponent
         Rpc(RPC_ServerExplode);
     } override void OnDelete(IEntity owner)
     {
-		   PlayerController playerC = GetGame().GetPlayerController();
+        PlayerController playerC = GetGame().GetPlayerController();
 
         IEntity playerEnt = null;
         if (playerC)
             playerEnt = playerC.GetControlledEntity();
-		if(playerUser==playerEnt){
-		
-	
+        if (playerUser == playerEnt)
+        {
 
-       	 if (sfxVolume != 0)
-            AudioSystem.SetMasterVolume(AudioSystem.SFX, sfxVolume);
-		}
+            AudioSystem.SetMasterVolume(AudioSystem.SFX, 1);
+        }
+
+        sfxVolume = 0;
         bool m_bIsServer = Replication.IsServer();
         if (!m_bIsServer)
         {

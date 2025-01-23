@@ -1,0 +1,55 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  RTTextureWidgetClass "{646EC9A3BC38E4B2}" {
+   Name "RTTexture0"
+   Slot FrameWidgetSlot "{646EC9A3BC38E4A7}" {
+    Anchor 0 0 1 1
+    PositionX 24.813
+    PositionY 27.571
+    SizeX -1820
+    OffsetRight 0
+    SizeY -1050
+    OffsetBottom 0
+   }
+  }
+  RenderTargetWidgetClass "{646EC9A2D2F5D78C}" {
+   Name "RenderTarget0"
+   Slot FrameWidgetSlot "{646EC9A2D2F5D7B6}" {
+    Anchor 0 0 1 1
+    PositionX 1911.02
+    OffsetLeft 0
+    PositionY 1063.73
+    SizeX -3872.58
+    OffsetRight 0
+    SizeY -2245.94
+    OffsetBottom 0
+   }
+   "Use Engine Scale" 0
+   xscale 0.5
+   yscale 0.5
+   Filter None
+   Format LDR_sRGB
+  }
+  ImageWidgetClass "{646ED6E7DC8AEC1E}" {
+   Name "Image0"
+   Slot FrameWidgetSlot "{646ED6E7DC8AEC0B}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX -1820
+    OffsetRight 0
+    SizeY -1050
+    OffsetBottom 0
+   }
+   Color 1 1 1 0.039
+   Texture "{B23F7CEB53AB6007}Texture/glitch-effect-black-background_53876-129025.edds"
+   Size 626 352
+   "Blend Mode" Additive
+   Filter 0
+   Saturation 0.224
+  }
+ }
+}

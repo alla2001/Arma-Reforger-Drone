@@ -1,0 +1,4 @@
+GaussFilterEffect {
+ Intensity 1
+ Mask "{B23F7CEB53AB6007}Texture/glitch-effect-black-background_53876-129025.edds"
+}

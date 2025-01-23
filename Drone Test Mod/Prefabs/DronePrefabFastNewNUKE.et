@@ -1,6 +1,19 @@
 GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
  ID "646550CA0862413F"
  components {
+  DroneController "{646550CB159501ED}" {
+   throttleForce 14000
+   groundRayOffset 0.13
+   speedCap 15
+  }
+  RigidBody "{646550CB5B53C45F}" {
+   Mass 12
+   Geometries {
+    PhysicsBoxGeometry box {
+     Mass 12
+    }
+   }
+  }
   SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
    Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
     ItemDisplayName WeaponUIInfo "{646550CB5B53C5A0}" {

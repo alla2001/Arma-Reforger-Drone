@@ -28,8 +28,8 @@ FrameWidgetClass {
       SizeY 67.205
       OffsetBottom -67.825
      }
-     Color 0.561 0.439 0.071 0.463
-     Texture "{AABF6D576C580580}battery.edds"
+     Color 0.561 0.561 0.561 0.463
+     Texture "{AABF6D576C580580}Texture/battery.edds"
      Size 308 117
     }
     ProgressBarWidgetClass "{6467432EA91BA448}" {
@@ -44,7 +44,7 @@ FrameWidgetClass {
       SizeY 57.004
       OffsetBottom -63.273
      }
-     Color 0.624 0.506 0.157 0.49
+     Color 0.624 0.624 0.624 0.49
      style Simple
     }
    }

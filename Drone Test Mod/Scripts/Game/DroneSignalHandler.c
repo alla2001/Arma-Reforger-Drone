@@ -101,7 +101,7 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 		 if (m_bIsServer&&controlingPlayer)
 		CalcualteSignalStrength();
 	}
-void OnDelete(IEntity owner){
+override void OnDelete(IEntity owner){
 		if(root)
 		delete root;
 	

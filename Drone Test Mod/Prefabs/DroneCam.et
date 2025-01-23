@@ -5,12 +5,28 @@ SCR_ManualCamera {
    m_Effects {
     SCR_CameraPostProcessEffect "{646533F1C4E4E2B6}" {
      m_Type FilmGrain
-     m_iPriority 1
+     m_iPriority 0
      m_MaterialPath "{3B4B9E13CA330078}RangeNoise.emat"
     }
     SCR_CameraPostProcessEffect "{6468D51DA9A1478F}" {
      m_Type Colors
+     m_iPriority 1
      m_MaterialPath "{E4324967325C499A}DeSatColor.emat"
+    }
+    SCR_CameraPostProcessEffect "{646EC9A7661A53CC}" {
+     m_Type RadialBlur
+     m_iPriority 2
+     m_MaterialPath "{A2337493444CD3E3}Blur.emat"
+    }
+    SCR_CameraPostProcessEffect "{646EC9A576C57399}" {
+     m_Type GaussFilter
+     m_iPriority 3
+     m_MaterialPath "{2169642C313472BE}VHS.emat"
+    }
+    SCR_CameraPostProcessEffect "{646EC9A56D98FB45}" {
+     m_Type ChromAber
+     m_iPriority 4
+     m_MaterialPath "{4024B57CB3FFFB7D}CHroma.emat"
     }
    }
   }

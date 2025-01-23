@@ -1,17 +1,23 @@
 GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
  ID "646550CA0862413F"
  components {
+  DroneBatteryHandler "{646550CB13E3E89C}" {
+   WarningColor 0.502 0.007 0.007 0.647
+  }
   DroneController "{646550CB159501ED}" {
-   throttleForce 9800
-   rotationSpeed 45
-   tiltSpeed 1.6
-   groundRayDistance 75
-   groundRayOffset 0.2
-   fakeGravityForce 15
-   interpolationThreshold 0.1
-   interpolationSpeed 12
+   throttleForce 8000
+   rotationSpeed 50
+   tiltSpeed 1.8
+   groundRayDistance 55
+   groundRayOffset 0.15
+   fakeGravityForce 5
+   interpolationThreshold 10
+   interpolationSpeed 20
+   speedCap 25
+   camPrefab "{8CC82BD58DB3ED83}Prefabs/DroneCam.et"
    cameraSpawnPoint 0 0.1 0.168
    cameraSpawnRotation 15 0 0
+   layout "{ECCF57B402F948E2}UI/RenderTarget.layout"
   }
   MeshObject "{646550CB5B53C40F}" {
    Object "{0606CDA76EA40E00}Models/Drone.xob"
@@ -19,8 +25,8 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
   RigidBody "{646550CB5B53C45F}" {
    Mass 3
    CenterOfMass 0 0.2 0
-   LinearDamping 0.3
-   ResponseIndex "Normal"
+   LinearDamping 0.7
+   AngularDamping 1
    Geometries {
     PhysicsBoxGeometry box {
      Mass 3
@@ -70,7 +76,8 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
    components {
     AttachmentSlotComponent "{646AC1D543E3B426}" {
      AttachmentSlot InventoryStorageSlot slot {
-      Offset 0 0.02 0
+      Offset 0 0.0204 0.0456
+      Angles 5.1245 0 0
       Prefab "{CA0BC6FA8B1FD14E}Prefabs/DroneCanExplosive.et"
       InspectionWidgetOffset 0 -0.1415 0
      }

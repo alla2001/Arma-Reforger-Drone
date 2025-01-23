@@ -16,8 +16,10 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 	float batteryConsumptionPerForceUnite;
 	    [Attribute()] ResourceName layout;
 			ProgressBarWidget batteryBar;
-
+	ref Color defaultColor;
    Widget root ;
+		[Attribute()]
+	ref Color WarningColor;
 	void Deploy(){
 	
 	  root = GetGame().GetWorkspace().CreateWidgets(layout);
@@ -25,7 +27,7 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
   
   
 		 batteryBar= ProgressBarWidget.Cast(	root.FindAnyWidget("BatteryBar"));
-
+			defaultColor=batteryBar.GetColor();
 	
 	}
 	void Disconnected(){
@@ -44,8 +46,14 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 	void RPC_CurrentBattery(float batteryVal)
 	{
 		currentBattery = batteryVal;
-		if(batteryBar)
-		batteryBar.SetCurrent(currentBattery);
+		if(batteryBar){
+			batteryBar.SetCurrent(currentBattery);
+			
+				if(currentBattery>20)
+		batteryBar.SetColor(defaultColor);
+			else
+				batteryBar.SetColor(WarningColor);
+		}
 
 	}
 	
@@ -54,7 +62,7 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 	{
 		
 	}
-	void OnDelete(IEntity owner){
+	override void OnDelete(IEntity owner){
 		if(root)
 		delete root;
 	

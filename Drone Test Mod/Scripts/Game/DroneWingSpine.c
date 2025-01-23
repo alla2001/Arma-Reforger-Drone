@@ -13,6 +13,7 @@ class DroneWingSpine : ScriptComponent // GameComponent > GenericComponent
 	float spinSpeed;
 	vector localPos;
 	SignalsManagerComponent procAnima;
+		
 	override void OnPostInit(IEntity owner)
     {
         super.OnPostInit(GetOwner());
@@ -31,7 +32,7 @@ procAnima=SignalsManagerComponent.Cast( owner.FindComponent(SignalsManagerCompon
 			procAnima.SetSignalValue( procAnima.FindSignal("DroneOn"),1);
 		return;
 		}
-				owner.SetOrigin( owner.CoordToParent( localPos));
+				
 		
 			owner.Update();
 	vector tran[4];
@@ -50,8 +51,8 @@ procAnima=SignalsManagerComponent.Cast( owner.FindComponent(SignalsManagerCompon
 	tran1[2] = tran1[2].Normalized() * scale;
 */
 		// Set the transformed matrix back to the object
-		owner.SetTransform(tran);
-
+		//owner.SetTransform(tran);
+		owner.SetOrigin( owner.CoordToParent( localPos));
 		owner.Update();
 			//Print(spinSpeed);
 	}
@@ -59,9 +60,9 @@ procAnima=SignalsManagerComponent.Cast( owner.FindComponent(SignalsManagerCompon
 	void SetSpinSpeed(float speed){
 	
 			spinSpeed = speed;
-	Rpc( RPC_SetSpinSpeed,spinSpeed);
+	//Rpc( RPC_SetSpinSpeed,spinSpeed);
 	}
-	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	[RplRpc(RplChannel.Unreliable, RplRcver.Server)]
 	void RPC_SetSpinSpeed(float speed){
 	
 		spinSpeed = speed;
