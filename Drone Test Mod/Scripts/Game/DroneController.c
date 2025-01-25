@@ -16,7 +16,7 @@ class DroneController : ScriptComponent
     [Attribute()] float forceToExplode;
     [Attribute()] float interpolationThreshold;
     [Attribute()] float interpolationSpeed;
-	   [Attribute()] float speedCap;
+	[Attribute()] float speedCap;
     [Attribute(params : "et")] protected ResourceName camPrefab;
 
     SCR_ManualCamera camera;
@@ -219,6 +219,19 @@ class DroneController : ScriptComponent
         rb.SetActive(ActiveState.INACTIVE);
         rb.ChangeSimulationState(SimulationState.NONE);
         phyiscal = false;
+
+			     
+        PlayerController playerC = GetGame().GetPlayerController();
+
+        IEntity playerEnt = null;
+        if (playerC)
+            playerEnt = playerC.GetControlledEntity();
+
+        // Create layout
+       
+		if(deployed &&playerUser == playerEnt){
+		ClientDisconnect();
+		}
         bool m_bIsServer = Replication.IsServer();
         if (m_bIsServer)
         {
@@ -245,7 +258,7 @@ class DroneController : ScriptComponent
     {
 
         rb.Destroy();
-        PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.6, 0.32, 0.6));
+        PhysicsGeom geom = PhysicsGeom.CreateBox(Vector(0.85, 0.32, 0.85));
         PhysicsGeomDef geoms[] = {PhysicsGeomDef("box", geom, "", 0xffffffff)};
         vector center = 0.097 * vector.Up;
         Physics.CreateDynamicEx(owner, center, mass, geoms);
@@ -287,7 +300,7 @@ class DroneController : ScriptComponent
         {
             rb.SetActive(ActiveState.INACTIVE);
             rb.ChangeSimulationState(SimulationState.NONE);
-            phyiscal = false;
+            phyiscal = true;
         }
         bool m_bIsServer = Replication.IsServer();
         if (m_bIsServer)
@@ -302,7 +315,7 @@ class DroneController : ScriptComponent
     {
 
         rplc = BaseRplComponent.Cast(owner.FindComponent(RplComponent));
-
+	
         wings = {};
         array<Managed> comps = new array<Managed>();
         FindComponentsInAllChildren(DroneWingSpine, owner, false, 1, 2, comps);
@@ -372,6 +385,7 @@ class DroneController : ScriptComponent
 
         // Set camera to hierarchy
         parent.AddChild(camera, -1, EAddChildFlags.AUTO_TRANSFORM);
+		/*
 			root = GetGame().GetWorkspace().CreateWidgets(layout);
 			m_wRenderTargetTextureWidget = RTTextureWidget.Cast(root.FindAnyWidget("RTTexture0"));
 		m_wRenderTargetWidget = RenderTargetWidget.Cast(root.FindAnyWidget("RenderTarget0"));
@@ -379,7 +393,7 @@ class DroneController : ScriptComponent
 		
 			m_wRenderTargetWidget.SetWorld(baseWorld, m_iCameraIndex);
 		if (!parent.IsDeleted())
-				m_wRenderTargetTextureWidget.SetGUIWidget(parent, 0);
+				m_wRenderTargetTextureWidget.SetGUIWidget(parent, 0);*/
 		
     }
 
@@ -492,12 +506,13 @@ class DroneController : ScriptComponent
         throttleInput += inputManager.GetActionValue("CollectiveIncrease")*timeSlice*5;
 		throttleInput -= inputManager.GetActionValue("CollectiveDecrease")*timeSlice*5;
 		throttleInput = Math.Lerp(throttleInput,0,timeSlice*10);
-throttleInput=Math.Clamp( throttleInput,-1,1);
+		throttleInput=Math.Clamp( throttleInput,-1,1);
         // Get inputs
         // Up (Jump) / Down (Fire3)
         moveInput = Vector(inputManager.GetActionValue("CyclicLeft") - inputManager.GetActionValue("CyclicRight"), 0, inputManager.GetActionValue("CyclicForward") - inputManager.GetActionValue("CyclicBack")); // Forward/Backward/Strafe
         yawInput = -inputManager.GetActionValue("AntiTorqueLeft") + inputManager.GetActionValue("AntiTorqueRight");                                                                                              // Yaw (Mouse X)
-
+		
+		moveInput = vector.Lerp(moveInput,vector.Zero,timeSlice*10);
         // Store last tilt angle for persistence
         vector lastTargetTilt;
 
@@ -558,7 +573,7 @@ throttleInput=Math.Clamp( throttleInput,-1,1);
         float gravityForce = mass * 9.81 * fakeGravityForce * timeSlice * hit;
 
         rb.ApplyForce(-(mat[1].Normalized() * gravityForce));
-        float mul = 0.8 + (1.0 - hit) * 3+(1.0 - hit1) * 3;
+        float mul = 0.8 + (1.0 - hit) * 2+(1.0 - hit1) *2;
         // Apply vertical force
         vector upwardForce = ((mat[1].Normalized() + (mat[2].Normalized() * 0.1)) * throttleInput * throttleForce * mul * timeSlice);
         rb.ApplyForce(upwardForce);
@@ -576,7 +591,7 @@ throttleInput=Math.Clamp( throttleInput,-1,1);
         rb.ApplyTorque(mat[2].Normalized() * vInput[0] * timeSlice * rotationSpeed);
         // Print( "Was Triggered : " + SCR_ExplosiveTriggerComponent.Cast(owner.FindComponent(SCR_ExplosiveTriggerComponent)).WasTriggered());
         //  Stabilize
-        vector velocityDamping = -rb.GetVelocity() * 1;
+        vector velocityDamping = -rb.GetVelocity() * 0;
         vector angularDamping = -rb.GetAngularVelocity() * 0.5;
         rb.ApplyForce(velocityDamping * timeSlice);
         rb.ApplyTorque(angularDamping * timeSlice);
@@ -641,9 +656,10 @@ throttleInput=Math.Clamp( throttleInput,-1,1);
         if (sfxVolume != 0)
             AudioSystem.SetMasterVolume(AudioSystem.SFX, sfxVolume);
         delete camera;
-		if (m_wRenderTargetTextureWidget && GetOwner() && !GetOwner().IsDeleted())
-			m_wRenderTargetTextureWidget.SetGUIWidget(GetOwner(), -1);
-delete root;
+		/*if (m_wRenderTargetTextureWidget && GetOwner() && !GetOwner().IsDeleted())
+			m_wRenderTargetTextureWidget.SetGUIWidget(GetOwner(), -1);*/
+if(root)
+		delete root;
         Rpc(RPC_Disconnect);
     }
     [RplRpc(RplChannel.Reliable, RplRcver.Owner)] void RPC_ClientDisconnect()
@@ -695,7 +711,8 @@ delete root;
 
             AudioSystem.SetMasterVolume(AudioSystem.SFX, 1);
         }
-
+if(root)
+		delete root;
         sfxVolume = 0;
         bool m_bIsServer = Replication.IsServer();
         if (!m_bIsServer)
@@ -704,6 +721,7 @@ delete root;
             return;
         }
         Rpc(RPC_ClientDisconnect);
+		
     }
 
     bool isDeployed() { return deployed; }

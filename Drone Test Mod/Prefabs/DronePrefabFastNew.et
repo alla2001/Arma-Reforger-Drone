@@ -6,18 +6,20 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
   }
   DroneController "{646550CB159501ED}" {
    throttleForce 8000
-   rotationSpeed 50
-   tiltSpeed 1.8
+   rotationSpeed 60
+   tiltSpeed 2
    groundRayDistance 55
    groundRayOffset 0.15
-   fakeGravityForce 5
+   fakeGravityForce 2
    interpolationThreshold 10
    interpolationSpeed 20
    speedCap 25
    camPrefab "{8CC82BD58DB3ED83}Prefabs/DroneCam.et"
    cameraSpawnPoint 0 0.1 0.168
-   cameraSpawnRotation 15 0 0
    layout "{ECCF57B402F948E2}UI/RenderTarget.layout"
+  }
+  DroneSignalHandler "{646550CB1734D305}" {
+   maxRange 1650
   }
   MeshObject "{646550CB5B53C40F}" {
    Object "{0606CDA76EA40E00}Models/Drone.xob"
@@ -131,7 +133,7 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
    ID "64655C6ACF6AF504"
    components {
     MeshObject "{64655B8151209588}" {
-     Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     Object "{765DFC92DF00A5E1}Models/FPVFastDroneWing.xob"
      Materials {
       MaterialAssignClass "{646A855DE123A611}" {
        SourceMaterial "Scene__Root"
@@ -140,7 +142,6 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
      }
     }
     Hierarchy "{64655B816DB21199}" {
-     AutoTransform 1
      MergePhysics 0
     }
    }
@@ -154,7 +155,6 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
     }
     Hierarchy "{64655B816DB21199}" {
-     AutoTransform 1
      MergePhysics 0
     }
    }
@@ -168,7 +168,6 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
     }
     Hierarchy "{64655B816DB21199}" {
-     AutoTransform 1
      MergePhysics 0
     }
    }

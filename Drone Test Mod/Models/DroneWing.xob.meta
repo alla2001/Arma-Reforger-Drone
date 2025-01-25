@@ -4,13 +4,22 @@ MetaFileClass {
   FBXResourceClass PC {
    ExportSkinning 1
    MaterialAssigns {
-    MaterialAssignClass "{6464D4F4E2C0A122}" {
-     SourceMaterial "Vint"
-     AssignedMaterial "{1D3363C9BAA9F7BE}Data/Vint.emat"
+    MaterialAssignClass "{646F6BA0754E8721}" {
+     SourceMaterial "metrics"
+     AssignedMaterial "{B9478EE3512E329E}Models/Data/metrics.emat"
     }
    }
    MeshParams {
-    MeshParam "GPshka.001" {
+    MeshParam model {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_coll1 {
+     SurfaceProperties {
+      "{CE9253778DD8FBDE}Common/Materials/Game/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
     }
    }
    Common TXOCommonClass "{6464D4F4E2CADF8C}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {

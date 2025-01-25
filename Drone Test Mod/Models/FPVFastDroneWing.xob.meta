@@ -1,15 +1,25 @@
 MetaFileClass {
- Name "{765DFC92DF00A5E1}FPVFastDroneWing.xob"
+ Name "{765DFC92DF00A5E1}Models/FPVFastDroneWing.xob"
  Configurations {
   FBXResourceClass PC {
+   ExportSkinning 1
    MaterialAssigns {
-    MaterialAssignClass "{64669CDB96F88406}" {
-     SourceMaterial "Material_76"
-     AssignedMaterial "{FBD21518301FC26F}Data/Material_76.emat"
+    MaterialAssignClass "{646F6CB9295ACD67}" {
+     SourceMaterial "metrics"
+     AssignedMaterial "{23A28350B90178DB}Materials/FPVDroneBody.emat"
     }
    }
    MeshParams {
-    MeshParam "lower_body.001" {
+    MeshParam model {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_coll1 {
+     SurfaceProperties {
+      "{CE9253778DD8FBDE}Common/Materials/Game/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
     }
    }
    Common TXOCommonClass "{64669CD8946D8D4C}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {

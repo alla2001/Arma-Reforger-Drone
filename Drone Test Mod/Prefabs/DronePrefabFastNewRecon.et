@@ -3,9 +3,13 @@ GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
  components {
   DroneController "{646550CB159501ED}" {
    throttleForce 8000
-   rotationSpeed 55
-   tiltSpeed 1.7
+   tiltSpeed 2.3
+   fakeGravityForce 3
    speedCap 35
+   cameraSpawnRotation -35 0 0
+  }
+  DroneSignalHandler "{646550CB1734D305}" {
+   maxRange 2500
   }
   SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
    Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {

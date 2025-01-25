@@ -1,0 +1,70 @@
+Vehicle : "{AFF6067A5CE8A853}Prefabs/Vehicles/Helicopters/Mi8MT/Mi8MT_base.et" {
+ ID "57DA6675519A417B"
+ components {
+  SCR_BaseCompartmentManagerComponent "{20FB66C5DCB8DF72}" {
+   DoorInfoList {
+    CompartmentDoorInfo "{50B8D5DDA17EB35D}" {
+     ExitPositionInfo PointInfo "{5EBEB81CCA8157AE}" {
+     }
+     AlignDuringGetOut 1
+     GetInAligningTeleport 1
+     GetOutAligningTeleport 1
+     GetInSeatAligningOnEvent 1
+     GetOutAligningOnEvent 1
+    }
+   }
+   CompartmentSlots {
+    CargoCompartmentSlot Passenger_m01 : "{9BD4548866DA1807}Prefabs/Vehicles/Core/Configs/CargoCompartment_Base.conf" {
+     CompartmentAction SCR_GetInUserAction "{5086CC2FCCAA457D}" {
+      ParentContextList {
+       "door_l01_door"
+      }
+     }
+     GetOutAction SCR_GetOutAction "{509D56665A8C6923}" {
+      ParentContextList {
+       "door_m01_cockpit"
+      }
+     }
+     SwitchSeatAction SCR_SwitchSeatAction "{509D56665850650D}" {
+      ParentContextList {
+       "navigator"
+      }
+      m_bPilotOnly 1
+     }
+     AdditionalActions {
+      SCR_RemoveCasualtyUserAction "{5D528255CC646B68}" {
+       ParentContextList {
+        "navigator" "door_m01_cargo" "door_l01"
+       }
+      }
+      SCR_SwitchSeatAction "{6470714FE7BBE283}" {
+       ParentContextList {
+        "door_m01_cargo"
+       }
+       UIInfo SCR_ActionUIInfo "{6470714FE7BBE28D}" {
+        Name "#AR-UserAction_SwitchSeat"
+        m_sIconName "mountAsPassengerCommand"
+       }
+       Duration 0.5
+       CanAggregate 1
+       m_bCargoOnly 1
+      }
+     }
+     PassengerPositionInfo EntitySlotInfo "{699366C6D607AD06}" {
+      PivotID "navigator_idle"
+     }
+     SkipCharacterDoorAnimationsFromSeat 1
+     SeatType 4
+     DoorInfoList {
+      0
+     }
+     UIInfo UIInfo "{50870A10CE897250}" {
+      Name "#AR-VehiclePosition_Navigator"
+     }
+     BaseCoverage 0.15
+     ContextName "navigator"
+    }
+   }
+  }
+ }
+}

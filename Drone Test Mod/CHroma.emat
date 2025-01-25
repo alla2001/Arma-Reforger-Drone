@@ -1,4 +1,5 @@
 ChromAberEffect {
- PowerX 0.012
- PowerY 0.012
+ Enabled 0
+ PowerX 0.001
+ PowerY 0.001
 }

@@ -4,6 +4,8 @@ GenericEntity {
   MeshObject "{646D0892540C9884}" {
    Object "{04A6756A511911E2}Models/Drone Explosive -Huge.xob"
   }
+  Hierarchy "{6470714DBCDFACF6}" {
+  }
  }
  coords 675.692 39.011 2587.197
 }

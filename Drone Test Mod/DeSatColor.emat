@@ -1,5 +1,5 @@
 ColorsEffect {
- OverlayColor 0.011 0.339 0.381 0
- Saturation 0.155
- ColorizationColor 0.212 0.212 0.212 0
+ Contrast 1.065
+ Saturation 0.735
+ ColorizationColor 0.863 0.863 0.863 0
 }

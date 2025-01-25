@@ -2,7 +2,7 @@ GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
  ID "646550CA0862413F"
  components {
   DroneController "{646550CB159501ED}" {
-   throttleForce 14000
+   throttleForce 16500
    groundRayOffset 0.13
    speedCap 15
   }

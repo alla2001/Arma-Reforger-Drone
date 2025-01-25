@@ -4,6 +4,8 @@ GenericEntity {
   MeshObject "{646B35004914C290}" {
    Object "{4B1A89CDE020EBB6}Models/Drone Battery.xob"
   }
+  Hierarchy "{6470714DA49B3E37}" {
+  }
  }
  coords 676.525 39 2588.276
 }

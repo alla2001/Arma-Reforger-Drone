@@ -42,7 +42,7 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 		//Print(currentBattery);
 
 	}
-	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	[RplRpc(RplChannel.Unreliable, RplRcver.Owner)]
 	void RPC_CurrentBattery(float batteryVal)
 	{
 		currentBattery = batteryVal;

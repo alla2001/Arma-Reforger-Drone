@@ -25,9 +25,6 @@ FrameWidgetClass {
     SizeY -2245.94
     OffsetBottom 0
    }
-   "Use Engine Scale" 0
-   xscale 0.5
-   yscale 0.5
    Filter None
    Format LDR_sRGB
   }
@@ -44,7 +41,7 @@ FrameWidgetClass {
     SizeY -1050
     OffsetBottom 0
    }
-   Color 1 1 1 0.039
+   Color 1 1 1 0.008
    Texture "{B23F7CEB53AB6007}Texture/glitch-effect-black-background_53876-129025.edds"
    Size 626 352
    "Blend Mode" Additive

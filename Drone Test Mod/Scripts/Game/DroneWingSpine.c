@@ -36,24 +36,25 @@ procAnima=SignalsManagerComponent.Cast( owner.FindComponent(SignalsManagerCompon
 		
 			owner.Update();
 	vector tran[4];
-	owner.GetTransform(tran);
+	owner.GetLocalTransform(tran);
 
 	// Extract the current scale
 	float scale = tran[0].Length(); // Assuming uniform scaling
-
+scale=1.3;
 	// Perform the rotation
 	vector tran1[4];
-	SCR_Math3D.RotateAround(tran, tran[3], tran[1].Normalized(), timeSlice * spinSpeed + timeSlice * 5, tran);
-/*
+	SCR_Math3D.RotateAround(tran, tran[3], tran[1].Normalized(), timeSlice * spinSpeed + timeSlice * 12, tran);
+
 	// Reapply the scale
 	tran1[0] = tran1[0].Normalized() * scale;
 	tran1[1] = tran1[1].Normalized() * scale;
 	tran1[2] = tran1[2].Normalized() * scale;
-*/
+
 		// Set the transformed matrix back to the object
-		//owner.SetTransform(tran);
-		owner.SetOrigin( owner.CoordToParent( localPos));
+		owner.SetLocalTransform(tran);
+		
 		owner.Update();
+		owner.SetOrigin( owner.CoordToParent( localPos));
 			//Print(spinSpeed);
 	}
 	

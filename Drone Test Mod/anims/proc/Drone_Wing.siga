@@ -3,37 +3,39 @@ ProcAnimSignalResClass {
   IOPItemInputClass {
    id 1
    name "SpinRPM"
-   tl -163 -54
+   tl -231 -34
    children {
     7
    }
+   value 11.4
    valueMin -360
    valueMax 360
   }
   IOPItemInputClass {
    id 5
    name "DroneOn"
-   tl -168 107
+   tl -248 105
    children {
     7
    }
+   value 1
   }
  }
  Ops {
   IOPItemOpMulClass {
    id 7
    name "Mul 7"
-   tl 26 31
+   tl 24 17
    children {
     2
    }
    inputs {
     ConnectionClass connection {
-     id 5
+     id 1
      port 0
     }
     ConnectionClass connection {
-     id 1
+     id 5
      port 0
     }
    }
@@ -66,7 +68,7 @@ ProcAnimSignalResClass {
   ops {
    IOPCompiledOp {
     data {
-     1 2 4 65536 0 0 0
+     1 2 4 0 0 65536 0
     }
    }
   }
