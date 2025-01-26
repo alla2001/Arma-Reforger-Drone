@@ -1,0 +1,210 @@
+GenericEntity {
+ ID "6473465FC9118EF1"
+ components {
+  SignalsManagerComponent "{6473465FFB91C88A}" {
+  }
+  SoundComponent "{6473465FFB91C84C}" {
+   Filenames {
+    "{5409F2998421DA59}Sounds/Items/Equipment/Radios/Items_Radio_Inspection_Actions.acp" "{4AB5F7FA7BB2CCBF}Sounds/Items/_SharedData/PickUp/Items_PickUp_RespawnKit.acp" "{77EF656D5DAC6FD5}Sounds/Items/_SharedData/Drop/Items_Drop_RespawnKit.acp" "{EFFB3D8065A486E3}Sounds/Items/DeployableRadio/Items_DeployableRadio.acp"
+   }
+   SoundPoints {
+    SoundPointInfo RadioPosition {
+     Offset 0 1.2272 0
+    }
+   }
+  }
+  BaseRadioComponent "{6473465FFB91C832}" {
+   "Encryption key" "chickenNuggets"
+   "Turned on" 1
+   Transceivers {
+    RadioTransceiver "{6473465FFB91C82B}" {
+     ChannelFrequency 48000
+     "Transmitting Range" 2000
+     "Min tunable frequency" 30000
+     "Max tunable frequency" 76000
+    }
+   }
+  }
+  JammerBackPack "{6473465FFB91C80D}" {
+  }
+  MeshObject "{6473465FFB91C9A1}" {
+   Object "{D29C3ADD27E3E71A}Assets/Items/Equipment/Radios/Radio_ANPRC77/Radio_ANPRC77_01_item.xob"
+   LODFactors {
+   }
+  }
+  RigidBody "{6473465FFB91C992}" {
+   ModelGeometry 1
+  }
+  SCR_DeployableInventoryItemInventoryComponent "{6473465FFB91CAA3}" {
+   Attributes SCR_ItemAttributeCollection "{6473465FFB91CAA8}" {
+    ItemDisplayName UIInfo "{6473465FFB91C93A}" {
+     Name "Jammer BackPack"
+     Description "jamms friendly and enemy drones"
+     Icon "{CF038C42DC15871B}UI/Textures/VON/ANPRC77-100px_UI.edds"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{6473465FFB91C91C}" {
+     Weight 9
+     SizeSetupStrategy Manual
+     ItemDimensions 25 25 25
+     ItemVolume 10000
+    }
+    CustomAttributes {
+     CharacterModifierAttributes "{6473465FFB91CAEE}" {
+     }
+     PreviewRenderAttributes "{6473465FFB91CAE1}" {
+      CameraPreset Back
+      CameraOrbitAngles 25 -25 180
+      CameraDistanceToItem 3
+      CameraOffset 0 -0.25 0
+      FOV 10
+      PreviewModel "{BA5D2EE89E84BDA3}Assets/Items/Equipment/Radios/Radio_ANPRC77/Radio_ANPRC77_01.xob"
+     }
+     SCR_VONPreviewAttributes "{6473465FFB91CAF7}" {
+      CameraOrbitAngles 0 210 0
+      CameraDistanceToItem 1.8
+      CameraOffset 0 0 0
+      FOV 40
+     }
+    }
+    CommonItemType "RADIO"
+    m_Size SLOT_2x2
+    m_SlotType SLOT_BACKPACK
+   }
+  }
+  SCR_RadioComponent "{6473465FFB91CA84}" {
+   m_eAnimVariable 2147483647
+   m_iRadioCategory MANPACK
+   m_iRadioType ANPRC77
+  }
+  SCR_RestrictedDeployableSpawnPointComponent "{6473465FFB91CA1E}" {
+   m_sReplacementPrefab "{B5A9B78EE58D9C76}Prefabs/Systems/DeployableRadios/DeployableItemRadioReplacemenUS.et"
+   m_FactionKey "US"
+   m_bQuerySpawnPoints 1
+   m_fQueryRadiusBases 80
+   m_fQueryRadiusSpawnPoints 80
+   m_fQueryRadiusCharacters 60
+   m_bQueryAllBases 1
+  }
+  SCR_SoundDataComponent "{6473465FFB91CBB3}" {
+   Enabled 0
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{6473465FFB91CBF3}" {
+     m_sSoundProject "{4AB5F7FA7BB2CCBF}Sounds/Items/_SharedData/PickUp/Items_PickUp_RespawnKit.acp"
+     m_sSoundEventName "SOUND_PICK_UP"
+    }
+    SCR_AudioSourceConfiguration "{6473465FFB91CBC3}" {
+     m_sSoundProject "{4AB5F7FA7BB2CCBF}Sounds/Items/_SharedData/PickUp/Items_PickUp_RespawnKit.acp"
+     m_sSoundEventName "SOUND_EQUIP"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{6473465FFB91CBDB}" {
+     m_sSoundProject "{77EF656D5DAC6FD5}Sounds/Items/_SharedData/Drop/Items_Drop_RespawnKit.acp"
+     m_sSoundEventName "SOUND_DROP"
+    }
+    SCR_AudioSourceConfiguration "{6473465FFB91CBD0}" {
+     m_sSoundProject "{5409F2998421DA59}Sounds/Items/Equipment/Radios/Items_Radio_Inspection_Actions.acp"
+     m_sSoundEventName "SOUND_ITEM_RADIO_TUNE_UP"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{6473465FFB91CBAD}" {
+     m_sSoundProject "{5409F2998421DA59}Sounds/Items/Equipment/Radios/Items_Radio_Inspection_Actions.acp"
+     m_sSoundEventName "SOUND_ITEM_RADIO_TUNE_DOWN"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{6473465FFB91CBA5}" {
+     m_sSoundProject "{5409F2998421DA59}Sounds/Items/Equipment/Radios/Items_Radio_Inspection_Actions.acp"
+     m_sSoundEventName "SOUND_ITEM_RADIO_TUNE_ERROR"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{6473465FFB91CBBA}" {
+     m_sSoundProject "{5409F2998421DA59}Sounds/Items/Equipment/Radios/Items_Radio_Inspection_Actions.acp"
+     m_sSoundEventName "SOUND_ITEM_RADIO_TOGGLE_ON"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{6473465FFB91CBB2}" {
+     m_sSoundProject "{5409F2998421DA59}Sounds/Items/Equipment/Radios/Items_Radio_Inspection_Actions.acp"
+     m_sSoundEventName "SOUND_ITEM_RADIO_TOGGLE_OFF"
+     m_eFlags 0
+    }
+   }
+  }
+  BaseLoadoutClothComponent "{6473465FFB91CB6C}" {
+   AreaType LoadoutBackpackArea "{6473465FFB91CB96}" {
+   }
+   WornModel "{BA5D2EE89E84BDA3}Assets/Items/Equipment/Radios/Radio_ANPRC77/Radio_ANPRC77_01.xob"
+   ItemModel "{D29C3ADD27E3E71A}Assets/Items/Equipment/Radios/Radio_ANPRC77/Radio_ANPRC77_01_item.xob"
+   VisibleInVehicle 0
+   DepthBack 0.025
+   OffsetShoulderLeft -0.1
+   OffsetShoulderRight 0.1
+   DeflatedModel "{4208B441C7591373}Assets/Items/Equipment/Radios/Radio_ANPRC77/Radio_ANPRC77_01_Inflated.xob"
+   AreaTypeWhenModelChange {
+    LoadoutArmoredVestSlotArea "{6473465FFB91CB6E}" {
+    }
+   }
+  }
+  ActionsManagerComponent "{6473465FFB91D470}" {
+   ActionContexts {
+    UserActionContext "{6473465FFB91CB53}" {
+     ContextName "default"
+     Position PointInfo "{6473465FFB91CB47}" {
+      Offset 0 0.1504 -0.1458
+     }
+    }
+   }
+   additionalActions {
+    SCR_DeployableInventoryItemPickUpAction "{6473465FFB91CB1C}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6473465FFB91CB20}" {
+      Name "#AR-Inventory_PickUp"
+     }
+    }
+    SCR_DeployableInventoryItemEquipClothAction "{6473465FFB91D4C9}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6473465FFB91D4E9}" {
+      Name "#AR-Inventory_Equip"
+     }
+    }
+    SCR_UnDeployJammerBackpack "{6473465FD993923D}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6473465FD99393FA}" {
+      Name "UnDeploy jammer"
+      Description "UnDeploy jammer"
+     }
+    }
+   }
+  }
+  GadgetGamepadEffectsManagerComponent "{6473465FFB91D543}" {
+   OwnedEffects {
+    GamepadTriggerEffect "{6473465FFB91D5BB}" {
+     Name "ADS"
+     Priority 30
+     TriggerType Left
+     TriggerEffectCurve {
+      0 0 0.556 0 0.667 0.125 0.778 0
+     }
+    }
+    GamepadTriggerEffect "{6473465FFB91D544}" {
+     Name "Charged"
+     Priority 30
+     TriggerEffectCurve {
+      0.556 0 0.667 0.125 0.778 0
+     }
+    }
+   }
+  }
+  RplComponent "{6473465FFB91D556}" {
+   "Rpl State Override" Runtime
+   "Parent Node From Parent Entity" 0
+  }
+  Hierarchy "{6473465FFB91D52B}" {
+  }
+ }
+ coords 2502.15 147.502 2285.156
+}

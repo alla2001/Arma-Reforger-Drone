@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{1CECBCDC65A5CA96}Configs/System/chimeraInputCommon.conf"
+ Name "{86E953538A28A98D}Configs/Systems/ChimeraSystemsConfig.conf"
  Configurations {
   CONFResourceClass PC {
   }

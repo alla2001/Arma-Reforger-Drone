@@ -7,6 +7,11 @@ GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
    fakeGravityForce 3
    speedCap 35
    cameraSpawnRotation -35 0 0
+   canAutoHover 1
+   altitudeStabilizationStrength 6000
+   maxStabilizationForce 6000
+   driftStabilizationStrength 6000
+   rotationStabilizationStrength 35
   }
   DroneSignalHandler "{646550CB1734D305}" {
    maxRange 2500

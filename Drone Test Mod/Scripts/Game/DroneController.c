@@ -29,10 +29,16 @@ class DroneController : ScriptComponent
 	 Widget root ;
     [Attribute()] int m_iCameraIndex;
     [RplProp(onRplName : "OnDeployed")] bool deployed;
-    [RplProp(condition : RplCondition.NoOwner)] bool armed;
+    [RplProp()] bool armed;
+	    [RplProp()] bool autoHoverOn;
     [Attribute(defvalue : "0 0 0", uiwidget : UIWidgets.Coords, params : "inf inf 0 purpose=coords space=entity anglesVar=cameraSpawnRotation")] vector cameraSpawnPoint;
     [Attribute(defvalue : "0 0 0", uiwidget : UIWidgets.Coords, params : "inf inf 0 purpose=angles space=entity coordsVar=cameraSpawnPoint")] vector cameraSpawnRotation;
  [Attribute()] ResourceName layout;
+		[Attribute()] bool canAutoHover;
+	[Attribute()] float altitudeStabilizationStrength;
+	[Attribute()] float maxStabilizationForce;
+	[Attribute()] float driftStabilizationStrength;
+		[Attribute()] float  rotationStabilizationStrength;
     IEntity playerUser;
     DroneSignalHandler droneSignalHandler;
     DroneBatteryHandler batteryHandler;
@@ -80,6 +86,8 @@ class DroneController : ScriptComponent
 
     void DeployDrone(IEntity drone, IEntity user)
     {
+		
+        if (droneSignalHandler.isjammed()) return;
         sfxVolume = 0;
         lastPos = GetOwner().GetOrigin();
         bool m_bIsServer = Replication.IsServer();
@@ -147,6 +155,7 @@ class DroneController : ScriptComponent
         inputManager.ActivateAction("AntiTorqueRight", duration : int.MAX);
 
         inputManager.AddActionListener("JumpOut", EActionTrigger.DOWN, ClientDisconnect);
+		     inputManager.AddActionListener("AutohoverToggle", EActionTrigger.DOWN, ToggleAutoHover);
         inputManager.AddActionListener("CharacterFire", EActionTrigger.DOWN, TriggerExplode);
         lastPos = drone.GetOrigin();
         droneSignalHandler.Deploy(user, camera);
@@ -188,6 +197,13 @@ class DroneController : ScriptComponent
             // rb.SetActive(ActiveState.ALWAYS_ACTIVE);
             // rb.ChangeSimulationState(SimulationState.SIMULATION);
         }
+    }
+	vector desiredPosition;
+  	 void ToggleAutoHover()
+    {
+		if(!canAutoHover)return;
+       autoHoverOn = !autoHoverOn;
+		desiredPosition = GetOwner().GetOrigin(); // Lock the current position
     }
 
     void DisarmeDrone()
@@ -602,7 +618,42 @@ class DroneController : ScriptComponent
         }
 	
 		rb.SetVelocity( rb.GetVelocity().Normalized()* Math.Min(speedCap,rb.GetVelocity().Length()));
+		if(autoHoverOn){
 		
+
+ 		 vector position = owner.GetOrigin();
+    vector velocity = rb.GetVelocity();
+
+    // --- Altitude Stabilization (Throttle Up/Down) ---
+    float altitudeError = desiredPosition[1] - position[1]; // Compare current altitude to desired
+    float verticalSpeed = velocity[1];
+
+    // Throttle force proportional to altitude error and vertical speed
+    float hoverthrottleForce = altitudeError * altitudeStabilizationStrength - verticalSpeed * 2.0;
+    hoverthrottleForce = Math.Clamp(hoverthrottleForce, -throttleForce, throttleForce);
+    rb.ApplyForce(vector.Up * hoverthrottleForce * timeSlice);
+
+    // --- Drift Stabilization (Roll and Pitch) ---
+    vector horizontalVelocity = Vector(velocity[0], 0, velocity[2]); // Only horizontal movement
+    vector driftCorrectionForce = -horizontalVelocity * driftStabilizationStrength;
+
+    // Determine desired roll/pitch angles based on drift correction
+    float desiredPitch = driftCorrectionForce[2] / hoverthrottleForce; // Forward/backward tilt
+    float desiredRoll = -driftCorrectionForce[0] / hoverthrottleForce; // Left/right tilt
+
+    // Apply pitch and roll torques
+    rb.ApplyTorque(Vector(desiredRoll * 10, 0, desiredPitch * 10) * timeSlice);
+
+    // --- Rotation Stabilization (Yaw) ---
+    vector currentAngularVelocity = rb.GetAngularVelocity();
+    vector desiredForward = vector.Forward; // Lock to default forward orientation
+    vector currentForward = owner.GetTransformAxis(2); // Get current forward vector
+
+    // Calculate yaw error (difference between desired and current orientation)
+    float yawError = vector.Dot(currentForward* desiredForward, vector.Up); // Sign of yaw error
+    float yawCorrectionTorque = yawError * 10 - currentAngularVelocity[1] * 2.0; // Add damping
+    rb.ApplyTorque(vector.Up * yawCorrectionTorque * timeSlice);
+		}
         foreach (DroneWingSpine wing : wings)
         {
             wing.SetSpinSpeed((throttleInput + vInput[2] + vInput[0] + yawInput) * throttleForce * mul * timeSlice);
@@ -647,6 +698,7 @@ class DroneController : ScriptComponent
             return;
 
         inputManager.RemoveActionListener("JumpOut", EActionTrigger.DOWN, ClientDisconnect);
+		     inputManager.RemoveActionListener("AutohoverToggle", EActionTrigger.DOWN, ToggleAutoHover);
         inputManager.RemoveActionListener("CharacterFire", EActionTrigger.DOWN, TriggerExplode);
         droneSignalHandler.Disconnected();
         batteryHandler.Disconnected();
@@ -658,7 +710,7 @@ class DroneController : ScriptComponent
         delete camera;
 		/*if (m_wRenderTargetTextureWidget && GetOwner() && !GetOwner().IsDeleted())
 			m_wRenderTargetTextureWidget.SetGUIWidget(GetOwner(), -1);*/
-if(root)
+		if(root)
 		delete root;
         Rpc(RPC_Disconnect);
     }
@@ -711,7 +763,7 @@ if(root)
 
             AudioSystem.SetMasterVolume(AudioSystem.SFX, 1);
         }
-if(root)
+		if(root)
 		delete root;
         sfxVolume = 0;
         bool m_bIsServer = Replication.IsServer();
