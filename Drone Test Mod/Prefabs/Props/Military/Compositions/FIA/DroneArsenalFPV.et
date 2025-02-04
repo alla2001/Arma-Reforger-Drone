@@ -1,0 +1,82 @@
+GenericEntity : "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/DroneArsenal.et" {
+ ID "6483638E0BFCF7D9"
+ components {
+  SCR_ArsenalComponent "{64855CD2FB3991FA}" {
+   m_OverwriteArsenalConfig SCR_ArsenalItemListConfig "{64855CD2E788DB92}" {
+    m_aArsenalItems {
+     SCR_ArsenalItemStandalone "{64855CD5E477866A}" {
+      m_eItemType EQUIPMENT
+      m_ItemResourceName "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et"
+     }
+    }
+   }
+  }
+  SCR_EditableSystemComponent "{64849741EE17E44F}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{64849741DF0EF88E}" {
+    Name "Drone Arsenal FPV"
+    Description "Drone Arsenal FPV"
+    m_Image "{EAB5FA272F0118A3}Texture/ArmaReforgerWorkbenchSteamDiag_pXl1ta5lAR.edds"
+    m_sFaction "US"
+   }
+  }
+  ActionsManagerComponent "{64830C5ED88922D2}" {
+   additionalActions {
+    SCR_OpenStorageRankAction "{64830C5ED8892CCB}" {
+     RankNeeded CAPTAIN
+    }
+   }
+  }
+ }
+ {
+  $grp GenericEntity {
+   {
+    ID "6484C0E62D209575"
+    components {
+     MeshObject "{6484C0E638361654}" {
+      Object "{290E190DCE125EC9}Models/Drone Explosive.xob"
+     }
+     Hierarchy "{6484C0E6208D05A8}" {
+     }
+    }
+    coords 0.669 0.205 -0.252
+    scale 1.25
+   }
+   {
+    ID "6484C0E62D231EA3"
+    components {
+     MeshObject "{6484C0E63A7C9218}" {
+      Object "{290E190DCE125EC9}Models/Drone Explosive.xob"
+     }
+     Hierarchy "{6484C0E6269C77F8}" {
+     }
+    }
+    coords 0.558 0.205 -0.257
+    scale 1.5
+   }
+   {
+    ID "6484C0E62D231F4D"
+    components {
+     MeshObject "{6484C0E63B8E5EAC}" {
+      Object "{290E190DCE125EC9}Models/Drone Explosive.xob"
+     }
+     Hierarchy "{6484C0E629216611}" {
+     }
+    }
+    coords 0.451 0.205 -0.254
+    scale 1.25
+   }
+   {
+    ID "6484C0E62D23611F"
+    components {
+     MeshObject "{6484C0E63D185F57}" {
+      Object "{290E190DCE125EC9}Models/Drone Explosive.xob"
+     }
+     Hierarchy "{6484C0E62B0353CE}" {
+     }
+    }
+    coords 0.361 0.205 -0.242
+    scale 1.6
+   }
+  }
+ }
+}

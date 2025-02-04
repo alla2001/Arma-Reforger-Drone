@@ -13,7 +13,7 @@ class SCR_DeployJammerBackpack :  ScriptedUserAction
 		JammerBackPack.Cast(pOwnerEntity.FindComponent(JammerBackPack)).SetJammerActive(true);
 	}
 	
-	override bool CanBeShownScript(IEntity user){
+	override bool CanBePerformedScript(IEntity user){
 	
 	return !JammerBackPack.Cast(GetOwner().FindComponent(JammerBackPack)).GetJammerActive();
 	}

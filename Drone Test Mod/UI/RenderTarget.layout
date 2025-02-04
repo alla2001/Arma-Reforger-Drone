@@ -25,6 +25,9 @@ FrameWidgetClass {
     SizeY -2245.94
     OffsetBottom 0
    }
+   "Use Engine Scale" 0
+   xscale 0.1
+   yscale 0.1
    Filter None
    Format LDR_sRGB
   }
@@ -36,9 +39,9 @@ FrameWidgetClass {
     OffsetLeft 0
     PositionY 0
     OffsetTop 0
-    SizeX -1820
+    SizeX 0
     OffsetRight 0
-    SizeY -1050
+    SizeY 0
     OffsetBottom 0
    }
    Color 1 1 1 0.008
@@ -47,6 +50,23 @@ FrameWidgetClass {
    "Blend Mode" Additive
    Filter 0
    Saturation 0.224
+  }
+  TextWidgetClass "{64748D6310561C39}" {
+   Name "Text0"
+   Slot FrameWidgetSlot "{64748D6310561C21}" {
+    Anchor 0.513 1 0.513 1
+    PositionX -125.283
+    OffsetLeft -125.283
+    PositionY -136.249
+    OffsetTop -136.249
+    SizeX 268.884
+    OffsetRight -143.601
+    SizeY 52.63
+    OffsetBottom 83.619
+   }
+   Text "Drone View"
+   "Horizontal Alignment" Center
+   "Vertical Alignment" Center
   }
  }
 }

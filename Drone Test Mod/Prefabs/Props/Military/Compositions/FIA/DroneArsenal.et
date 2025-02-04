@@ -1,0 +1,410 @@
+GenericEntity {
+ ID "6483638E0BFCF7D9"
+ components {
+  ClimbingDataComponent "{64849741E1E230C5}" {
+   CanClimbOver 0
+  }
+  MeshObject "{64830C5ED889D1CB}" {
+   Object "{00A0405646094295}Models/case.xob"
+   Materials {
+    MaterialAssignClass "{64830C5ED889D042}" {
+     SourceMaterial "ArsenalBox_01_Decal"
+     AssignedMaterial "{459622B158FA51D5}Assets/Props/Military/AmmoBox/ArsenalBox_01/Data/ArsenalBox_01_Decal_FIA_general.emat"
+    }
+    MaterialAssignClass "{64830C5ED889D1B9}" {
+     SourceMaterial "ArsenalBox_01_MLOD"
+     AssignedMaterial "{54890FD8AFC9D213}Assets/Props/Military/AmmoBox/ArsenalBox_01/Data/ArsenalBox_01_FIA_MLOD.emat"
+    }
+   }
+  }
+  RigidBody "{64830C5ED889D138}" {
+   Mass 10
+   ModelGeometry 1
+   Static 1
+  }
+  SCR_ArsenalComponent "{64855CD2FB3991FA}" {
+   m_eSupportedArsenalItemTypes 1048574
+   m_eSupportedArsenalItemModes 254
+   m_eEditableAttributeGroups 30
+   m_OverwriteArsenalConfig SCR_ArsenalItemListConfig "{64855CD2E788DB92}" {
+    m_aArsenalItems {
+     SCR_ArsenalItemStandalone "{64855CD2EAB74756}" {
+      m_eItemType EQUIPMENT
+      m_ItemResourceName "{B364A5F81D382E96}Prefabs/DronePrefabFastNewRecon.et"
+     }
+     SCR_ArsenalItemStandalone "{64855CD2D696197C}" {
+      m_eItemType BACKPACK
+      m_ItemResourceName "{B546BAF04B3BD03E}Prefabs/Items/Equipment/Radios/Jammer Backpack.et"
+     }
+    }
+   }
+  }
+  SCR_EditableSystemComponent "{64849741EE17E44F}" {
+   m_EntityType SYSTEM
+   m_UIInfo SCR_EditableEntityUIInfo "{64849741DF0EF88E}" {
+    Name "Drone Arsenal "
+    Description "Drone Arsenal"
+    Icon "{EA975C03DF5422AD}UI/Textures/Editor/EditableEntities/Systems/EditableEntity_System_Arsenal.edds"
+    m_Image "{47878B617C7C573F}Texture/ArmaReforgerWorkbenchSteamDiag_QFOah2V8hj.edds"
+    m_sFaction "US"
+    m_aAuthoredLabels {
+     280 7
+    }
+    m_aAutoLabels {
+     12 108 121 27
+    }
+   }
+   m_bAutoRegister ALWAYS
+   m_Flags 773
+  }
+  SCR_FactionAffiliationComponent "{64830C5ED889D6BD}" {
+   "faction affiliation" "US"
+  }
+  SCR_PreviewEntityComponent "{64849741A17180C9}" {
+   m_bRuntime 0
+   m_aEntries {
+    SCR_BasePreviewEntry "{648497419051E2BB}" {
+     m_iParentID -1
+     m_Mesh "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/DroneArsenal.et"
+     m_Flags 0
+     m_Shape MESH
+     m_iPivotID ""
+     m_vPosition 0 0 0
+     m_vAngles 0 0 0
+    }
+   }
+  }
+  SCR_ResourceComponent "{64830C5ED889D671}" {
+   m_aConsumers {
+    SCR_ResourceConsumerServicePoint "{64830C5ED889D6CD}" {
+     m_sDebugName "Arsenal - Consumer"
+     m_eResourceRights ALL
+     m_eGeneratorIdentifier DEFAULT
+     m_fResourceRange 135
+     m_ContainerQueue SCR_ResourceConsumerContainerQueue "{64830C5ED889D686}" {
+      m_StoragePolicies {
+       SCR_ResourceConsumerStoragePolicy "{64830C5ED889D693}" {
+        m_StorageQueue SCR_ResourceConsumerContainerStorageQueueExtended "{64830C5ED889D690}" {
+        }
+       }
+       SCR_ResourceConsumerStoragePolicy "{64830C5ED889D68B}" {
+        m_StorageQueue SCR_ResourceConsumerContainerStorageQueueExtended "{64830C5ED889D68A}" {
+        }
+        m_eStorageType STORED
+       }
+      }
+     }
+    }
+   }
+   m_aGenerators {
+    SCR_ResourceGeneratorServicePoint "{64830C5ED889D677}" {
+     m_sDebugName "Arsenal - Generator"
+     m_eResourceRights ALL
+     m_fResourceMultiplier 0.333
+     m_fStorageRange 135
+     m_ContainerQueue SCR_ResourceGeneratorContainerQueue "{64830C5ED889D622}" {
+      m_StoragePolicies {
+       SCR_ResourceGeneratorStoragePolicy "{64830C5ED889D628}" {
+        m_StorageQueue SCR_ResourceGeneratorContainerStorageQueueExtended "{64830C5ED889D62F}" {
+        }
+        m_eStorageType STORED
+       }
+       SCR_ResourceGeneratorStoragePolicy "{64830C5ED889D620}" {
+        m_StorageQueue SCR_ResourceGeneratorContainerStorageQueueExtended "{64830C5ED889D626}" {
+        }
+       }
+      }
+     }
+     m_aActions {
+      SCR_ResourceGeneratorActionStore "{64830C5ED889D61B}" {
+      }
+      SCR_ResourceGeneratorActionDropContainers "{64830C5ED889D616}" {
+      }
+     }
+    }
+   }
+  }
+  SCR_ResupplySupportStationComponent "{64830C5ED889D7A5}" {
+   m_sOnUseSoundEffectFile "{7BACA57AF41F033D}Sounds/SupportStations/SupportStations_Character.acp"
+   m_sOnUseSoundEffectEventName "SOUND_RESUPPLY_AMMUNITION_SELF"
+   m_fRange -1
+  }
+  SCR_ServicePointComponent "{64830C5ED889D79D}" {
+   m_eType ARMORY
+   m_eBuildingLabel SERVICE_ARMORY
+   m_sDelegatePrefab "{13EB5465CA676A60}Prefabs/Systems/Services/ServicePointDelegate_Armory.et"
+  }
+  SCR_SlotCompositionComponent "{64830C5ED889D794}" {
+   m_bOrientChildrenToTerrain 0
+  }
+  SCR_SoundDataComponent "{64830C5ED889D7FF}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{64830C5ED889D786}" {
+     m_sSoundProject "{A73D28179B395F19}Sounds/Props/Military/AmmoBoxes/AmmoBox_Big_Wooden/Props_AmmoBox_Big_Wooden.acp"
+     m_sSoundEventName "SOUND_CONTAINER_OPEN"
+    }
+    SCR_AudioSourceConfiguration "{64830C5ED889D7FE}" {
+     m_sSoundProject "{A73D28179B395F19}Sounds/Props/Military/AmmoBoxes/AmmoBox_Big_Wooden/Props_AmmoBox_Big_Wooden.acp"
+     m_sSoundEventName "SOUND_CONTAINER_CLOSE"
+    }
+   }
+  }
+  UniversalInventoryStorageComponentDrone "{648350C9791B348D}" {
+   Attributes SCR_ItemAttributeCollection "{648350C960741A12}" {
+    ItemDisplayName SCR_InventoryUIInfo "{56F2C6D6A229E091}" {
+     Name "#AR-Arsenal_Name"
+     Description "#AR-Arsenal_Description"
+     m_aItemHints {
+      SCR_SupplyAvailableItemHintUIInfo "{5E76A7E614C745B3}" {
+       Name "#AR-Item_SupplyConsumer_Hint1"
+       Icon "{8EB808BFA227C080}UI/Textures/Icons/InventoryHints/InventoryHint_SuppliesStored.edds"
+       m_cColor 1 1 1 1
+       m_bHideInArsenal 1
+      }
+     }
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{56F2C6D6AC3D5013}" {
+     Weight 5
+     ItemDimensions 10 10 10
+     ItemVolume 100
+     DimensionScaler 0.9
+     RestingAdditiveRotationLS 0 0 0
+     RestingAdditiveOffsetLS 0 0 0
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{593AC3A96E70FEA7}" {
+      CameraOrbitAngles 330 30 0
+      CameraDistanceToItem 2
+      FOV 60
+      AspectRatio 1
+     }
+    }
+    m_Size SLOT_3x3
+    m_SlotType SLOT_LOADOUT_STORAGE
+    m_bDraggable 0
+   }
+  }
+  SCR_ArsenalInventoryStorageManagerComponent "{64830C5ED889D712}" {
+  }
+  ActionsManagerComponent "{64830C5ED88922D2}" {
+   ActionContexts {
+    UserActionContext "{64830C5ED889D76F}" {
+     ContextName "default"
+     Position PointInfo "{64830C5ED889D76D}" {
+      Offset 0 0.464 0
+     }
+     Radius 1.5
+    }
+   }
+   additionalActions {
+    SCR_OpenStorageRankAction "{64830C5ED8892CCB}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64830C5ED889D75D}" {
+      Name "#AR-Inventory_OpenArsenalStorage"
+     }
+     RankNeeded LIEUTENANT
+    }
+   }
+  }
+  RplComponent "{64830C5ED88922C6}" {
+   Enabled 1
+   "Rpl State Override" Runtime
+  }
+  Hierarchy "{64830C5ED889223D}" {
+   Enabled 1
+  }
+ }
+ coords 2030.19 39.026 2051.916
+ angleX 4.994
+ angleY -1.006
+ angleZ -11.405
+ scale 0.8
+ Flags 1027
+ {
+  $grp GenericEntity {
+   {
+    ID "6484AB01C2041C10"
+    components {
+     MeshObject "{6484AB01F7636529}" {
+      Object "{1FA59B6C4ED25DE6}system/wbdata/MaterialEditor/MaterialPlane.xob"
+      Materials {
+       MaterialAssignClass "{6484AB01A825BA12}" {
+        SourceMaterial "DummyMaterial"
+        AssignedMaterial "{EB3398D070DBFDA4}Materials/Logo.emat"
+       }
+      }
+     }
+     Hierarchy "{6484AB00B54960F1}" {
+     }
+    }
+    coords 0.511 0.595 -0.597
+    angleX 63.523
+    angleY -179.548
+    angleZ 0.823
+    scale 0.412
+   }
+   {
+    ID "6484AB01C20445C1"
+    components {
+     MeshObject "{6484AB0111625147}" {
+      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     }
+     Hierarchy "{6484B24E874C6F9B}" {
+     }
+    }
+    coords -0.474 0.235 0.255
+    angleY 43.841
+    scale 1.25
+   }
+   {
+    ID "6484AB01C2049EC9"
+    components {
+     MeshObject "{6484AB012FCA7AA1}" {
+      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     }
+     Hierarchy "{6484B24E8E065237}" {
+     }
+    }
+    coords -0.355 0.227 0.232
+    scale 1.25
+   }
+   {
+    ID "6484AB01C204C7F6"
+    components {
+     MeshObject "{6484AB012AFACE50}" {
+      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     }
+     Hierarchy "{6484B24D752CB282}" {
+     }
+    }
+    coords 0.366 0.227 0.241
+    angleY 45.056
+    scale 1.25
+   }
+   {
+    ID "6484AB01C2397A3B"
+    components {
+     MeshObject "{6484AB015459D9A9}" {
+      Object "{0606CDA76EA40E00}Models/Drone.xob"
+     }
+     Hierarchy "{6484B24D79E8298B}" {
+     }
+    }
+    coords -0.44 0.12 -0.024
+    angleY 8.93
+    scale 1.25
+   }
+   {
+    ID "6484AB01C2397ADF"
+    components {
+     MeshObject "{6484AB017EDFE236}" {
+      Object "{4B1A89CDE020EBB6}Models/Drone Battery.xob"
+     }
+     Hierarchy "{6484B24D7C02E507}" {
+     }
+    }
+    coords -0.08 0.108 -0.088
+    angleY -9.667
+    angleZ -2.261
+    scale 1.25
+   }
+   {
+    ID "6484AB01C23A27ED"
+    components {
+     MeshObject "{6484AB0131674FEC}" {
+      Object "{0606CDA76EA40E00}Models/Drone.xob"
+     }
+     Hierarchy "{6484B24D71251EE9}" {
+     }
+    }
+    coords -0.03 0.36 -0.495
+    angleX -43.024
+    angleY -0.244
+    angleZ -3.254
+    scale 1.25
+   }
+   {
+    ID "6484AB01C23AA73B"
+    components {
+     MeshObject "{6484AB014A67638D}" {
+      Object "{4B1A89CDE020EBB6}Models/Drone Battery.xob"
+     }
+     Hierarchy "{6484B24D7FC49988}" {
+     }
+    }
+    coords 0.082 0.229 -0.269
+    angleZ 88.169
+    scale 1.25
+   }
+   {
+    ID "6484AB01C23AD200"
+    components {
+     MeshObject "{6484AB0148D4DC5C}" {
+      Object "{4B1A89CDE020EBB6}Models/Drone Battery.xob"
+     }
+     Hierarchy "{6484B24D61EC4F61}" {
+     }
+    }
+    coords 0.091 0.115 0.097
+    angleY -41.351
+    scale 1.25
+   }
+   {
+    ID "6484AB01C23B619B"
+    components {
+     MeshObject "{6484AB01262025E6}" {
+      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     }
+     Hierarchy "{6484B24D65A23E18}" {
+     }
+    }
+    coords 0.542 0.227 0.25
+    angleY 3.724
+    scale 1.25
+   }
+   {
+    ID "6484AB01C23BE54F"
+    components {
+     MeshObject "{6484AB0139D48CED}" {
+      Object "{765DFC92DF00A5E1}Models/FPVFastDroneWing.xob"
+     }
+     Hierarchy "{6484B24D67CA8362}" {
+     }
+    }
+    coords 0.426 0.239 0.2
+    angleY 51.384
+    angleZ -2.03
+    scale 1.25
+   }
+   {
+    ID "6484AB01C23BE558"
+    components {
+     MeshObject "{6484AB0138AC4904}" {
+      Object "{765DFC92DF00A5E1}Models/FPVFastDroneWing.xob"
+     }
+     Hierarchy "{6484B24D6A892DCA}" {
+     }
+    }
+    coords 0.544 0.231 0.116
+    scale 1.25
+   }
+   {
+    ID "6484AB0278E7BC2B"
+    components {
+     MeshObject "{6484AB03A39F0F8A}" {
+      Object "{D29C3ADD27E3E71A}Assets/Items/Equipment/Radios/Radio_ANPRC77/Radio_ANPRC77_01_item.xob"
+     }
+     Hierarchy "{6484B24EC093480C}" {
+     }
+    }
+    coords -0.502 0.532 -0.319
+    angleX -74.604
+    angleY -8.313
+    angleZ -169.01
+    scale 1.063
+   }
+  }
+ }
+}

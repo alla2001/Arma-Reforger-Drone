@@ -1,0 +1,12 @@
+GenericEntity : "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/DroneArsenal.et" {
+ coords 2702.213 99.803 2236.704
+ angleX 0
+ angleY 0
+ angleZ 10.486
+}
+GenericEntity : "{95F44AC5F90D01FF}Prefabs/Props/Military/Compositions/FIA/DroneArsenalFPV.et" {
+ coords 2700.731 100.086 2236.426
+ angleX 0
+ angleY 0
+ angleZ 14.351
+}

@@ -13,12 +13,8 @@ class SCR_DeployDroneAction :  ScriptedUserAction
 		DroneController.Cast(pOwnerEntity.FindComponent(DroneController)).DeployDrone(pOwnerEntity,pUserEntity);
 	}
 	
-	override bool CanBeShownScript(IEntity user){
-	if(DroneController.Cast(GetOwner().FindComponent(DroneController)).isDeployed())
-		{
-		SetCannotPerformReason("Already Deployed");
-			return false;
-		}
+	override bool CanBePerformedScript(IEntity user){
+	
 	
 	if(DroneBatteryHandler.Cast(GetOwner().FindComponent(DroneBatteryHandler)).isDead())
 		{
@@ -26,6 +22,17 @@ class SCR_DeployDroneAction :  ScriptedUserAction
 			return false;
 		}
 		
+		return true;
+	}
+	
+	override bool CanBeShownScript(IEntity user){
+	if(DroneController.Cast(GetOwner().FindComponent(DroneController)).isDeployed())
+		{
+		SetCannotPerformReason("Already Deployed");
+			return false;
+		}
+	
+
 		return true;
 	}
 }

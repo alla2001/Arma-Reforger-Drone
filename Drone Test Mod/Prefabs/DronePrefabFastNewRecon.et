@@ -1,20 +1,24 @@
 GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
  ID "646550CA0862413F"
  components {
+  DroneBatteryHandler "{646550CB13E3E89C}" {
+   batteryConsumptionPerForceUnite 0.008
+  }
   DroneController "{646550CB159501ED}" {
-   throttleForce 8000
-   tiltSpeed 2.3
+   throttleForce 8300
+   groundRayDistance 60
    fakeGravityForce 3
    speedCap 35
    cameraSpawnRotation -35 0 0
    canAutoHover 1
+   canZoom 1
    altitudeStabilizationStrength 6000
    maxStabilizationForce 6000
    driftStabilizationStrength 6000
    rotationStabilizationStrength 35
   }
   DroneSignalHandler "{646550CB1734D305}" {
-   maxRange 2500
+   maxRange 3200
   }
   SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
    Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
@@ -38,6 +42,18 @@ GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
     AttachmentSlotComponent "{646AC1D543E3B426}" {
      AttachmentSlot InventoryStorageSlot slot {
       Prefab ""
+     }
+    }
+   }
+  }
+  ActionsManagerComponent "{646550CB5B5077B8}" {
+   additionalActions {
+    SCR_ArmDroneAction "{6467432D557CB447}" {
+     ParentContextList {
+     }
+    }
+    SCR_DisarmDroneAction "{6467432D56200229}" {
+     ParentContextList {
      }
     }
    }

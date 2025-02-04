@@ -37,7 +37,14 @@ class DroneBatteryHandler : ScriptComponent // GameComponent > GenericComponent
 	void EnergyUsed(float energy)
 	{
 		currentBattery = Math.Clamp(currentBattery-(energy*batteryConsumptionPerForceUnite),0,maxBattery);
-	
+	if(batteryBar){
+			batteryBar.SetCurrent(currentBattery);
+			
+				if(currentBattery>20)
+		batteryBar.SetColor(defaultColor);
+			else
+				batteryBar.SetColor(WarningColor);
+		}
 		Rpc(RPC_CurrentBattery,currentBattery);
 		//Print(currentBattery);
 

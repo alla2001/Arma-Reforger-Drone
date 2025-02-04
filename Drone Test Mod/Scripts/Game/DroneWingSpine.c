@@ -61,7 +61,7 @@ class DroneWingSpine : ScriptComponent // GameComponent > GenericComponent
 	void SetSpinSpeed(float speed)
 	{
 		spinSpeed = speed;
-		//Rpc( RPC_SetSpinSpeed,spinSpeed);
+		Rpc( RPC_SetSpinSpeed,spinSpeed);
 	}
 	
 	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]

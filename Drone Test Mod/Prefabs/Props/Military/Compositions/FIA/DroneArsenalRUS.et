@@ -1,0 +1,13 @@
+GenericEntity : "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/DroneArsenal.et" {
+ ID "6483638E0BFCF7D9"
+ components {
+  SCR_EditableSystemComponent "{64849741EE17E44F}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{64849741DF0EF88E}" {
+    m_sFaction "USSR"
+   }
+  }
+  SCR_FactionAffiliationComponent "{64830C5ED889D6BD}" {
+   "faction affiliation" "USSR"
+  }
+ }
+}

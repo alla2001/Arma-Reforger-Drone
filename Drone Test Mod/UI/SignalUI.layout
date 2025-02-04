@@ -1,6 +1,23 @@
 FrameWidgetClass {
  Name "rootFrame"
  {
+  TextWidgetClass "{64748D5D3E1155EC}" {
+   Name "Text0"
+   Slot FrameWidgetSlot "{64748D5D3E11553A}" {
+    Anchor 0.501 0.699 0.501 0.699
+    PositionX -95.473
+    OffsetLeft -95.473
+    PositionY -32.611
+    OffsetTop -32.611
+    SizeX 201.136
+    OffsetRight -105.663
+    SizeY 29.801
+    OffsetBottom 2.81
+   }
+   Color 0.502 0 0 1
+   Text "JAMMER NEARBY !"
+   "Font Size" 32
+  }
   ImageWidgetClass "{646C107172E4ABEF}" {
    Name "Image3"
    Slot FrameWidgetSlot "{6467432F4830AC16}" {

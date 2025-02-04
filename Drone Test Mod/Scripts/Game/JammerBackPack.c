@@ -11,6 +11,9 @@ class JammerBackPack : ScriptComponent // GameComponent > GenericComponent
 {
 	[Attribute("200")]
 	float range;
+	
+	[Attribute("200")]
+	float disconnectRange;
 	[RplProp(condition: RplCondition.NoOwner)]
 	bool enabled;
 		
@@ -29,7 +32,7 @@ class JammerBackPack : ScriptComponent // GameComponent > GenericComponent
     }
 	override void OnDelete(IEntity owner){
 	
-	
+		UnRegisterJammer();
 	
 	}
 	void SetJammerActive(bool active){

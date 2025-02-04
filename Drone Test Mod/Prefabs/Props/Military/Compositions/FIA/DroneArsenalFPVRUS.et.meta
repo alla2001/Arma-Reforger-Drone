@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{EAB4B576BAE0A7FC}Prefabs/Props/Military/Compositions/FIA/DroneArsenalFPVRUS.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

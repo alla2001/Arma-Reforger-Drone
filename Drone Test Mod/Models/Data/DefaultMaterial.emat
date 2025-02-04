@@ -1,0 +1,6 @@
+MatPBRBasic {
+ Color 0.319 0.319 0.319 1
+ BCRMap "{0CF4BF284CD9C6CE}Texture/Drone/Weaponcase_BaseColour.edds"
+ NormalPower 1.912
+ NMOMap "{95B305E1D5EA8CB1}Texture/Drone/Weaponcase_Normal.edds"
+}

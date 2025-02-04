@@ -13,7 +13,7 @@ class SCR_ArmDroneAction :  ScriptedUserAction
 		DroneController.Cast(pOwnerEntity.FindComponent(DroneController)).ArmDrone();
 	}
 	
-	override bool CanBeShownScript(IEntity user){
+	override bool CanBePerformedScript(IEntity user){
 	
 	return !DroneController.Cast(GetOwner().FindComponent(DroneController)).isArmed();
 	}

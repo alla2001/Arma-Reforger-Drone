@@ -6,20 +6,22 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
   }
   DroneController "{646550CB159501ED}" {
    throttleForce 8000
-   rotationSpeed 60
-   tiltSpeed 2
-   groundRayDistance 55
+   rotationSpeed 70
+   tiltSpeed 2.2
+   groundRayDistance 85
    groundRayOffset 0.15
-   fakeGravityForce 2
+   fakeGravityForce 1
    interpolationThreshold 10
-   interpolationSpeed 20
+   interpolationSpeed 18
    speedCap 25
    camPrefab "{8CC82BD58DB3ED83}Prefabs/DroneCam.et"
    cameraSpawnPoint 0 0.1 0.168
    layout "{ECCF57B402F948E2}UI/RenderTarget.layout"
+   zoomMin 40
+   zoomMax 85
   }
   DroneSignalHandler "{646550CB1734D305}" {
-   maxRange 1650
+   maxRange 2750
   }
   MeshObject "{646550CB5B53C40F}" {
    Object "{0606CDA76EA40E00}Models/Drone.xob"
@@ -45,7 +47,7 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
      Description "FPV Drone, fly it"
     }
     ItemPhysAttributes ItemPhysicalAttributes "{646550CB5B53C595}" {
-     Weight 2
+     Weight 6
      RestingAdditiveOffsetLS 0 0.08 0
     }
     ItemAnimationAttributes ItemAnimationAttributes "{646550CB5B53C5EE}" {
@@ -95,6 +97,9 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
      ShowInInspection 1
     }
    }
+   UIInfo GrenadeUIInfo "{6468D525489A20B5}" {
+    m_eAmmoTypeFlags 0
+   }
   }
   ActionsManagerComponent "{646550CB5B5077B8}" {
    ActionContexts {
@@ -105,6 +110,9 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
      Height 0
     }
     UserActionContext "{646A855957ADDEDF}" {
+     UIInfo UIInfo "{647C89E36A62CD4D}" {
+      Name "test"
+     }
      ContextName "knob_toggle"
      Position PointInfo "{646A85595E00802E}" {
       Offset 0 0.2 -0.01

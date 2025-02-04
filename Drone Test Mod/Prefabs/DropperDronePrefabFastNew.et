@@ -1,0 +1,31 @@
+GenericEntity : "{DF408B6826B4C5AA}Prefabs/DronePrefabFastNew.et" {
+ ID "646550CA0862413F"
+ components {
+  DroneController "{646550CB159501ED}" {
+   throttleForce 8300
+   groundRayDistance 100
+   fakeGravityForce 0
+  }
+  WeaponComponent "{6468D52551BE07BC}" {
+   components {
+    AttachmentSlotComponent "{646AC1D543E3B426}" {
+     AttachmentSlot InventoryStorageSlot slot {
+      MergePhysics 1
+      Prefab ""
+     }
+     AttachmentType AttachmentOpticsM21 "{646AC1D45025B6C3}" {
+     }
+    }
+   }
+  }
+  ActionsManagerComponent "{646550CB5B5077B8}" {
+   ActionContexts {
+    UserActionContext "{646A855957ADDEDF}" {
+     Position PointInfo "{646A85595E00802E}" {
+      Offset 0 0.052 -0.01
+     }
+    }
+   }
+  }
+ }
+}

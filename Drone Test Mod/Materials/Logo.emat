@@ -1,0 +1,5 @@
+MatPBRDecal {
+ AlphaMul 1.029
+ BCRMap "{DA56AE35DFACE4D2}Texture/SpearHead_Logo_V2.edds"
+ OpacityMap "{DA56AE35DFACE4D2}Texture/SpearHead_Logo_V2.edds"
+}

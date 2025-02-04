@@ -13,19 +13,9 @@ GenericEntity {
     }
    }
   }
-  BaseRadioComponent "{6473465FFB91C832}" {
-   "Encryption key" "chickenNuggets"
-   "Turned on" 1
-   Transceivers {
-    RadioTransceiver "{6473465FFB91C82B}" {
-     ChannelFrequency 48000
-     "Transmitting Range" 2000
-     "Min tunable frequency" 30000
-     "Max tunable frequency" 76000
-    }
-   }
-  }
   JammerBackPack "{6473465FFB91C80D}" {
+   range 155
+   disconnectRange 82
   }
   MeshObject "{6473465FFB91C9A1}" {
    Object "{D29C3ADD27E3E71A}Assets/Items/Equipment/Radios/Radio_ANPRC77/Radio_ANPRC77_01_item.xob"
@@ -70,20 +60,6 @@ GenericEntity {
     m_Size SLOT_2x2
     m_SlotType SLOT_BACKPACK
    }
-  }
-  SCR_RadioComponent "{6473465FFB91CA84}" {
-   m_eAnimVariable 2147483647
-   m_iRadioCategory MANPACK
-   m_iRadioType ANPRC77
-  }
-  SCR_RestrictedDeployableSpawnPointComponent "{6473465FFB91CA1E}" {
-   m_sReplacementPrefab "{B5A9B78EE58D9C76}Prefabs/Systems/DeployableRadios/DeployableItemRadioReplacemenUS.et"
-   m_FactionKey "US"
-   m_bQuerySpawnPoints 1
-   m_fQueryRadiusBases 80
-   m_fQueryRadiusSpawnPoints 80
-   m_fQueryRadiusCharacters 60
-   m_bQueryAllBases 1
   }
   SCR_SoundDataComponent "{6473465FFB91CBB3}" {
    Enabled 0
@@ -176,6 +152,15 @@ GenericEntity {
      UIInfo UIInfo "{6473465FD99393FA}" {
       Name "UnDeploy jammer"
       Description "UnDeploy jammer"
+     }
+    }
+    SCR_DeployJammerBackpack "{64740B21EF81ACB6}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64740B21EF81ACE4}" {
+      Name "Deploy jammer"
+      Description "Deploy jammer"
      }
     }
    }

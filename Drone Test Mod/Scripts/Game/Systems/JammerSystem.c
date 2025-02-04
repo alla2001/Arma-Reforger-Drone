@@ -2,7 +2,7 @@ class JammerSystem : GameSystem
 {
 	protected ref array<JammerBackPack> m_aJammers = {};
 	protected ref array<DroneSignalHandler> m_aDrones = {};
-	
+
 
 	//------------------------------------------------------------------------------------------------
 	protected override void OnUpdate(ESystemPoint point)
@@ -16,9 +16,9 @@ class JammerSystem : GameSystem
 			float debuff = 0;
 			foreach (JammerBackPack jammer : m_aJammers)
 			{
-				if(!jammer.enabled) continue;
+				if(jammer==null || !jammer.enabled) continue;
 				float distance = vector.Distance(drone.GetOwner().GetOrigin(),jammer.GetOwner().GetOrigin());
-				float thisDebuff = Math.Clamp((jammer.range-distance)/(jammer.range-100),0,1);
+				float thisDebuff = Math.Clamp((jammer.range-distance)/(jammer.range-jammer.disconnectRange),0,1);
 				debuff = Math.Max(debuff,thisDebuff);
 					
 			}

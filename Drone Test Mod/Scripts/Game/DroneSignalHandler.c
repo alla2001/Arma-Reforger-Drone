@@ -12,6 +12,7 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 	float currentSignalStrength = 1.0;
 	[Attribute("100")]
 	float maxRange;
+	[RplProp()]
 	float debuff=0;
 	SCR_CameraPostProcessEffect filmGrainPostEffect;
 	IEntity controlingPlayer;
@@ -19,6 +20,7 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 	ImageWidget Bar1;
 	ImageWidget Bar2;
 	ImageWidget Bar3;
+	TextWidget jammerText;
 	[Attribute()] ResourceName layout;
 	[Attribute()]
 	ref Color WarningColor;
@@ -62,6 +64,7 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 		 Bar1= ImageWidget.Cast(	root.FindAnyWidget("Image0"));
 		 Bar2= ImageWidget.Cast(	root.FindAnyWidget("Image1"));
 		 Bar3= ImageWidget.Cast(	root.FindAnyWidget("Image2"));
+		jammerText = TextWidget.Cast(root.FindAnyWidget("Text0"));
 		defaultColor= Bar1.GetColor();
 			RegisterDrone();
 	}
@@ -76,6 +79,7 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 	void SetDebuff(float debuffVal){
 	
 	debuff=Math.Clamp(debuffVal,0,1);
+		Replication.BumpMe();
 	}
 	void CalcualteSignalStrength()
 	{
@@ -96,16 +100,17 @@ class DroneSignalHandler : ScriptComponent // GameComponent > GenericComponent
 		Bar1.SetColor(WarningColor);
 		Bar2.SetVisible(currentSignalStrength>0.33);
 		Bar3.SetVisible(currentSignalStrength>0.66);
+		jammerText.SetVisible(debuff>0);
 	}
 	bool isOutOfRange(){return currentSignalStrength<=0;}
 		bool isjammed(){return debuff>=1;}
 	  override void EOnSimulate(IEntity owner, float timeSlice)
     {
 		  bool m_bIsServer = Replication.IsServer();
-		 if (m_bIsServer)
+		 if (m_bIsServer&&controlingPlayer)
 		CalcualteSignalStrength();
 	}
-override void OnDelete(IEntity owner){
+	override void OnDelete(IEntity owner){
 		if(root)
 		delete root;
 	
