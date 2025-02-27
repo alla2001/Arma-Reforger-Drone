@@ -1,3 +1,6 @@
+GenericEntity : "{1353C6EAD1DCFE43}Prefabs/Weapons/Handguns/M9/Handgun_M9.et" {
+ coords 1390.18 51.899 2226.724
+}
 GenericEntity : "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/DroneArsenal.et" {
  coords 2702.213 99.803 2236.704
  angleX 0
@@ -9,4 +12,10 @@ GenericEntity : "{95F44AC5F90D01FF}Prefabs/Props/Military/Compositions/FIA/Drone
  angleX 0
  angleY 0
  angleZ 14.351
+}
+GenericEntity : "{B364A5F81D382E96}Prefabs/DronePrefabFastNewRecon.et" {
+ coords 1388.825 52.034 2223.911
+}
+GenericEntity : "{B3D4D6E6060EE92E}Prefabs/UAV Drones/UAV.et" {
+ coords 1387.049 52.048 2226.503
 }

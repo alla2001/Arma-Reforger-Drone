@@ -239,10 +239,10 @@ GenericEntity {
      Hierarchy "{6484AB00B54960F1}" {
      }
     }
-    coords 0.511 0.595 -0.597
-    angleX 63.523
-    angleY -179.548
-    angleZ 0.823
+    coords 0.496 0.59 -0.66
+    angleX 61.383
+    angleY -179.612
+    angleZ 0.766
     scale 0.412
    }
    {
@@ -254,7 +254,7 @@ GenericEntity {
      Hierarchy "{6484B24E874C6F9B}" {
      }
     }
-    coords -0.474 0.235 0.255
+    coords -0.447 0.129 0.278
     angleY 43.841
     scale 1.25
    }
@@ -267,7 +267,7 @@ GenericEntity {
      Hierarchy "{6484B24E8E065237}" {
      }
     }
-    coords -0.355 0.227 0.232
+    coords -0.328 0.121 0.255
     scale 1.25
    }
    {
@@ -279,7 +279,7 @@ GenericEntity {
      Hierarchy "{6484B24D752CB282}" {
      }
     }
-    coords 0.366 0.227 0.241
+    coords 0.393 0.121 0.264
     angleY 45.056
     scale 1.25
    }
@@ -292,7 +292,7 @@ GenericEntity {
      Hierarchy "{6484B24D79E8298B}" {
      }
     }
-    coords -0.44 0.12 -0.024
+    coords -0.413 0.014 -0.001
     angleY 8.93
     scale 1.25
    }
@@ -305,7 +305,7 @@ GenericEntity {
      Hierarchy "{6484B24D7C02E507}" {
      }
     }
-    coords -0.08 0.108 -0.088
+    coords -0.053 0.002 -0.065
     angleY -9.667
     angleZ -2.261
     scale 1.25
@@ -319,7 +319,7 @@ GenericEntity {
      Hierarchy "{6484B24D71251EE9}" {
      }
     }
-    coords -0.03 0.36 -0.495
+    coords -0.003 0.254 -0.472
     angleX -43.024
     angleY -0.244
     angleZ -3.254
@@ -334,7 +334,7 @@ GenericEntity {
      Hierarchy "{6484B24D7FC49988}" {
      }
     }
-    coords 0.082 0.229 -0.269
+    coords 0.109 0.123 -0.246
     angleZ 88.169
     scale 1.25
    }
@@ -347,7 +347,7 @@ GenericEntity {
      Hierarchy "{6484B24D61EC4F61}" {
      }
     }
-    coords 0.091 0.115 0.097
+    coords 0.118 0.009 0.12
     angleY -41.351
     scale 1.25
    }
@@ -360,7 +360,7 @@ GenericEntity {
      Hierarchy "{6484B24D65A23E18}" {
      }
     }
-    coords 0.542 0.227 0.25
+    coords 0.569 0.121 0.273
     angleY 3.724
     scale 1.25
    }
@@ -373,7 +373,7 @@ GenericEntity {
      Hierarchy "{6484B24D67CA8362}" {
      }
     }
-    coords 0.426 0.239 0.2
+    coords 0.453 0.133 0.223
     angleY 51.384
     angleZ -2.03
     scale 1.25
@@ -387,7 +387,7 @@ GenericEntity {
      Hierarchy "{6484B24D6A892DCA}" {
      }
     }
-    coords 0.544 0.231 0.116
+    coords 0.571 0.125 0.139
     scale 1.25
    }
    {
@@ -399,11 +399,30 @@ GenericEntity {
      Hierarchy "{6484B24EC093480C}" {
      }
     }
-    coords -0.502 0.532 -0.319
+    coords -0.475 0.426 -0.296
     angleX -74.604
     angleY -8.313
     angleZ -169.01
     scale 1.063
+   }
+   {
+    ID "648CB01E25524007"
+    components {
+     MeshObject "{648CB01E3ABED8A7}" {
+      Object "{1FA59B6C4ED25DE6}system/wbdata/MaterialEditor/MaterialPlane.xob"
+      Materials {
+       MaterialAssignClass "{648CB01EA288DEEB}" {
+        SourceMaterial "DummyMaterial"
+        AssignedMaterial "{6D5B930B88705330}Materials/QR.emat"
+       }
+      }
+     }
+     Hierarchy "{648CB01E3CD02CFD}" {
+     }
+    }
+    coords 0.504 0.283 -0.491
+    angleX -61.113
+    scale 0.25
    }
   }
  }

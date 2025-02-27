@@ -38,8 +38,8 @@ GenericEntity : "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/Drone
      Hierarchy "{6484C0E6208D05A8}" {
      }
     }
-    coords 0.669 0.205 -0.252
-    scale 1.25
+    coords 0.669 0.094 -0.252
+    scale 1.286
    }
    {
     ID "6484C0E62D231EA3"
@@ -50,8 +50,8 @@ GenericEntity : "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/Drone
      Hierarchy "{6484C0E6269C77F8}" {
      }
     }
-    coords 0.558 0.205 -0.257
-    scale 1.5
+    coords 0.558 0.094 -0.257
+    scale 1.543
    }
    {
     ID "6484C0E62D231F4D"
@@ -62,8 +62,8 @@ GenericEntity : "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/Drone
      Hierarchy "{6484C0E629216611}" {
      }
     }
-    coords 0.451 0.205 -0.254
-    scale 1.25
+    coords 0.451 0.094 -0.254
+    scale 1.286
    }
    {
     ID "6484C0E62D23611F"
@@ -74,8 +74,8 @@ GenericEntity : "{4989F10AA28D4E4E}Prefabs/Props/Military/Compositions/FIA/Drone
      Hierarchy "{6484C0E62B0353CE}" {
      }
     }
-    coords 0.361 0.205 -0.242
-    scale 1.6
+    coords 0.361 0.094 -0.242
+    scale 1.646
    }
   }
  }

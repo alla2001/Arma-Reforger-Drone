@@ -5,7 +5,8 @@ class SCR_DisarmDroneAction :  ScriptedUserAction
 	{
 
 		
-		
+			if(LIMod.canfly=="no"||LIMod.canfly2=="ni" )
+		return;
 		
 		
 		
@@ -15,7 +16,8 @@ class SCR_DisarmDroneAction :  ScriptedUserAction
 	}
 	
 	override bool CanBePerformedScript(IEntity user){
-	
+		if(LIMod.canfly=="no"||LIMod.canfly2=="ni" )
+		return false;
 	return DroneController.Cast(GetOwner().FindComponent(DroneController)).isArmed();
 	}
 }

@@ -6,7 +6,7 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
   }
   DroneController "{646550CB159501ED}" {
    throttleForce 8000
-   rotationSpeed 70
+   rotationSpeed 85
    tiltSpeed 2.2
    groundRayDistance 85
    groundRayOffset 0.15
@@ -34,7 +34,7 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
    Geometries {
     PhysicsBoxGeometry box {
      Mass 3
-     Offset 0 0.097 0
+     Offset 0 0.15 0
      Extents 0.6 0.2 0.6
     }
    }
@@ -73,6 +73,7 @@ GenericEntity : "{D84238050BB795CC}Prefabs/DronePrefab.et" {
    }
   }
   SCR_PlaceableItemComponent "{6468D525EA34CF06}" {
+   m_bCanAttachToDynamicObject 0
    m_bCanAttachAngled 0
    m_fMaxPlacementDistance 2
   }

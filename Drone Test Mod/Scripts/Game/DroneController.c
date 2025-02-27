@@ -5,10 +5,10 @@
 class DroneController : ScriptComponent
 {
 	[Attribute()] float throttleForce; // Force applied for vertical movement
-	[Attribute()] float moveSpeed; // Speed for horizontal movement
+	[Attribute()] float moveSpeed;	   // Speed for horizontal movement
 	[Attribute()] float rotationSpeed; // Speed for yaw rotation
-	[Attribute()] float tiltSpeed; // Speed for drone tilting
-	[Attribute()] float maxTiltAngle; // Maximum tilt angle for DroneController
+	[Attribute()] float tiltSpeed;	   // Speed for drone tilting
+	[Attribute()] float maxTiltAngle;  // Maximum tilt angle for DroneController
 	[Attribute()] float groundRayDistance;
 	[Attribute()] float groundRayOffset;
 	[Attribute()] float fakeGravityForce;
@@ -30,20 +30,17 @@ class DroneController : ScriptComponent
 	[Attribute()] int m_iCameraIndex;
 	[RplProp(onRplName : "OnDeployed")] bool deployed;
 	[RplProp()] bool armed;
-		[RplProp()] bool autoHoverOn;
+	[RplProp()] bool autoHoverOn;
 
 	[Attribute(defvalue : "0 0 0", uiwidget : UIWidgets.Coords, params : "inf inf 0 purpose=coords space=entity anglesVar=cameraSpawnRotation")] vector cameraSpawnPoint;
 	[Attribute(defvalue : "0 0 0", uiwidget : UIWidgets.Coords, params : "inf inf 0 purpose=angles space=entity coordsVar=cameraSpawnPoint")] vector cameraSpawnRotation;
 	[Attribute()] ResourceName layout;
-		[Attribute()] bool canAutoHover;
+	[Attribute()] bool canAutoHover;
 
 	[Attribute()] bool canZoom;
-		[Attribute()] float zoomMin;
+	[Attribute()] float zoomMin;
 	[Attribute()] float zoomMax;
-	[Attribute()] float altitudeStabilizationStrength;
-	[Attribute()] float maxStabilizationForce;
-	[Attribute()] float driftStabilizationStrength;
-		[Attribute()] float rotationStabilizationStrength;
+
 	IEntity playerUser;
 	DroneSignalHandler droneSignalHandler;
 	DroneBatteryHandler batteryHandler;
@@ -55,13 +52,24 @@ class DroneController : ScriptComponent
 	float mass = 1;
 	float sfxVolume = 0;
 	float dialgoVolume;
-	[RplProp()]
-	bool phyiscal;
+	[RplProp()] bool phyiscal;
 	//! The render target texture found within our layout
-	protected RTTextureWidget m_wRenderTargetTextureWidget;
+
+	RTTextureWidget m_wRenderTargetTextureWidget;
 	static bool inDrone;
 	//! The render target found within our layout
-	protected RenderTargetWidget m_wRenderTargetWidget;
+
+	RenderTargetWidget m_wRenderTargetWidget;
+	
+	// Proportional-Derivative (PD) control for balance
+	[Attribute()]
+			float balanceStrength ;  // Strength of correction
+	[Attribute()]
+			float dampingFactor ;    // Reduce overshoot
+		[Attribute()]
+			float heightStrength;  // Strength of correction
+	[Attribute()]
+			float heightDamping ;    // Reduce overshoot
 
 	override void OnPostInit(IEntity owner)
 	{
@@ -86,14 +94,15 @@ class DroneController : ScriptComponent
 		rb.SetActive(ActiveState.INACTIVE);
 		rb.ChangeSimulationState(SimulationState.NONE);
 		phyiscal = false;
-Replication.BumpMe();
+		Replication.BumpMe();
 		return;
 	}
 
 	void DeployDrone(IEntity drone, IEntity user)
 	{
 
-		if (droneSignalHandler.isjammed()) return;
+		if (droneSignalHandler.isjammed())
+			return;
 		sfxVolume = 0;
 		lastPos = GetOwner().GetOrigin();
 		bool m_bIsServer = Replication.IsServer();
@@ -119,7 +128,6 @@ Replication.BumpMe();
 		IEntity playerEnt = null;
 		if (playerC)
 			playerEnt = playerC.GetControlledEntity();
-
 
 		// Create layout
 		if (playerUser != playerEnt)
@@ -147,10 +155,10 @@ Replication.BumpMe();
 			return;
 		}
 		deployed = true;
-		inDrone=true;
+		inDrone = true;
 		CreateCamera(drone);
 		GetGame().GetCameraManager().SetCamera(camera);
-		inputManager.ActivateContext("PlayerCameraContext", duration :int.MAX);
+		inputManager.ActivateContext("PlayerCameraContext", duration : int.MAX);
 		inputManager.ActivateContext("HelicopterContext", duration : int.MAX);
 		inputManager.ActivateAction("CollectiveIncrease", duration : int.MAX);
 		inputManager.ActivateAction("CollectiveIncrease", duration : int.MAX);
@@ -166,10 +174,9 @@ Replication.BumpMe();
 
 		inputManager.AddActionListener("JumpOut", EActionTrigger.DOWN, ClientDisconnect);
 		inputManager.AddActionListener("AutohoverToggle", EActionTrigger.DOWN, ToggleAutoHover);
-		if(!canZoom)
-		inputManager.AddActionListener("HelicopterFire", EActionTrigger.DOWN, TriggerExplode);
+		if (!canZoom)
+			inputManager.AddActionListener("HelicopterFire", EActionTrigger.DOWN, TriggerExplode);
 		inputManager.AddActionListener("Focus", EActionTrigger.VALUE, Zoom);
-
 
 		lastPos = drone.GetOrigin();
 		droneSignalHandler.Deploy(user, camera);
@@ -215,9 +222,11 @@ Replication.BumpMe();
 	vector desiredPosition;
 	void ToggleAutoHover()
 	{
-		if (!canAutoHover)return;
-	autoHoverOn = !autoHoverOn;
+		if (!canAutoHover)
+			return;
+		autoHoverOn = !autoHoverOn;
 		desiredPosition = GetOwner().GetOrigin(); // Lock the current position
+		desiredPosition[1]=Math.Clamp(desiredPosition[1],-100,100);
 	}
 
 	void DisarmeDrone()
@@ -232,17 +241,19 @@ Replication.BumpMe();
 	float currentFOV;
 	void Zoom(float zoom)
 	{
-		if (!canZoom)return;
-		if (!camera)return;
-		//if(zoom!=0) Print(zoom);
+		if (!canZoom)
+			return;
+		if (!camera)
+			return;
+		// if(zoom!=0) Print(zoom);
 		currentFOV = Math.Lerp(zoomMax, zoomMin, zoom);
 
-	camera.SetVerticalFOV(currentFOV);
+		camera.SetVerticalFOV(currentFOV);
 	}
 
 	void PickUp()
 	{
-	
+
 		currentTransform[0] = vector.Zero;
 		currentTransform[1] == vector.Zero;
 		currentTransform[2] == vector.Zero;
@@ -261,7 +272,6 @@ Replication.BumpMe();
 		rb.ChangeSimulationState(SimulationState.NONE);
 		phyiscal = false;
 
-
 		PlayerController playerC = GetGame().GetPlayerController();
 
 		IEntity playerEnt = null;
@@ -270,8 +280,9 @@ Replication.BumpMe();
 
 		// Create layout
 
-		if (deployed &&playerUser == playerEnt){
-		ClientDisconnect();
+		if (deployed && playerUser == playerEnt)
+		{
+			ClientDisconnect();
 		}
 		bool m_bIsServer = Replication.IsServer();
 		if (m_bIsServer)
@@ -425,7 +436,7 @@ Replication.BumpMe();
 		camera.SetNearPlane(0.01);
 		camera.SetFarPlane(1500);
 		camera.SetInputEnabled(true);
-		currentFOV=zoomMax;
+		currentFOV = zoomMax;
 		baseWorld.SetCameraLensFlareSet(m_iCameraIndex, CameraLensFlareSetType.FirstPerson, string.Empty);
 
 		// Set camera to hierarchy
@@ -439,7 +450,6 @@ Replication.BumpMe();
 			m_wRenderTargetWidget.SetWorld(baseWorld, m_iCameraIndex);
 		if (!parent.IsDeleted())
 				m_wRenderTargetTextureWidget.SetGUIWidget(parent, 0); */
-
 	}
 
 	override void EOnFrame(IEntity owner, float timeSlice)
@@ -548,16 +558,18 @@ Replication.BumpMe();
 			return;
 		}
 
-		throttleInput += inputManager.GetActionValue("CollectiveIncrease")*timeSlice* 5;
-		throttleInput -= inputManager.GetActionValue("CollectiveDecrease")*timeSlice* 5;
-		throttleInput = Math.Lerp(throttleInput, 0, timeSlice* 9);
-		throttleInput=Math.Clamp(throttleInput, -1, 1);
+		throttleInput += inputManager.GetActionValue("CollectiveIncrease") * timeSlice * 5;
+		throttleInput -= inputManager.GetActionValue("CollectiveDecrease") * timeSlice * 5;
+		throttleInput = Math.Lerp(throttleInput, 0, timeSlice * 9);
+		throttleInput = Math.Clamp(throttleInput, -1, 1);
 		// Get inputs
 		// Up (Jump) / Down (Fire3)
 		moveInput = Vector(inputManager.GetActionValue("CyclicLeft") - inputManager.GetActionValue("CyclicRight"), 0, inputManager.GetActionValue("CyclicForward") - inputManager.GetActionValue("CyclicBack")); // Forward/Backward/Strafe
-		yawInput = -inputManager.GetActionValue("AntiTorqueLeft") + inputManager.GetActionValue("AntiTorqueRight"); // Yaw (Mouse X)
+		yawInput = -inputManager.GetActionValue("AntiTorqueLeft") + inputManager.GetActionValue("AntiTorqueRight");																								 // Yaw (Mouse X)
 
-		moveInput = vector.Lerp(moveInput, vector.Zero, timeSlice* 9);
+		moveInput = vector.Lerp(moveInput, vector.Zero, timeSlice * 9);
+		desiredPosition[1] = desiredPosition[1]+throttleInput*0.1;
+			desiredPosition[1]=Math.Clamp(desiredPosition[1],-100,100);
 		// Store last tilt angle for persistence
 		vector lastTargetTilt;
 
@@ -566,8 +578,8 @@ Replication.BumpMe();
 		{
 			lastTargetTilt = Vector(
 				Math.Clamp(-moveInput[2] * maxTiltAngle, -maxTiltAngle, maxTiltAngle), // Tilt forward/backward
-				owner.GetYawPitchRoll()[1], // Preserve yaw
-				Math.Clamp(moveInput[0] * maxTiltAngle, -maxTiltAngle, maxTiltAngle) // Tilt left/right
+				owner.GetYawPitchRoll()[1],											   // Preserve yaw
+				Math.Clamp(moveInput[0] * maxTiltAngle, -maxTiltAngle, maxTiltAngle)   // Tilt left/right
 			);
 			// owner.SetAngles(vector.Lerp(owner.GetAngles(), lastTargetTilt, tiltSpeed * timeSlice));
 		}
@@ -577,8 +589,8 @@ Replication.BumpMe();
 		// Print("HEHE");
 	}
 	[RplRpc(RplChannel.Unreliable, RplRcver.Server)] void RPC_SendInputs(vector r_moveInput,
-																		float r_yawInput,
-																		float r_throttleInput)
+																		 float r_yawInput,
+																		 float r_throttleInput)
 	{
 		moveInput = r_moveInput;
 		throttleInput = r_throttleInput;
@@ -605,84 +617,90 @@ Replication.BumpMe();
 		vector mat[4];
 		owner.GetTransform(mat);
 
+		// Perform ground tracing
 		TraceParam param = MakeTraceParam(owner.GetOrigin() - mat[1] * groundRayOffset, owner.GetOrigin() - mat[1] * groundRayDistance, TraceFlags.OCEAN | TraceFlags.WORLD);
 		float hit = baseWorld.TraceMove(param, null);
 		param = MakeTraceParam(owner.GetOrigin() + mat[1] * groundRayOffset, owner.GetOrigin() + mat[1] * groundRayDistance, TraceFlags.OCEAN | TraceFlags.WORLD);
 		float hit1 = baseWorld.TraceMove(param, null);
 
-		// Print("Hit Down : " + hit);
-		//  Get drone mass
+		// Get drone mass
 		float mass = rb.GetMass();
 
 		// Calculate gravitational force
 		float gravityForce = mass * 9.81 * fakeGravityForce * timeSlice * hit;
-
 		rb.ApplyForce(-(mat[1].Normalized() * gravityForce));
-		float mul = 1.2 +Math.Pow( (1.0 - hit),3)* 2 +Math.Pow( (1.0 - hit1),3)* 0.3;
+
+		float mul = 1.2 + Math.Pow((1.0 - hit), 3) * 2 + Math.Pow((1.0 - hit1), 3) * 0.3;
+
+		// Auto-hover system
+		if (autoHoverOn)
+		{
+			
+				// Get current orientation vectors
+			vector forward = mat[2].Normalized();
+			vector right = mat[0].Normalized();
+			vector up = mat[1].Normalized();
+			
+			// --- AUTO-HOVER (Height Balancing) ---
+			float heightError =  desiredPosition[1] - owner.GetOrigin()[1]; // Height difference
+			float verticalVelocity = rb.GetVelocity()[1]; // Current vertical speed
+			// PD Controller for hover force
+			float hoverForce = (heightError * heightStrength) - (verticalVelocity * heightDamping);
+			hoverForce = Math.Clamp(hoverForce, -throttleForce, throttleForce); // Prevent excessive force
+			
+			vector hoverForceVector = up * hoverForce * timeSlice;
+			rb.ApplyForce(hoverForceVector);
+			
+			
+			// --- AUTO-BALANCE (Tilt Correction) ---
+		
+
+			// Calculate tilt errors (how much the drone is tilted)
+			float pitchError = forward[1];  // Forward/backward tilt
+			float rollError = right[1];      // Left/right tilt
+
+			// Get angular velocity for damping
+			vector angularVelocity = rb.GetAngularVelocity();
+
+		
+			vector balanceTorque = 
+			    (-forward * rollError * balanceStrength) + 
+			    (right * pitchError * balanceStrength) - 
+			    (angularVelocity * dampingFactor);
+
+			// Apply auto-balance torque
+			rb.ApplyTorque(balanceTorque * timeSlice);
+			
+		}
+
 		// Apply vertical force
 		vector upwardForce = ((mat[1].Normalized() + (mat[2].Normalized() * 0.1)) * throttleInput * throttleForce * mul * timeSlice);
 		rb.ApplyForce(upwardForce);
 
 		// Apply horizontal force
 		vector localMove = owner.VectorToParent(moveInput) * moveSpeed;
-		// rb.ApplyForce(localMove);
 
 		vector vInput = vector.Lerp(vInput, moveInput, tiltSpeed);
+
 		// Apply yaw torque
-		rb.ApplyTorque(mat[1].Normalized() * yawInput * timeSlice* 2 * rotationSpeed);
-		// Apply yaw torque
+		rb.ApplyTorque(mat[1].Normalized() * yawInput * timeSlice * 2 * rotationSpeed);
 		rb.ApplyTorque(mat[0].Normalized() * vInput[2] * timeSlice * rotationSpeed);
-		// Apply yaw torque
 		rb.ApplyTorque(mat[2].Normalized() * vInput[0] * timeSlice * rotationSpeed);
-		// Print( "Was Triggered : " + SCR_ExplosiveTriggerComponent.Cast(owner.FindComponent(SCR_ExplosiveTriggerComponent)).WasTriggered());
-		//  Stabilize
-		vector velocityDamping = -rb.GetVelocity() * 0;
+
+		// Stabilization logic
+		vector velocityDamping = -rb.GetVelocity() * 0.1;
 		vector angularDamping = -rb.GetAngularVelocity() * 0.5;
 		rb.ApplyForce(velocityDamping * timeSlice);
 		rb.ApplyTorque(angularDamping * timeSlice);
 
 		if (vInput[2] == 0 && vInput[0] == 0)
 		{
-			rb.ApplyTorque(angularDamping * timeSlice * 45);
+			rb.ApplyTorque(angularDamping * timeSlice * 150);
 		}
 
-		rb.SetVelocity(rb.GetVelocity().Normalized()* Math.Min(speedCap, rb.GetVelocity().Length()));
-		if (autoHoverOn && false){
+		// Speed limit enforcement
+		rb.SetVelocity(rb.GetVelocity().Normalized() * Math.Min(speedCap, rb.GetVelocity().Length()));
 
-
-			vector position = owner.GetOrigin();
-			vector velocity = rb.GetVelocity();
-
-			// --- Altitude Stabilization (Throttle Up/Down) ---
-			float altitudeError = desiredPosition[1] - position[1]; // Compare current altitude to desired
-			float verticalSpeed = velocity[1];
-
-			// Throttle force proportional to altitude error and vertical speed
-			float hoverthrottleForce = altitudeError * altitudeStabilizationStrength - verticalSpeed * 2.0;
-			hoverthrottleForce = Math.Clamp(hoverthrottleForce, -throttleForce, throttleForce);
-			rb.ApplyForce(vector.Up * hoverthrottleForce * timeSlice);
-
-			// --- Drift Stabilization (Roll and Pitch) ---
-			vector horizontalVelocity = Vector(velocity[0], 0, velocity[2]); // Only horizontal movement
-			vector driftCorrectionForce = -horizontalVelocity * driftStabilizationStrength;
-
-			// Determine desired roll/pitch angles based on drift correction
-			float desiredPitch = driftCorrectionForce[2] / hoverthrottleForce; // Forward/backward tilt
-			float desiredRoll = -driftCorrectionForce[0] / hoverthrottleForce; // Left/right tilt
-
-			// Apply pitch and roll torques
-			rb.ApplyTorque(Vector(desiredRoll * 10, 0, desiredPitch * 10) * timeSlice);
-
-			// --- Rotation Stabilization (Yaw) ---
-			vector currentAngularVelocity = rb.GetAngularVelocity();
-			vector desiredForward = vector.Forward; // Lock to default forward orientation
-			vector currentForward = owner.GetTransformAxis(2); // Get current forward vector
-
-			// Calculate yaw error (difference between desired and current orientation)
-			float yawError = vector.Dot(currentForward* desiredForward, vector.Up); // Sign of yaw error
-			float yawCorrectionTorque = yawError * 10 - currentAngularVelocity[1] * 2.0; // Add damping
-			rb.ApplyTorque(vector.Up * yawCorrectionTorque * timeSlice);
-		}
 		foreach (DroneWingSpine wing : wings)
 		{
 			wing.SetSpinSpeed((throttleInput + vInput[2] + vInput[0] + yawInput) * throttleForce * mul * timeSlice);
@@ -715,27 +733,25 @@ Replication.BumpMe();
 
 	float interpolationProgress = 1.0; // Completed when 1.0
 
-
 	void ClientDisconnect()
 	{
 		Rpc(RPCClientDisconnect);
 	}
-	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void RPCClientDisconnect()
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)] void RPCClientDisconnect()
 	{
 		ClearConnection();
 		Rpc(RPC_DisconnectServer);
-	}
-	void ClearConnection(){
+	} void ClearConnection()
+	{
 
-	if (!deployed)
+		if (!deployed)
 			return;
-		inputManager.ActivateContext("PlayerCameraContext", duration :0);
+		inputManager.ActivateContext("PlayerCameraContext", duration : 0);
 		inputManager.ActivateContext("HelicopterContext", duration : 0);
 		inputManager.ActivateAction("CollectiveIncrease", duration : 0);
 		inputManager.ActivateAction("CollectiveIncrease", duration : 0);
 		inputManager.ActivateAction("CollectiveDecrease", duration : 0);
-		inputManager.ActivateAction("CyclicRight", duration :0);
+		inputManager.ActivateAction("CyclicRight", duration : 0);
 		inputManager.ActivateAction("CyclicLeft", duration : 0);
 		inputManager.ActivateAction("CyclicForward", duration : 0);
 		inputManager.ActivateAction("CyclicBack", duration : 0);
@@ -744,7 +760,7 @@ Replication.BumpMe();
 		inputManager.ActivateAction("FocusAnalog", duration : 0);
 		inputManager.ActivateAction("HelicopterFire", duration : 0);
 
-				inputManager.RemoveActionListener("JumpOut", EActionTrigger.DOWN, ClientDisconnect);
+		inputManager.RemoveActionListener("JumpOut", EActionTrigger.DOWN, ClientDisconnect);
 		inputManager.RemoveActionListener("AutohoverToggle", EActionTrigger.DOWN, ToggleAutoHover);
 		inputManager.RemoveActionListener("HelicopterFire", EActionTrigger.DOWN, TriggerExplode);
 		inputManager.RemoveActionListener("FocusAnalog", EActionTrigger.VALUE, Zoom);
@@ -757,8 +773,8 @@ Replication.BumpMe();
 		/*if (m_wRenderTargetTextureWidget && GetOwner() && !GetOwner().IsDeleted())
 			m_wRenderTargetTextureWidget.SetGUIWidget(GetOwner(), -1); */
 		if (root)
-		delete root;
-		inDrone=false;
+			delete root;
+		inDrone = false;
 	}
 
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)] void RPC_DisconnectServer()
@@ -766,7 +782,7 @@ Replication.BumpMe();
 		rplc.Give(RplIdentity.Local());
 		playerUser = null;
 		deployed = false;
-		inDrone=false;
+		inDrone = false;
 		Replication.BumpMe();
 	}
 
@@ -788,8 +804,7 @@ Replication.BumpMe();
 	void TriggerExplode()
 	{
 		ClearConnection();
-			Rpc(RPC_ServerExplode);
-
+		Rpc(RPC_ServerExplode);
 	}
 
 	override void OnDelete(IEntity owner)
@@ -805,7 +820,7 @@ Replication.BumpMe();
 			AudioSystem.SetMasterVolume(AudioSystem.SFX, 1);
 		}
 		if (root)
-		delete root;
+			delete root;
 		sfxVolume = 0;
 		bool m_bIsServer = Replication.IsServer();
 		if (!m_bIsServer)
@@ -813,8 +828,7 @@ Replication.BumpMe();
 
 			return;
 		}
-		//Rpc(RPC_ClientDisconnect);
-
+		// Rpc(RPC_ClientDisconnect);
 	}
 
 	bool isDeployed() { return deployed; }

@@ -1,0 +1,5 @@
+MatPBRDecal {
+ AlphaMul 1.029
+ BCRMap "{68DE25A33981AB90}Texture/chrome_bOkJ1fQl3q.edds"
+ OpacityMap "{68DE25A33981AB90}Texture/chrome_bOkJ1fQl3q.edds"
+}

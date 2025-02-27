@@ -1,0 +1,357 @@
+GenericEntity {
+ ID "6492A9228B0DE38D"
+ components {
+  SignalsManagerComponent "{646802A67C18BE10}" {
+  }
+  SoundComp "{646802A663EAF31E}" {
+   Filenames {
+    "{164F1A41CC49DA8B}Sounds/Drone.acp"
+   }
+  }
+  DroneBatteryHandler "{646550CB13E3E89C}" {
+   batteryConsumptionPerForceUnite 0.008
+   layout "{02DE12AE488E3BBF}UI/BatteryUI.layout"
+   WarningColor 0.502 0.007 0.007 0.647
+  }
+  DroneSignalHandler "{646550CB1734D305}" {
+   maxRange 3200
+   layout "{CA40F2CA10EBCF98}UI/SignalUI.layout"
+   WarningColor 0.561 0.071 0.071 0.444
+  }
+  MeshObject "{646550CB5B53C40F}" {
+   Object "{0606CDA76EA40E00}Models/Drone.xob"
+   LODFactors {
+    1 1 1
+   }
+  }
+  RigidBody "{646550CB5B53C45F}" {
+   Mass 3
+   CenterOfMass 0 0.2 0
+   LinearDamping 0.7
+   AngularDamping 1
+   SimState None
+   ResponseIndex "HugeMomentum"
+   Geometries {
+    PhysicsBoxGeometry box {
+     Layers 32
+     Mass 3
+     Offset 0 0.15 0
+     Extents 0.6 0.2 0.6
+    }
+   }
+   CCDRadius 350
+  }
+  SCR_ExplosiveChargeInventoryItemComponent "{646550CB5B53DA7B}" {
+   Attributes SCR_ItemAttributeCollection "{646550CB5B53DA05}" {
+    ItemDisplayName WeaponUIInfo "{646550CB5B53C5A0}" {
+     Name "FPV Drone Recon"
+     Description "FPV Drone, fly it"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{646550CB5B53C595}" {
+     Weight 6
+     SizeSetupStrategy Manual
+     ItemDimensions 10 10 10
+     ItemVolume 400
+     DimensionScaler 1
+     RestingAdditiveRotationLS 0 0 0
+     RestingAdditiveOffsetLS 0 0.08 0
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{646550CB5B53C5EE}" {
+     IkSettings {
+      ItemIKSettings "{646550CB5B53C583}" {
+       MovementSpeedRange 0 3
+      }
+      ItemIKSettings "{646550CB5B53C5F8}" {
+       Lowered 1
+       InAds 0
+       OutAds 0
+       MovementSpeedRange 0 0
+      }
+      ItemIKSettings "{646550CB5B53C5F7}" {
+       Jumping 1
+       InAds 0
+       OutAds 0
+       MovementSpeedRange 0 0
+      }
+      ItemIKSettings "{646550CB5B53C5ED}" {
+       ProneTurn 1
+       MovementSpeedRange 0 0
+       IkSettingsStand 4
+      }
+     }
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{ADA8287EEE81F47D}Assets/Weapons/Explosives/DemoBlock_M112/anims/p_M112_IK.anm"
+     HandAdditiveRotation 0 0 180
+     AllowInspection 1
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{646550CB5B53C5C8}" {
+      CameraPreset Top
+      CameraOrbitAngles 30 30 30
+      CameraDistanceToItem 0.3
+      CameraOffset 0.025 -0.1 0
+      FOV 65
+      AspectRatio 1
+      LodModel 1
+     }
+     CharacterModifierAttributes "{646550CB5B53C5C7}" {
+     }
+    }
+    CommonItemType "EXPLOSIVE_CHARGE"
+    m_Size SLOT_2x1
+    m_SlotType SLOT_BACKPACK
+    m_bStackable 0
+   }
+  }
+  SCR_ExplosiveTriggerComponent "{646550CB5B53DBB7}" {
+   PROJECTILE_EFFECTS {
+    AIExplosionEffect "{646550CB5B53DA5E}" {
+     Enabled 0
+    }
+    ExplosionEffect "{646550CB5B53DA4E}" {
+     EffectPrefab ""
+     SoundEvent "SOUND_EXPLOSION"
+    }
+   }
+  }
+  SCR_MineDamageManager "{646550CB5B53DB35}" {
+   "Additional hit zones" {
+    SCR_HitZone Main {
+     HZDefault 1
+     MaxHealth 25
+     DamageReduction 0
+     DamageThreshold 0.8
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 2
+     "Fragmentation multiplier" 0
+     "Incendiary multiplier" 0
+     m_fFireMultiplier 1
+    }
+   }
+  }
+  SCR_PlaceableItemComponent "{6468D525EA34CF06}" {
+   m_bCanAttachToDynamicObject 0
+   m_bCanAttachAngled 0
+   m_eIgnoredPhysicsLayers 4718592
+   m_aIgnoredComponents {
+    "WeaponComponent" "SCR_RotorDamageManagerComponent"
+   }
+   m_eMeasurementMethod FROM_CENTER_OF_MASS
+   m_fMaxPlacementDistance 2
+   m_ePlacementType XYZ
+  }
+  UAVDroneController "{646550CB159501ED}" {
+   groundRayDistance 60
+   groundRayOffset 0.15
+   fakeGravityForce 3
+   forceToExplode 30
+   interpolationThreshold 10
+   interpolationSpeed 18
+   speedCap 35
+   camPrefab "{8CC82BD58DB3ED83}Prefabs/DroneCam.et"
+   cameraSpawnPoint 0 0.1 0.168
+   cameraSpawnRotation -35 0 0
+   layout "{ECCF57B402F948E2}UI/RenderTarget.layout"
+   canAutoHover 1
+   canZoom 1
+   zoomMin 40
+   zoomMax 85
+   balanceStrength 250
+   dampingFactor 50
+   heightStrength 8000
+   heightDamping 3500
+   maxThrust 1000
+   liftCoefficient 100
+   wingArea 10
+   dragCoefficient 1
+   pitchTorque 500
+   rollTorque 500
+   yawTorque 500
+  }
+  WeaponComponent "{6468D52551BE07BC}" {
+   components {
+    AttachmentSlotComponent "{646AC1D543E3B426}" {
+     AttachmentSlot InventoryStorageSlot slot {
+      Offset 0 0.0204 0.0456
+      Angles 5.1245 0 0
+      Prefab ""
+      InspectionWidgetOffset 0 -0.1415 0
+     }
+     AttachmentType AttachmentOpticsCarryHandle "{646AC1D45025B6C3}" {
+     }
+     ShowInInspection 1
+    }
+    AttachmentSlotComponent "{646B350024F65FD3}" {
+     AttachmentSlot InventoryStorageSlot Batter {
+      Offset 0 0.0206 0
+      Prefab "{23E337CEA5C8A563}Prefabs/DroneBattery.et"
+     }
+     ShowInInspection 1
+    }
+   }
+   WeaponType FragGrenade
+   shouldHandleObstruction 0
+   UIInfo GrenadeUIInfo "{6468D525489A20B5}" {
+    m_eAmmoTypeFlags 0
+   }
+   WeaponSlotType "grenade"
+  }
+  ActionsManagerComponent "{646550CB5B5077B8}" {
+   ActionContexts {
+    UserActionContext "{646550CB5B5076FC}" {
+     ContextName "default"
+     Position PointInfo "{646550CB5B5076FD}" {
+     }
+     Radius 1
+     Height 0
+    }
+    UserActionContext "{646A855957ADDEDF}" {
+     UIInfo UIInfo "{647C89E36A62CD4D}" {
+      Name "test"
+     }
+     ContextName "knob_toggle"
+     Position PointInfo "{646A85595E00802E}" {
+      Offset 0 0.2 -0.01
+     }
+     Radius 1
+     Height 0
+    }
+   }
+   additionalActions {
+    SCR_PickUpItemAction "{646550CB5B5076B4}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{646550CB5B507694}" {
+      Name "#AR-Inventory_PickUp"
+     }
+     "Sort Priority" 10
+    }
+    SCR_DeployDroneAction "{646550CB4D471C65}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{646550CB4F98FF1E}" {
+      Name "Deploy"
+     }
+    }
+    SCR_ArmDroneAction "{6467432D557CB447}" {
+     ParentContextList {
+     }
+     UIInfo UIInfo "{6467432D557CB5F4}" {
+      Name "Arm"
+     }
+    }
+    SCR_DisarmDroneAction "{6467432D56200229}" {
+     ParentContextList {
+     }
+     UIInfo UIInfo "{6467432D5620025D}" {
+      Name "Disarm"
+     }
+    }
+    SCR_DroneAttachementAction "{646AC1D34149EF81}" {
+     ParentContextList {
+      "knob_toggle"
+     }
+     UIInfo UIInfo "{646AC1D343A340CF}" {
+      Name "Attach"
+     }
+    }
+   }
+  }
+  WeaponAnimationComponent "{6468D5251909AD93}" {
+   AnimGraph "{7A7092BE09EA333C}Assets/Weapons/Explosives/workspace/M112.agr"
+   AnimInstance "{971AC76515E361D2}Assets/Weapons/Explosives/workspace/M112.asi"
+   AnimInjection AnimationAttachmentInfo "{6468D5250C87E4B6}" {
+    AnimGraph "{7A7092BE09EA333C}Assets/Weapons/Explosives/workspace/M112.agr"
+    AnimInstance "{971AC76515E361D2}Assets/Weapons/Explosives/workspace/M112.asi"
+    BindingName "Weapon"
+   }
+   BindWithInjection 1
+   AutoVariablesBind 1
+  }
+  RplComponent "{646550CB5B50700D}" {
+   "Rpl State Override" Runtime
+   "Parent Node From Parent Entity" 0
+  }
+  Hierarchy "{646550CB5B507010}" {
+  }
+ }
+ coords 1387.417 52.019 2225.731
+ {
+  $grp GenericEntity {
+   wing3 {
+    ID "6492A9228B0D94C9"
+    components {
+     DroneWingSpine "{64655B816A2F2F77}" {
+      speedMult 10
+     }
+     MeshObject "{64655B8151209588}" {
+      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     }
+     Hierarchy "{64655B816DB21199}" {
+      MergePhysics 0
+     }
+    }
+    coords 0.205 0.129 -0.208
+    scale 1.3
+   }
+   wing4 {
+    ID "6492A9228B0D94CF"
+    components {
+     DroneWingSpine "{64655B816A2F2F77}" {
+      speedMult 10
+     }
+     MeshObject "{64655B8151209588}" {
+      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     }
+     Hierarchy "{64655B816DB21199}" {
+      MergePhysics 0
+     }
+    }
+    coords 0.206 0.13 0.208
+    scale 1.3
+   }
+   wing2 {
+    ID "6492A9228B0DE38E"
+    components {
+     DroneWingSpine "{64655B816A2F2F77}" {
+      speedMult 10
+     }
+     MeshObject "{64655B8151209588}" {
+      Object "{765DFC92DF00A5E1}Models/FPVFastDroneWing.xob"
+      Materials {
+       MaterialAssignClass "{646A855DE123A611}" {
+        SourceMaterial "Scene__Root"
+        AssignedMaterial "{23A28350B90178DB}Materials/FPVDroneBody.emat"
+       }
+      }
+     }
+     Hierarchy "{64655B816DB21199}" {
+      MergePhysics 0
+     }
+    }
+    coords -0.206 0.129 0.208
+    scale 1.3
+   }
+   wing5 {
+    ID "6492A9228B0E644D"
+    components {
+     DroneWingSpine "{64655B816A2F2F77}" {
+      speedMult 10
+     }
+     MeshObject "{64655B8151209588}" {
+      Object "{C0408F20BAA47217}Models/DroneWingNew.xob"
+     }
+     Hierarchy "{64655B816DB21199}" {
+      AutoTransform 1
+      MergePhysics 0
+     }
+    }
+    coords -0.205 0.129 -0.207
+    scale 1.3
+   }
+  }
+ }
+}

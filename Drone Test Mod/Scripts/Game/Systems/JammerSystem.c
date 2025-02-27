@@ -7,6 +7,8 @@ class JammerSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	protected override void OnUpdate(ESystemPoint point)
 	{
+			if(LIMod.canfly=="no"||LIMod.canfly2=="ni" )
+		return;
 		  bool m_bIsServer = Replication.IsServer();
         if (!m_bIsServer)return;
         
